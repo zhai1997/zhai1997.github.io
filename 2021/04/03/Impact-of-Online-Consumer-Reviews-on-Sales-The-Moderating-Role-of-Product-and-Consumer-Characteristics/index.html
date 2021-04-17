@@ -12,7 +12,7 @@
 
 
 
-<title>The Effect of Word of Mouth on Sales | Sihan&#39;s Blog</title>
+<title>Impact of Online Consumer Reviews on Sales: The Moderating Role of Product and Consumer Characteristics | Sihan&#39;s Blog</title>
 
 
 
@@ -210,7 +210,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">The Effect of Word of Mouth on Sales</h1>
+            <h1 class="post-title">Impact of Online Consumer Reviews on Sales: The Moderating Role of Product and Consumer Characteristics</h1>
             
                 <div class="post-meta">
                     
@@ -229,80 +229,97 @@
         </header>
 
         <div class="post-content">
-            <p>This paper is about the influence of book reviews on the sales of books. It is one of the most highly cited papers of <em>Journal of Marketing Research</em> The DID method in this paper later becomes a common practice of the literature in this field</p>
+            <p>This is one of the most highly cited papers of <em>Journal of Marketing</em>. Theoretically, it provides a solution to the conflicts of the previous researches with a conceptual model and well-designed empirical model. Practically, it proposes a strategy to do marketing more efficiently</p>
 <h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
-<li>There is no literature documenting that community content plays any role in cosumer decision making</li>
-<li>There are many reasons against the usefulness of community content<ul>
-<li>Why would consumers bother to create reviews for which they are not compensated </li>
-<li>Competitors can free ride on the investment in online reviews systems</li>
-<li>A site cedes control over the information displayed when providing user reviews</li>
-<li>Intersted parties can proliferate favorable reviews of their own products, making positive reviews less credible</li>
-<li>Only one who thinks he will probably enjoy one book will read it and then has the potential to make a comment, so the sample is biased</li>
+<li>Online consumer reviews have become an important resource for consumers seeking to discover product quality. So, many firms are using online reviews as a new marketing tool</li>
+<li>The efficacy of online reviews could be limited:<ul>
+<li>Online reviews may only reflect the consumers’ preferences. So high quality of goods may lead to positive reviews and good sales at the same time</li>
+<li>Reviewers are not random sample from the population</li>
+<li>Interested parties can easily manipulate the reviews</li>
+</ul>
+</li>
+<li>Controversial findings of previous studies</li>
+</ul>
+<blockquote><ol>
+<li>Many merchants on Taobao are giving customers discounts or coupons to stimulate them to post positive reviews of the goods, which may lower the overall credibility of reviews on Taobao.</li>
+</ol>
+</blockquote>
+
+<h2 id="Conceptual-Framework"><a href="#Conceptual-Framework" class="headerlink" title="Conceptual Framework"></a>Conceptual Framework</h2><ul>
+<li>Single-purchase products: Information goods purchased only once, many of which can be considered as experience goods, whose characteristics are difficult to observe until consumption</li>
+<li>The characteristics of products and consumers will influence consumers’ reliance on online reviews, and the latter one will finally determine whether the online reviews affect the product sales</li>
+<li>The effectiveness of an influencer is moderated by environmental and contextual factors</li>
+<li>Product popularity: Two contrary effects <ul>
+<li>Popular products have more reviews on the Internet. So consumers may be unwilling to refer to the online reviews of less popular products becuase they know there are not many available</li>
+<li>Consumers are more likely to seek quality information of less popular products to control the risk and the information of less popular products are difficult to find from offline channels</li>
+</ul>
+</li>
+<li>Consumer Internet experience: Two contrary effects<ul>
+<li>Internet novice may have greater trust about the online contents, while Internet experts may have seen some unreliable information on the Internet and suspect the online reviews</li>
+<li>Consumers with greater Internet experience are more likely to access online reviews</li>
 </ul>
 </li>
 </ul>
 <blockquote><ol>
-<li>Only some consumers would volunteer to comment a book, which may lead to the bias of comments. To be more specific, the reviews may only represent the opinions of some of consumers, perhaps the ones who extremely love or hate the book. </li>
-<li>It is common that some community content providers get free rided by dominant online retailers. For example, young ladies in China like to look for fashionable clothes and makeups on Xiaohongshu but they may buy them on Taobao, because Xiaohongshu has more abundant community contents while Taobao is more reliable and trustworthy on quality</li>
-<li>Some movies like <em>Rashōmon</em> enjoy a high rate on Douban, because only people who like classical Japanese movies would watch it. Usually, when movies get more popular, someone who does not like this specific kind of movies will also watch it by chance, and lower star reviews will emerge.</li>
+<li>“Single-purchase products” is really an appealing concept. I find most single-purchase products like movies and books have nearly the same price. Usually, the price of all movies in a movie theater at a certain time are the same. It’s quite different from the purchase described in microeconomics that if the price is lower than reserve price, the buyers will purchase. I think in this case, buyers are paying time for enjoyable experience.</li>
 </ol>
 </blockquote>
 
 <h2 id="Empirical-Analysis"><a href="#Empirical-Analysis" class="headerlink" title="Empirical Analysis"></a>Empirical Analysis</h2><h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><ul>
-<li>Sample of sales: rely on $\ln(sales\_rank)$ from Amazon and BM to represent the sales of books becuase:<ul>
-<li>No access to sales data</li>
-<li>The relationship between $\ln(sales\_rank)$ and $\ln(sales)$ is approximately linear</li>
-<li>Log method measures the pecentage change of dependent variables, thus eliminating scale effects</li>
+<li>Data on console sales and game sales are from NPD</li>
+<li>Review data are from GameSpot.com</li>
+<li>Three statistics of online reviews:<ul>
+<li>The average rating</li>
+<li>The variation of ratings (disagreement among reviewers)</li>
+<li>The total number of reviews posted</li>
 </ul>
 </li>
-<li>Ratings, shipping categories, lengths of comments</li>
 </ul>
-<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>The author introduces two fixed effects, which will influence the sales of books yet unobservable: </p>
-<ul>
-<li>Book fixed effect ($\nu_i$) is the charateristics of books, such as the popularity of the authors, the promotion by the publishers and the quality of the books. They may influence the reviews and sales at the same time, so we must put them in the regression model</li>
-<li>Book-site fixed effect ($\mu_i^A$) is the matching between the books and the websites, thereby the author can eliminate the differences of users of each website </li>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><ul>
+<li>Demand equation for the two-stage nested logit model is<br>$$<br>\begin{aligned}<br>\ln(s_{jt}^k)-\ln(s_{0t}^k)=&amp;\beta_0+ \beta_1p_{jt}^k+\beta_2r_{j,t-1}^k+\beta_3(r_{j,t-1}^k\times \mathrm{popular}_{jt})\\<br>&amp;+\beta_4(r_{j,t-1}^k\times \mathrm{offline}_j)+\beta_5\mathrm{popular}_{jt}+\beta_6\mathrm{offline}_j+\sigma\ln(s_{jt|g}^k)+\xi_{jt}^k<br>\end{aligned}<br>$$<br>where $j$ denotes games, $k$ denotes consoles, $i$ denotes players, $p$ denotes price, and $r$ denotes lagged reviews. $\mathrm{popular}$ and $\mathrm{offline}$ are two dummies. $s_{jt}^k$ is the share of the potential market captured by game $j$ of console $k$ in period $t$, and $s_{jt|g}^k$ is game $j$’s share of portion of the market that purchases games in period $t$. </li>
+<li>$\xi_{jt}^k$ is the characteristics of other games, and can be further decomposed as<br>$$\xi_{kt}^k=\theta_{jt}+\eta_j^k+\epsilon_{jt}^k$$<br>where $\theta_{jt}$ is a game-specific component, $\eta_j^k$ is the console-specific effect, and $\epsilon_{jt}^k$ is and iid normal error term varying across games and over time.</li>
+<li>Differnce in differnce method is used to eliminate unobservable variables</li>
 </ul>
-<p>$$\begin{aligned}<br>\ln (rank_i^A)=&amp;\mu_i^A+\nu_i+\alpha_A\ln (P_i^A)+\gamma^A\ln (P_i^B)+X\Gamma^A+S\Pi^A+\epsilon_i^A\\<br>\ln (rank_i^B)=&amp;\mu_i^B+\nu_i+\alpha_B\ln (P_i^B)+\gamma^B\ln (P_i^A)+X\Gamma^B+S\Pi^B+\epsilon_i^B<br>\end{aligned}$$</p>
-<p>In the equation above, $A$ and $B$ denote Amazon and bn respectively. $P$ denotes price. $X$ denotes the vector of reviews variables from both sites. $X$ is the dummy variables about the promised shipping times. </p>
-<p>Then the author shows the fixed effects can cancel out with some algebra and under some assumptions:</p>
-<ul>
-<li>Cross-sectional difference:<br>$$\ln (rank_i^A)-\ln(rank_i^B)=\beta^A\ln(P_i^A)+\beta^B\ln(P_i^B)+X\Gamma+S\Pi+\epsilon_i+(\mu_i^A-\mu_i^B)$$<br>If there is no book-site effect, then<br>$$\ln (rank_i^A)-\ln(rank_i^B)=\beta^A\ln(P_i^A)+\beta^B\ln(P_i^B)+X\Gamma+S\Pi+\epsilon_i$$</li>
-<li>Differnce-in-difference:<br>Take differnce across time to eliminate the book-site effects.<br>$$\Delta[\ln (rank_i^A)-\ln(rank_i^B)]=\beta^A\Delta\ln(P_i^A)+\beta^B\Delta\ln(P_i^B)+\Delta X\Gamma+\Delta S\Pi+\epsilon_i$$</li>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="Summary-Statistics"><a href="#Summary-Statistics" class="headerlink" title="Summary Statistics"></a>Summary Statistics</h3><ul>
+<li>The reviews are overwhelmingly positive for games for both consoles</li>
+<li>Average ratings in the first couple of months are significantly higher than in the later months, suggesting the existence of a self-selection bias</li>
 </ul>
-<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><ul>
-<li>Reviews are overwhelmingly high on both sites. The reviews on bn are slightly more positive</li>
-<li>Reviews on Amazon are more detailed</li>
-<li>The improvement of rating will increase the sales on the same site</li>
-<li>The length of reviews have negative effects on the sales. The author claims that longer reviews convey mixed feelings about the books. 5-star reviews with longer texts may read like 4.5-star review due to the mixed feelings. This also suggests that consumers do read the reviews instead of simply focusing on the overall star of books</li>
-<li>1-star reviews have higher impact than 5-star reviews. This may be due to the more credibility of lower star reviews.</li>
-</ul>
-<blockquote><ol>
-<li>Ratings of movies are generally lower than those of TV dramas on Douban. Moreover, the overall ratings on Douban are lower than Taopiaopiao, a platform selling movie tickets. The possible interperations can be:<ul>
-<li>The differences of users of different websites</li>
-<li>The same consumer with the a certain comment about a movie may give different stars on differents websites. Because he may think 4-star is enough to tell others this is a good movie, but 4-star means average on Taopiaopiao</li>
-<li>Since Taopiaopiao wants to sell more tickets to make profits, it may use some tricks to improve the ratings of movies</li>
+<h3 id="Regression-Results"><a href="#Regression-Results" class="headerlink" title="Regression Results"></a>Regression Results</h3><ul>
+<li>Overall<ul>
+<li>The game price negatively affects the demand</li>
+<li>Average rating has no effect on the demand</li>
+<li>Video games are poor substitutes for each other</li>
 </ul>
 </li>
-<li>Longer reviews on Amazon may be due to more users of Amazon, which is a motivation for users of Amazon to devote their time to post contents</li>
-<li>With the advanced techniques, we can examine the texts with some packages, and find the relationship between the lengths of reviews and enthusiasm conveyed by the words</li>
-</ol>
-</blockquote>
-
+<li>Model with dummies and interaction terms<ul>
+<li>Sales with less popular games are negatively affected by their prices.</li>
+<li>The coefficients of the average rating and the variation of ratings are significant only for less popular and online games</li>
+<li>The coefficients of the number of reviews is significant for online games</li>
+</ul>
+</li>
+<li>Model in which the stage in the life cycle is used as popularity<ul>
+<li>The online reviews are less influential in the early phases of the game life </li>
+<li>It is probably due to the offline promotion in the early stage</li>
+</ul>
+</li>
+</ul>
 <h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><ul>
-<li>This paper stops short of showing that retailers profit from providing review contents.</li>
-<li>Whether improving a customer’s satisfaction afftects customer loyalty is worth studying.</li>
-<li>Review generating process<ul>
-<li>On the one hand, an increased dependence on posted reviews could make them less informative</li>
-<li>On the other hand, if an unfair or an incorrect review prompts a quick reaction, this could increase the overall value of reviews to customers</li>
+<li>Online reviews are more influential for products whose information is scarce elsewhere, like Niche Products</li>
+<li>With the development of Internet, online reviews will become increasingly important</li>
+<li>The conflicts of previous studies may result from the differences in the structure of customers or products</li>
+<li>Further research could:<ul>
+<li>Take a similar approach to examine the differential roles of reviews on various types of products within the same product category</li>
+<li>Test whether diffusion models for forecasting the sales of such products can substantially improve their accuracy after considering online reviews</li>
+<li>Investigate firms’ online and offline marketing strategies and compare their effectiveness</li>
+<li>Compare the influence of online reviews among multiple products</li>
 </ul>
 </li>
 </ul>
 <blockquote><ol>
-<li>Communities like Xiaohongshu have more interations among reviewers. They can easily comment on others’ posts and make friends during this process. I think this kind of communities can serve as a good place to observe and study the review generating process. Moreover, since Xiaohongshu is more like a forum, I belive there must be some other characteristics we can find</li>
-<li>I find the differences between Word of Mouth and Advertising are more and more subtle. For example, if Li Jiaqi, a celebrity in China, says something good about a lipstick in a community merely in order to give the followers useful information to make a more enjoyable purchase, then we call it word of mouth. If he gets paid by the manufacturers of the lipsticks, we call it advertising. </li>
+<li>The relationship between online and offline marketing is a little bit subtle. For products targeting the young generation, online marketing is viatl. As for offline marketing, it can work together to raise the awareness of customers, but may also reduce the effecacy of online marketing. I guess the overall effect of offline marketing may depend on the characteristics of products and customers</li>
 </ol>
 </blockquote>
-<p><em>Chevalier, Judith and Dina Mayzlin. 2006. “The Effect of Word-of-Mouth on Sales: OnlineBook Reviews.” Journal of Marketing Research, 43(3), 345-354.</em></p>
+<p><em>Zhu, F., &amp; Zhang, X. (2010). Impact of online consumer reviews on sales: The moderating role of product and consumer characteristics. Journal of marketing, 74(2), 133-148.</em></p>
 
         </div>
 
@@ -326,8 +343,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/04/03/Impact-of-Online-Consumer-Reviews-on-Sales-The-Moderating-Role-of-Product-and-Consumer-Characteristics/">Impact of Online Consumer Reviews on Sales: The Moderating Role of Product and Consumer Characteristics</a>
+                <a class="prev" rel="prev" href="/2021/04/06/How-Does-the-Variance-of-Product-Ratings-Matter/">How Does the Variance of Product Ratings Matter?</a>
             
+            
+            <a class="next" rel="next" href="/2021/04/01/The-Effect-of-Word-of-Mouth-on-Sales-OnlineBook-Reviews/">The Effect of Word of Mouth on Sales</a>
             
         </section>
 

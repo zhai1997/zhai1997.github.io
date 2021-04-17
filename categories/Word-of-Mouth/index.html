@@ -39,7 +39,44 @@
 
     
     
-        
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
     
 
 
@@ -122,6 +159,42 @@
         
 
         <article class="archive-item">
+            <a class="archive-item-link" href="/2021/04/08/Exploring-the-value-of-online-product-reviews-in-forecasting-sales/">Exploring the value of online product reviews in forecasting sales</a>
+            <span class="archive-item-date">April 8, 2021</span>
+        </article>
+    
+        
+
+        
+
+        <article class="archive-item">
+            <a class="archive-item-link" href="/2021/04/07/Promotional-reviews-An-empirical-investigation-of-online-review-manipulation/">Promotional reviews: An empirical investigation of online review manipulation</a>
+            <span class="archive-item-date">April 7, 2021</span>
+        </article>
+    
+        
+
+        
+
+        <article class="archive-item">
+            <a class="archive-item-link" href="/2021/04/06/How-Does-the-Variance-of-Product-Ratings-Matter/">How Does the Variance of Product Ratings Matter?</a>
+            <span class="archive-item-date">April 6, 2021</span>
+        </article>
+    
+        
+
+        
+
+        <article class="archive-item">
+            <a class="archive-item-link" href="/2021/04/03/Impact-of-Online-Consumer-Reviews-on-Sales-The-Moderating-Role-of-Product-and-Consumer-Characteristics/">Impact of Online Consumer Reviews on Sales: The Moderating Role of Product and Consumer Characteristics</a>
+            <span class="archive-item-date">April 3, 2021</span>
+        </article>
+    
+        
+
+        
+
+        <article class="archive-item">
             <a class="archive-item-link" href="/2021/04/01/The-Effect-of-Word-of-Mouth-on-Sales-OnlineBook-Reviews/">The Effect of Word of Mouth on Sales</a>
             <span class="archive-item-date">April 1, 2021</span>
         </article>
@@ -133,7 +206,7 @@
         </div>
         <footer id="footer" class="footer">
     <div class="copyright">
-        <span>© Sihan Zhai | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
     </div>
 </footer>
 

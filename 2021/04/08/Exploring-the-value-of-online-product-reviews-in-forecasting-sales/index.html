@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Exploring the value of online product reviews in forecasting sales | Sihan&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Exploring the value of online product reviews in forecasting sales</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Word-of-Mouth/">Word of Mouth</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper creatively introduces the online review data and diffusion model to the box office revenue prediction model, and the proposed model not only outperforms all mainstream models used in practice, but also has abundant empirical insights </p>
+<h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
+<li>Whereas marketing plays an important role in movies’ opening weekend, consumer word-of-mouth has been frequently cited as the sigle most important factor that determines the long-term success of movies and other experience goods</li>
+<li>Online reviews are potentially valuable tools for firms to monitor attitudes of customers and adapt the strategies</li>
+<li>Academics have inconsistent empirical results of what metrics of reviews have more explanatory power</li>
+</ul>
+<blockquote><ol>
+<li>Movie series is another way of marketing. Some movies like <em>Detective Chinatown 3</em> can still have high box office revenues despite their low ratings of around 5 on Douban just because they use the title and reputation of <em>Detective Chinatown</em> series.</li>
+<li>Similar to money, time is also limited. We allocate limited time to purchase experience goods because we believe they will bring us happy experience. But the quality of experience goods is difficult to figure out in advance.</li>
+</ol>
+</blockquote>
+
+<h2 id="Related-Wrok"><a href="#Related-Wrok" class="headerlink" title="Related Wrok"></a>Related Wrok</h2><h3 id="Forecasting-Models-of-Motion-Picture-Revenues"><a href="#Forecasting-Models-of-Motion-Picture-Revenues" class="headerlink" title="Forecasting Models of Motion Picture Revenues"></a>Forecasting Models of Motion Picture Revenues</h3><p>Models can be classified along three dimensions:</p>
+<ul>
+<li>Explanatory variables employed (eg. star power, movie genre and MPAA ratings, academy awards, advertising, timing of release)</li>
+<li>Timing of the forecast (eg. before the initial release, after the early box office revenues become known)</li>
+<li>Type of model used (eg. linear model, diffusion theory, exponential distribution)</li>
+</ul>
+<h3 id="Methodologies-for-Measuring-Consumer-Word-of-Mouth"><a href="#Methodologies-for-Measuring-Consumer-Word-of-Mouth" class="headerlink" title="Methodologies for Measuring Consumer Word-of-Mouth"></a>Methodologies for Measuring Consumer Word-of-Mouth</h3><ul>
+<li>Traditionally, researches about consumer word-of-mouth are based on inference, surveys and controlled experiments.  </li>
+<li>Internet introduces a new way to measure consumer WOM: directly through online discussion groups, online review forums, etc</li>
+<li>Previous research has used volume, valence and dispersion to examine consumer postings<ul>
+<li>Volume: The more consumers discuss a product, the higher the chance that other consumers will be aware of it</li>
+<li>Valence: Positive opinions will encourage other consumers to adopt a product whereas negative opinions will discourage them</li>
+<li>Dispersion: Opinions spread quickly within commuinities, but slowly across them. Opinions with strong dispersion across communities are more likely to have substantial staying power</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>The authors mention that Reingen et al. (1984) compare brand preference congruity between women that lived in the same house and those that did not, and find that those that lived together had more <em>congruent brand preferences</em>. The study infers that those that lived together had more opportunities for interaction and thus, that WOM communication was more prevalent. This reminds me of the researches about why people tend to be similar to each other when they bulid connections with each other.</li>
+</ol>
+</blockquote>
+
+<h2 id="Data-and-Models"><a href="#Data-and-Models" class="headerlink" title="Data and Models"></a>Data and Models</h2><h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><ul>
+<li>From Yahoo! Movies, collected the names of movies, detailed review information, including all professional critic reviews and all user revies</li>
+<li>From Boxofficemojo, collected weekly box office and marketing expense</li>
+<li>From Hollywood Reporter, collected the star power of movies</li>
+<li>It is noteworthy that the relationship between user and professional reviews is not strong</li>
+</ul>
+<h3 id="Models"><a href="#Models" class="headerlink" title="Models"></a>Models</h3><ul>
+<li>Hazard rate defined as below is the instantaneous probability that a representative who has not yet adopted a product will do so at time $t$. $F(t)$ denotes the cummulative fraction of adopters at time $t$<br>$$<br>h(t)=\frac{Pr[\mathrm{adopts~at~time~}t \mathrm{~instantaneously}]}{Pr[\mathrm{has~not~yet~adopted~at~time~}t]}=\frac{F’(t)}{1-F(t)}<br>$$</li>
+<li>If the population size is $N$, and the purchase prive is $p$, the total market size is $M=Np$. The evolution of cumulative revenues $R(t)=MF(t)$ is governed by the differntial equation below:<br>$$<br>R’(t)=(M-R(t))h(t)<br>$$</li>
+<li>Bass (1969) proposes a special case of $h(t)$ as $h(t)=P+QF(t)$, where $P$ is interpreted as the external force which typically relates to advertising and product availability, and internal force which relates to the WOM is dependent on the number of people who have adpoted, thus denoted by $QF(t)$ </li>
+<li>In the movie industry, most advertising declines repidly postrelease. Moreover, people talk more about movies immediately after watching them, and less as time goes by. So the hazard function can be modified as:<br>$$<br>h(t)=P\delta^t+Q\int^t_{\tau=0}F’(t-\tau)\epsilon^\tau d\tau,~\delta\in [0,1],~\epsilon\in [0,1]<br>$$<br>where $\delta$ and $\epsilon$ are two discount factors</li>
+<li>With the help of modified $h(t)$, the revenues can be expressed as<br>$$<br>R’(t)=(M-R(t))\left( P\delta^t+\frac{Q}{M}\int^t_{\tau=0}R’(t-\tau)\epsilon^\tau d\tau \right)<br>$$</li>
+<li>Assuming recent adopters who contribute to a movie’s internal force of adoption are equal to last week’s adopters, then we can have the discrete-time formulation<br>$$<br>\begin{aligned}<br>&amp;Y_{it}=(M_i-R_{i(t-1)})\left( P_i\delta_i^t+\frac{Q_i}{M_i}Y_{i(t-1)}\right)  \\<br>&amp;R_{it}=Y_{it}+R_{i(t-1)},~t=1,2,\dots \\<br>&amp;\mathrm{and~} R_{i0}=Y_{i0}=0<br>\end{aligned}<br>$$</li>
+</ul>
+<h3 id="Movie-Specific-Covariates"><a href="#Movie-Specific-Covariates" class="headerlink" title="Movie-Specific Covariates"></a>Movie-Specific Covariates</h3><ul>
+<li>Market potential $M_i$<ul>
+<li>The theoretical maximum revenue that a particular movie can hope to generate if it is played in theaters forever</li>
+<li>Equation $M_I$: Function of its genre, MPAA ratings, and supply factors such as initial theater availability ($SCR$) and release strategy</li>
+<li>Equation $M_{II}$: $M_I$ without theater availability</li>
+</ul>
+</li>
+<li>External influence $P_i$<ul>
+<li>External factors that induce a person to watch a movie, such as marketing and publicity, critics reviews and unobservable attributes (a movie’s plot, the quality of its trailer, etc)</li>
+<li>Equation $P_I$: Fucntion of the movie’s opening weekend revenues over the movie’s market potential</li>
+<li>Equation $P_{II}$: In case the box office revenues are not available, $P_{II}$ uses <strong>the volume of opening weekend box office revenues</strong>, marketing cost ($MKT$), professional critic reviews ($CRAVG$), and the presense of well-known stars ($STAR$), age and gender entropy ($AENTR, GENTR$)</li>
+<li>Equation $P_{III}$: Only includes marketing and professional critic review data (no box office or online review data)</li>
+<li>Equation $P_{IV}$: Only includes online review data</li>
+</ul>
+</li>
+<li>Internal influence $Q_i$:<ul>
+<li>Internal factors that induce a moviegoer to watch a movie</li>
+<li>Equation $Q_I$: <ul>
+<li>Release strategy: Awareness-building is especially important for sleeper</li>
+<li>Valence of reviews ($AVG$)</li>
+<li>Entropy measures of online reviews ($AENTR, GENTR$): The more heterogeneous the population, the wider the audience of previously uninformed consumers are likely to be informed</li>
+<li>MPAA ratings</li>
+<li>Demographic dummies</li>
+</ul>
+</li>
+<li>Equation $Q_{II}$: Without any online review matrics</li>
+</ul>
+</li>
+<li>Discount factor $\delta_i$:<ul>
+<li>The rate by which a movie’s external influences decay after its initial release</li>
+<li>$logit(\delta_I)$:<ul>
+<li>Valence of user reviews ($AVG$): Studios tend to sustain adversiting and publicity for well-received movies and cut their losses quickly for badly-recerived movies</li>
+<li>Release strategy: Sleepers have slower decaying rate</li>
+</ul>
+</li>
+<li>$logit(\delta_{II})$: Uses professional critic reviews ($CRAVG$) instead of $AVG$ in $logit(\delta_I)$</li>
+</ul>
+</li>
+</ul>
+<h2 id="Estimation-and-Results"><a href="#Estimation-and-Results" class="headerlink" title="Estimation and Results"></a>Estimation and Results</h2><p>The paper uses MCMC to estimate the coefficients in the model. </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Model Settings</th>
+<th>Description</th>
+<th>MAPE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>$(P_{I},Q_{I},M_{I},\delta_I)$</td>
+<td>To be used when all the most explanatory variables are available</td>
+<td>8.5%</td>
+</tr>
+<tr>
+<td>B</td>
+<td>$(P_{II},Q_I,M_I,\delta_I)$</td>
+<td>To be used when early box office data are mot available</td>
+<td>14.5%</td>
+</tr>
+<tr>
+<td>C</td>
+<td>$(P_{III},Q_{II},M_I,\delta_{II})$</td>
+<td>Model B without any online review data</td>
+<td>17.7%</td>
+</tr>
+<tr>
+<td>D</td>
+<td>$(P_{IV},Q_{I},M_{II},\delta_{I})$</td>
+<td>Contains exclusively online review data</td>
+<td>20%</td>
+</tr>
+</tbody></table>
+<p>Model A achieves levels of forecasting accuracy for which BOXMOD-1 requires 3 weeks of box office data.</p>
+<h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><ul>
+<li>Contributes to a better understanding of how metrics of online reviews can add value to firm decision support</li>
+<li>Given abundant online reviews are available within hours of a new movie’s release, this model allows the generation of reliable forecasts much sooner than before</li>
+<li>This model can help exhibitor chains adapt exhibition capacity allocated to a new movie and may lead to more flexible contracts that allow exhibitors to reevaluate their dicisions immediately after the opening week</li>
+<li>Empirical insights:<ul>
+<li>The early volume of online reviews can be used as a proxy for early sales</li>
+<li>The average valence of user reviews is statistically significant as the predictor of the coefficient of internal influence and rate of dacay of external marketing</li>
+<li>The gender entropy of online reviewers has statistical significance for both a movie’s initial appeal and the impact of WOM from previous moviegoers on future sales</li>
+</ul>
+</li>
+<li>Future research could:<ul>
+<li>Incorporate the impact of competition from other movies</li>
+<li>Examine a model that uses measurements of theaters, revenues, and reviews at multiple points in time and and deal with the endogeneity</li>
+<li>Investigate the applicability of the model on other products</li>
+</ul>
+</li>
+</ul>
+<p><em>Dellarocas, C., Zhang, X. M., &amp; Awad, N. F. (2007). Exploring the value of online product reviews in forecasting sales: The case of motion pictures. Journal of Interactive marketing, 21(4), 23-45.</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/04/15/Interesting-projects-at-ByteDance/">Interesting projects at ByteDance</a>
+            
+            
+            <a class="next" rel="next" href="/2021/04/07/Promotional-reviews-An-empirical-investigation-of-online-review-manipulation/">Promotional reviews: An empirical investigation of online review manipulation</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>How Does the Variance of Product Ratings Matter? | Sihan&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">How Does the Variance of Product Ratings Matter?</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Word-of-Mouth/">Word of Mouth</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper proposes a possible way that the std of reviews influence the sales, which is convincing both theoretically and empirically.</p>
+<h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
+<li>Consumers seek online reviews to aid their purchasing decision, and leading websites are making more information about reviews, like the distribution of review ratings, available to the consumers</li>
+<li>Prior researches focus on establishing the causual impact of the average rating, without paying enough attention to the distribution of review ratings</li>
+<li>Some guess about the variance of reviews, the most important statistics except mean<ul>
+<li>Consumers are risk-averse and thus would better avoid taking risk to purchase a controversial product</li>
+<li>Differences in ratings may trigger curiosity, which could lead to higher demand</li>
+</ul>
+</li>
+</ul>
+<h2 id="Theoretical-Model"><a href="#Theoretical-Model" class="headerlink" title="Theoretical Model"></a>Theoretical Model</h2><h3 id="The-assumptions-and-settings-of-the-game"><a href="#The-assumptions-and-settings-of-the-game" class="headerlink" title="The assumptions and settings of the game"></a>The assumptions and settings of the game</h3><p>The authors assume that both consumers and sellers are fully rational and creates a strategic situation where the later consumers can perfectly infers the properties of products</p>
+<ul>
+<li>Players: A monopoly seller and risk-neutral consumers with heterogeneous tastes</li>
+<li>Attributions of products: quality $v$ and mismatch cost $t$. the latter one means the pains one gets for one unit of  mismatch between the consumers and products</li>
+<li>Attributions of consumers: tastes $x$ which belong to the taste space as a straight line of length 2 on which the product is located at the midpoint</li>
+<li>Possible actions of players:<ul>
+<li>Consumers: Buy or not</li>
+<li>Seller: Price of products $P$</li>
+</ul>
+</li>
+<li>Utility of players:<ul>
+<li>Consumers: $v-tx-P \mathrm{~if~buy}, 0 \mathrm{~otherwise}$</li>
+<li>Seller: $PD$, where $D$ denotes the demand, namely there is no cost for the producer</li>
+</ul>
+</li>
+</ul>
+<blockquote><p>Assumptions of the theoretical model:</p>
+<ol>
+<li>No manipulations of online WOM by sellers</li>
+<li>Risk neutral consumers</li>
+<li>Uniform distribution of the attributions of products</li>
+<li>Common knowlegde of rationality, distributions of the attributions of products, and demand in the previous stage</li>
+<li>Consumers konw their taste and the taste of the book perfectly, while how much the mismatch influence their utility is unknown to them at first</li>
+<li>The actual attributes of products are decided by nature (God), so nobody knows the value, which is the typical setting of imcomplete information game</li>
+</ol>
+<p>Becuase of 1 and 4, there is no uncertainty in the second stage</p>
+</blockquote>
+
+<p>The structure of the game is as followed</p>
+<ul>
+<li>Period 1: A unit mass of early consumers enter the market. The seller chooses $P_1$, and consumers decide to buy or not. Every consumer who buys the product consumes it and publish a rating $s(x)=v-tx$ (only based on his own experience) The first period demand $D_1$ and ratings then become common knowledge</li>
+<li>Period 2: A unit mass of later consumers enter the market. Having observed the $D_1$ and the mean and variance of ratings, the seller decides $P_2$, and each consumer decides to buy or not</li>
+</ul>
+<h3 id="SPNE"><a href="#SPNE" class="headerlink" title="SPNE"></a>SPNE</h3><ul>
+<li>Period 1: Given $P_1$, $D_1$ is decided through<br>$$<br>E(v)-E(t)\cdot D_1-P_1=0<br>$$<br>Also given $D_1$, the seller is solving<br>$$<br>\max_{P_1} P_1\frac{E(v)-P_1}{E(t)}+E\left(\frac{v^2}{4t}\right)<br>$$<br>The NE is<br>$$<br>\begin{aligned}<br>P_1^*&amp;=\frac{E(v)}{2}\\<br>D_1^*&amp;=\frac{E(v)}{2E(t)}\\<br>\Pi_1^*&amp;=\frac{E(v)^2}{4E(t)}<br>\end{aligned}<br>$$<br>The distributions of reviews are uniformly distributed with<br>$$<br>M=v-\frac{1}{2}t\cdot D_1 ~~~\mathrm{and}~~~ V=\frac{1}{12}(t\cdot D_1)^2<br>$$<br>which suggests that the mean and variance of reviews are not independent</li>
+<li>Period 2: Due to the common knowledge of reviews in the Period 1, consumers can derive<br>$$<br>v=M+\sqrt{3V} ~~~\mathrm{and}~~~ t=\frac{2\sqrt{3V}}{D_1}<br>$$<br>Similar to Period 1, given $P_2$, consumers choose $D_2=(v-P_2)/t$. Also, given $D_2$, the seller is solving<br>$$<br>\max_{P_2} P_2\frac{v-P_2}{t}<br>$$<br>The NE is<br>$$<br>\begin{aligned}<br>P_2^*&amp;=\frac{M+\sqrt{3V}}{2}\\<br>D_2^*&amp;=\frac{D_1}{4}\left( \frac{M}{\sqrt{3V}}+1\right)\\<br>\Pi_2^*&amp;=\frac{D_1}{8}\left(\frac{M^2}{\sqrt{3V}}+\sqrt{3V}+2M\right)<br>\end{aligned}<br>$$</li>
+</ul>
+<h3 id="Analysis-of-the-results"><a href="#Analysis-of-the-results" class="headerlink" title="Analysis of the results"></a>Analysis of the results</h3><ul>
+<li>Propositions<ul>
+<li>Second-period price, demand, and profit all increase with the average rating</li>
+<li>In the second period, price increases with the variance if and only if $M\leq 0$, and profit increases with the variance if and only if $M\leq\sqrt{3V}$</li>
+</ul>
+</li>
+<li>Price increases with the variance, because a high price helps the seller fully exploit well-matched consumers’ high willingness to pay</li>
+<li>The demand and profit increase with the variance only when the average rating is ralatively low. <ul>
+<li>When average rating is low, a high variance makes consumers with good match believe the low rating is due to the personal tastes of some reviewers. </li>
+<li>When the average rating is high, since most consumers already believe in the product’s quality, high variance tend to drive away marginal consumers </li>
+</ul>
+</li>
+<li>The price is higher in the second period than in the first stage if and only if $v=M+\sqrt{3V}&gt;E(v)$, that is, the seller should raise the product’s price over time if it receives a high mean or variance of ratings</li>
+</ul>
+<h2 id="Empirical-Analysis"><a href="#Empirical-Analysis" class="headerlink" title="Empirical Analysis"></a>Empirical Analysis</h2><h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><p>Similar to Chevalier and Mayzlin (2006)</p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>The standard deviation of reviews ratings and the interation beteween standard deviation and average are added to the DID model similar to that in Chevalier and Mayzlin (2006).</p>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><ul>
+<li>A higher average rating on Amazon increases the book’s relative sales</li>
+<li>A higher standard deviation of Amazon ratings lead to relative higher sales if and only if the average rating on Amazon is low</li>
+<li>If interation items are ignored, researchers may get the impercise conclusion that the effect of variance on sales is not significant</li>
+</ul>
+<h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><p>Future researchers could:</p>
+<ul>
+<li>Explore the application of the findings in the competitive environment</li>
+<li>Test the effects of other aspects of consumer reviews, like durability and ease of use for GPS, picture quality and sound quality of TVs, etc</li>
+</ul>
+<p><em>Sun, M. (2012). How does the variance of product ratings matter?. Management Science, 58(4), 696-707.</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/04/07/Promotional-reviews-An-empirical-investigation-of-online-review-manipulation/">Promotional reviews: An empirical investigation of online review manipulation</a>
+            
+            
+            <a class="next" rel="next" href="/2021/04/03/Impact-of-Online-Consumer-Reviews-on-Sales-The-Moderating-Role-of-Product-and-Consumer-Characteristics/">Impact of Online Consumer Reviews on Sales: The Moderating Role of Product and Consumer Characteristics</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
