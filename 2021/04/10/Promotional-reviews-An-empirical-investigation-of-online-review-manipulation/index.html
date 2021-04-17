@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Promotional reviews: An empirical investigation of online review manipulation | Sihan&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Promotional reviews: An empirical investigation of online review manipulation</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Word-of-Mouth/">Word of Mouth</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
+<li>The presense of undetectable fake reviews may:<ul>
+<li>Induce customers to make suboptimal choices</li>
+<li>Lead consumers to mistrust reviews and underweight helpful information</li>
+</ul>
+</li>
+<li>The specific context of advertising disguised as user reviews has not been extensively studied</li>
+</ul>
+<blockquote><p>I find the following topics are interesting:</p>
+<ol>
+<li>To what extent consumers can tell the fake reviews from the helpful ones. The theoretical models in the appendix and <a href="/2021/04/06/How-Does-the-Variance-of-Product-Ratings-Matter/" title="How Does the Variance of Product Ratings Matter?">How Does the Variance of Product Ratings Matter?</a> both have no uncertainty in the later stage, which is OK in this context, but not applicable if we want to further understand the customer behaviors</li>
+<li>Furthermore, if the consumers find some of the reviews are probably fake:<ol>
+<li>How will they discount the untrustworthy reviews, namely how will they decide the discount factor</li>
+<li>How will the decision of discount factor influence or distort their purchasing behavior</li>
+<li>How will this finding influence their willingness to make future contributions to the community</li>
+<li>How will the dissatisfaction of consumers and regulations of government influence the profits of the review platform, thus forcing them to invest to detect and delete the the fake reviews</li>
+<li>How will the constraints the review platforms put on the reviewers influence the willingness and abilities of reviewers to write reviews</li>
+<li>What is the equilibrium of these processes</li>
+</ol>
+</li>
+</ol>
+<p>In a word, the model in this paper focuses on the trade-off of hotels, the producers. I think the trade-off of the review platforms and the behavior of customers are also quite interesting</p>
+</blockquote>
+
+<h2 id="Prior-Literature"><a href="#Prior-Literature" class="headerlink" title="Prior Literature"></a>Prior Literature</h2><ul>
+<li>Strategic communication: In models of pursuasion, an information sender can influence the receiver’s decision by optimally choosing the informatiuon structure. But one common thread among these papers is that the sender’s identity and incentives are common knowledge, which is not applicable here </li>
+<li>Mayzlin (2006) <ul>
+<li>Derives the condition under which online reviews are persuasive</li>
+<li>Demonstrates that producers of lower quality products will expend more resources on promotional reviews</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>I find the online reviews are quite similar the settings of <strong>Cheap Talk</strong>. The reviewers are not responsible for what they have posted on the Internet (as long as it is legitimate). They can exaggerate, say something irrelevant, or do anything they like. Their cost of posting a review is so little that we can ignore it in many contexts. Cheap talk theory studies how credible the listeners think the talks are</li>
+<li>Read Mayzlin (2006) later!</li>
+</ol>
+</blockquote>
+
+<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><ul>
+<li>Identified the 25th to 75th largest US cities, whcih are large enough to “fit” many hotels, but not so large and dense that competition patterns are difficult to determine</li>
+<li>From TripAdvisor and Expedia, obtained the text and the star values of all user reviews, the identity of the reviewer, and the date of the review about the hotels in the selected cities</li>
+<li>From STR, obtained the location (to find the neighbors), different measures of organizational forms (ownership, affiliation, management) of the hotels</li>
+<li>Some other variables to control for the probablity that TripAdvisor and Expedia users value hotels with different characteristics differently</li>
+<li>Hotel reviewers are more critical than reviewers in other previously studied contexts</li>
+</ul>
+<blockquote><ol>
+<li>The average ratings on different products or even different platforms are quite different. What leads to the differnces is also interesting</li>
+</ol>
+</blockquote>
+
+<h2 id="Theoretical-Model"><a href="#Theoretical-Model" class="headerlink" title="Theoretical Model"></a>Theoretical Model</h2><h3 id="Model-in-the-Appendix"><a href="#Model-in-the-Appendix" class="headerlink" title="Model in the Appendix"></a>Model in the Appendix</h3><p>This game theory model mainly seggests that the cost of the review manipulation affects the number of promotional reviews. The game consists of two competing firms A and B, and a continuum of consumers.</p>
+<ul>
+<li>Stage 1: Nature draws the true quality of each firm ($q_A$ and $q_B$)</li>
+<li>Stage 2: The firms set prices ($p_A$ and $p_B$), which become common knowledge immediately</li>
+<li>Stage 3: Each firm can surreptitiously and simultaneously manufacture positive reviews for itself and negative reviews for its competitor. The fake reviews become common knowledge. We denote the effort that firm $i$ invests into negative reviews for firm $j$ by $e_{i,j}$, the effort firm $i$ invests into positive self-promotion by $e_{i,i}$, and the observed quality by $\hat{q_i}$<br>$$<br>\begin{aligned}<br>\hat{q_A}&amp;=q_A+e_{A,A}-e_{B,A}\\<br>\hat{q_B}&amp;=q_B+e_{B,B}-e_{A,B}<br>\end{aligned}<br>$$<br>The authors introduce a vital concept for the later reasoning, cost of manipulation. It is a convex function of the efforts $C(e_{i,i},e_{i,j})$. That is because while the first review can reflect the owner’s own authentic writing style, the later reviews must be dissimilar from the reviews that prceded it in order to avoid the detection by the review platform</li>
+<li>Stage 4: The consumer chooses the product that maximizes her utility. Assuming firm A is located at $x=0$ and firm B is located at $x=1$, the consumer at $x$ chooses A if<br>$$<br>E[q_A|\hat{q_A}]-tx-p_A\geq E[q_B|\hat{q_B}]-t(1-x)-p_B<br>$$</li>
+<li>The optimization results of all the consumers are<br>$$<br>\hat{x}=\frac{1}{2}+\frac{E[q_A|\hat{q_A}]-E[q_B|\hat{q_B}]+p_B-p_A}{2t}<br>$$</li>
+<li>The optimization the producers are solving is (taking firm A as the example)<br>$$<br>\max_{e_{A,A},e_{A,B}} \left( p_A\left[ \frac{1}{2}+\frac{e_{A,A}+e_{A,B}-\hat{e_{A,A}^*}-\hat{e_{A,B}^*}+c_A+p_B-p_A}{2t}<br>\right] -\delta_A\frac{e_{A,A}^2}{2}-\gamma_A\frac{e_{A,B}^2}{2} \right)<br>$$</li>
+<li>The PBE is<br>$$<br>\begin{aligned}<br>e_{A,A}^*&amp;=\frac{p_A}{2\delta_A t}\\<br>e_{A,B}^*&amp;=\frac{p_A}{2\gamma_A t}\\<br>e_{B,B}^*&amp;=\frac{p_B}{2\delta_B t}\\<br>e_{B,A}^*&amp;=\frac{p_B}{2\gamma_B t}<br>\end{aligned}<br>$$<br>The efforts to manipulate review $e$ are all in inverse proportion to the cost of manipulation</li>
+</ul>
+<blockquote><p>Assumptions of the model</p>
+<ol>
+<li>The true quality of each firm is unknown to anyone, but their distribution is common knowledge. All the other parameters of the game is common knowledge</li>
+<li>The linear relationship between $\hat{q_i}$ and the efforts of firms to manipulate reviews</li>
+</ol>
+</blockquote>
+<blockquote><p>The theoretical model proposes another mechanism that may lead to the manipulation of reviews. If other companies except you are posting fake reviews, your ratings will be relatively lower than others, which drives you to also manipulation the reviews</p>
+</blockquote>
+<h3 id="The-contexts-of-ownership-structure-and-affiliation"><a href="#The-contexts-of-ownership-structure-and-affiliation" class="headerlink" title="The contexts of ownership structure and affiliation"></a>The contexts of ownership structure and affiliation</h3><ul>
+<li>In practice, the primary cost of promotional reviews from the firms’ perspective is the risk that the activity will be publicly exposed</li>
+<li>The cost of posting a fake review increases with the size of the entity, while the benefit does not<ul>
+<li>Negative spillovers associated with punishments of manupulation: A larger entity suffers a greater penalty from being caught undertaking fraudulent activities as all the assets held by the entity will be negatively influnenced. In contrast, small entities have less to lose</li>
+<li>Nearly no spillovers of benefits from manipulation: Customers seldom refer to another hotel under the same owner when they are thinking about whether to book one hotel</li>
+</ul>
+</li>
+<li>The owner-operaters are residual claimants of hotel profitability, whereas the emplyee-operaters would have little to gain in terms of direct profit realization. But they all bear the risk. So, ower-operaters are more likely to undertake fake reviewing activity</li>
+<li>Combined with the theoretical model in the appendix, three claims are made:<ul>
+<li>A firm that is located close to a competitor will have more fake negative reviews than a firm with no neighbors</li>
+<li>A firm that is part of smaller entity will have more positive fake reviews</li>
+<li>A firm that is located close to a smaller entity competitor will have more fake negative reviews</li>
+</ul>
+</li>
+</ul>
+<h2 id="Empirical-Model"><a href="#Empirical-Model" class="headerlink" title="Empirical Model"></a>Empirical Model</h2><ul>
+<li>There is a key differnce between the two websites used in this study:<ul>
+<li>Anybody can post a review on TripAdvisor</li>
+<li>Only users who purchased the hotel stay on Expedia in the past six months can post a review for the hotel</li>
+<li>It is far less costly for a hotel to post fake reviews on TripAdvisor versus posting fake reviews on Expedia</li>
+</ul>
+</li>
+<li>DID model<br>$$<br>\begin{aligned}<br>\frac{Nstar~ Reviews_{ij}^{TA}}{Total~ Reviews_{ij}^{TA}}-\frac{Nstar~ Reviews_{ij}^{Exp}}{Total~ Reviews_{ij}^{Exp}}=&amp;\textbf{X}_{ij}\textbf{B}_1+\textbf{OwnAf}_{ij}\textbf{B}_2+Nei_{ij}B_3\\<br>&amp;+\textbf{NeiOwnAf}_{ij}\textbf{B}_4+\sum\gamma_j+\epsilon_{ij}<br>\end{aligned}<br>$$<ul>
+<li>The dependent variable is the difference between the share of reviews on TripAdvisor that are N star and the share of reviews on Expedia that are N star for hotel $i$ and city $j$.</li>
+<li>$\textbf{X}_{ij}$ contains controls for hotel characteristics that are irrelevant with this study but may be valued differently by users of different websites</li>
+<li>$Nei_{ij}$ is whether there is a neigbor within 0.5 km</li>
+<li>$\textbf{OwnAf}_{ij}$ contains the own-hotel ownership and affiliation characteristics</li>
+<li>$\textbf{NeiOwnAf}_{ij}$ contains the owership and affiliation characteristics of the neighbor hotel</li>
+</ul>
+</li>
+<li>If the ownership and affiliation are correlated, then reviewers of the two websites value the affiliation and ownership characteristics differently<ul>
+<li>Assuming ordinary reviewers will not value the two characteristics differently, which is quite intuitive</li>
+<li>Then it must be that fake reviewers who are actually the interested parties value these two charateristics differently, becuase they will influence their cost and benefit from manipulation</li>
+</ul>
+</li>
+</ul>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><ul>
+<li>Negative reviews<ul>
+<li>Find a strong and statistically significant effect of the presense of a neighbor on the negative reviews</li>
+<li>The presense of an independent neighbor will increase the negative reviews</li>
+<li>The presense of a multiunit owner neighbor will decrease the negative reviews (baseline: having a neigbor)</li>
+<li>$\textbf{OwnAf}_{ij}$ has no significant influence on the difference</li>
+</ul>
+</li>
+<li>Positive reviews<ul>
+<li>Independent hotels have more positive reviews</li>
+<li>Multiunit hotels have fewer positive reviews</li>
+<li>$\textbf{NeiOwnAf}_{ij}$ has no significant influence on the difference</li>
+</ul>
+</li>
+<li>The result of one-time reviewers are not as significant as that of the full data, indicating that some widely-used characteristics are not quite reliable</li>
+</ul>
+<h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><ul>
+<li>Proposes a novel mothod to empirically detect review manipulation</li>
+<li>Contributes to the literature on incentives and organizational form</li>
+<li>Proposes a potential tradeoff of online review platform: more reviews or fewer fake reviews</li>
+<li>Future researchers could:<ul>
+<li>Include content analysis</li>
+<li>Find ways to detect fake reviews directly</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>Given mainstream online review platforms in China all have multiple categories of ratings like the bed, the service, the noise, etc. Do fake reviews focus on the some of the categories to scare away customers of compititors</li>
+<li>Some stores on Taobao promise to give the customers coupons or discount if they are willing to post a 5-star review. Usually, the customer do not have enough reason to support such a high rating (very probably the products are not that good), so they have to say something with no details.</li>
+</ol>
+</blockquote>
+
+
+<p><em>Mayzlin, D., Dover, Y., &amp; Chevalier, J. (2014). Promotional reviews: An empirical investigation of online review manipulation. American Economic Review, 104(8), 2421-55.</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/04/15/Interesting-projects-at-ByteDance/">Interesting projects at ByteDance</a>
+            
+            
+            <a class="next" rel="next" href="/2021/04/08/Exploring-the-value-of-online-product-reviews-in-forecasting-sales/">Exploring the value of online product reviews in forecasting sales</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
