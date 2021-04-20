@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Fake it till you make it: Reputation, competition, and Yelp review fraud | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Fake it till you make it: Reputation, competition, and Yelp review fraud</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Word-of-Mouth/">Word of Mouth</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper examines the economic incentives behind the fake online reviews. They conclude that weak reputation, recently received bad reviews, affiliation and competition are explanations for the fake reviews</p>
+<h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
+<li>Despite the major challenge that review fraud poses for firms, consumers, and review platforms alike, little is known about the economic incentives behind it</li>
+</ul>
+<blockquote><ol>
+<li>I think it is interesting work to model the economic incentives mentioned in this paper based on the model in <a href="/2021/04/Promotional-reviews-An-empirical-investigation-of-online-review-manipulation/" title="Promotional reviews: An empirical investigation of online review manipulation">Promotional reviews: An empirical investigation of online review manipulation</a></li>
+<li>The authors mention that Li and Hitt (2008) investigate the selection issues of reviewing, where people who purchase a product choose not to post a review. Read this paper later!</li>
+<li>Anderson and Simester (2014) show that some people who choose not to buy a product still leave a review. Read this paper later!</li>
+<li>Gao et al.(2015) find that despite the bias of online reviews, there is still strong correlation between the an offline measure of physician quality and the same physicians’ online ratings. read it later!</li>
+</ol>
+</blockquote>
+
+<h2 id="Empirical-Context-and-Data"><a href="#Empirical-Context-and-Data" class="headerlink" title="Empirical Context and Data"></a>Empirical Context and Data</h2><h3 id="Fake-and-filtered-reviews"><a href="#Fake-and-filtered-reviews" class="headerlink" title="Fake and filtered reviews"></a>Fake and filtered reviews</h3><ul>
+<li>16% of reviews are identified as suspicious by Yelp</li>
+<li>Challenges in empirically identifying review fraud<ul>
+<li>Unable to directly observe whether a review is fake</li>
+<li>Lack of a single standard for what makes review “fake”, may include<ul>
+<li>Saying something false (at least different from what the reviewers actually think)</li>
+<li>Encouraging and discouraging honest reviewers to leave a review</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Characteristics-of-filtered-reviews"><a href="#Characteristics-of-filtered-reviews" class="headerlink" title="Characteristics of filtered reviews"></a>Characteristics of filtered reviews</h3><ul>
+<li>Fake reviews are likely to be extreme, which may also contribute to the large dispersion that is often observed in consumer ratings<blockquote><ol>
+<li>Based on the theoretical model proposed in <a href="/2021/04/How-Does-the-Variance-of-Product-Ratings-Matter/" title="How Does the Variance of Product Ratings Matter?">How Does the Variance of Product Ratings Matter?</a>, if the dispersion of ratings exists, consumers may overestimate the mismatch cost</li>
+</ol>
+</blockquote></li>
+<li>Estimate the characteristics of filtered reviews in more detail with the following linear probability model:<br>$$<br>Filtered_{ij}=b_i+x_{ij}’\beta+\epsilon_{ij}<br>$$<br>where $Filtered_{ij}$ indicates whether the $j$th review of business $i$ was filtered, $b_i$ is a business fixed effect, $x_{ij}$ is a vector of review and reviewer characteristics including:<ul>
+<li>star ratings</li>
+<li>length in characters</li>
+<li>total number of reviewer reviews</li>
+<li>a dummy for the reviewer having a Yelp profile picture</li>
+</ul>
+</li>
+<li>The results: <ul>
+<li>Reviews with extreme ratings are more likely to be filtered</li>
+<li>Point out other potential algorithmic biases when using filtered reviews as a proxy for fake reviews</li>
+</ul>
+</li>
+</ul>
+<h3 id="Review-fraud-sting"><a href="#Review-fraud-sting" class="headerlink" title="Review fraud sting"></a>Review fraud sting</h3><ul>
+<li>Concerns about taking filtered reviews as a proxy for fake reviews<ul>
+<li>One might be concerned that this paper is reverse engineering Yelp’s algorithm rather than analyzing fraud</li>
+<li>Collect and analyze a second data set which is not generated with the help of the same algorithm in order to check the robustness</li>
+</ul>
+</li>
+<li>Cross-validation with the second data set<ul>
+<li>If filtered reviews are a reasonable proxy for fake reviews, then businesses caught in the sting should also have higher rates of filtered reviews</li>
+<li>Check whether the characteristics of filtered reviews on this restricted sample of businesses are similar to filtered reviews in the main sample Boston restaurants</li>
+<li>The results of the two cross-validations justify the use of filtered reviews as the proxy for fake reviews</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>I have question about the second cross-validation. The validation can prove the sample (or whether the review committed review fraud) is not correlated with the features of the filtered reviews. I guess it means no different algorithm for different sample. But I wonder how this result can serve as a validation</li>
+</ol>
+</blockquote>
+
+<h2 id="Empirical-Strategy"><a href="#Empirical-Strategy" class="headerlink" title="Empirical Strategy"></a>Empirical Strategy</h2><ul>
+<li>Ideally, if we could recognize fake reviews, we would estimate the following regression model<br>$$<br>f_{it}^*=x_{it}’\beta +b_i+\tau_t+\epsilon_{it}<br>$$<br>where $f_{it}^*$ is the number of fake reviews business $i$ received during the period $t$; $x_{it}$ is a vector of time-varying covariates measuring a business’s economic incentives to engage in review fraud; $\beta$ are the structural parameters of interest; $b_i$ and $\tau_t$ are business and time fixed effects; and $\epsilon_{it}$ is an error term</li>
+<li>But we cannot tell fake reviews. Assume that $Pr[Filtered|\neg Fake]=a_0$ and $Pr[Filtered|Fake]=a_0+a_1$. Let $f_{itk}^*$ be a true indicator of the $k$th review of businesses $i$ at time $t$ being fake<br>$$<br>\begin{aligned}<br>f_{itk}&amp;=\alpha_0 (1-f_{itk}^*)+(\alpha_0+\alpha_1)f_{itk}^*+u_{itk}\\<br>f_{it}&amp;=\sum_{k=1}^{n_{it}}f_{itk}=\alpha_0 n_{it} +\alpha_1 f_{it}^*+u_{it}\\<br>&amp;=a_0n_{it}+a_1(x_{it}’\beta+b_i+\tau_t+\epsilon_{it})+u_{it}<br>\end{aligned}<br>$$</li>
+<li>We can only estimate $\alpha_1\beta$ as a whole. The results of the empirical model are scaled by a constant</li>
+<li>Controlling for biases in Yelp’s Filter: Add review length, the number of prior reviews the author has written, and whether the reviewer has a profile picture associated with the account to the model</li>
+</ul>
+<h2 id="Review-Fraud-and-Own-Reputation"><a href="#Review-Fraud-and-Own-Reputation" class="headerlink" title="Review Fraud and Own Reputation"></a>Review Fraud and Own Reputation</h2><ul>
+<li>Low ratings increase incentives for positive review fraud, and high ratings decrease them</li>
+<li>Having more reviews reduces incentives for positive review fraud: As a restaurant receives more reviews, the benefit to each additional review decreases</li>
+<li>Restaurants are more likely to engage in positive review fraud earlier in their life circles</li>
+<li>Chain restaurants leave fewer positive fake reviews, and the reason is quite similar to <a href="/2021/04/Promotional-reviews-An-empirical-investigation-of-online-review-manipulation/" title="Promotional reviews: An empirical investigation of online review manipulation">Promotional reviews: An empirical investigation of online review manipulation</a></li>
+<li>Business who has undergone a verification process to be able to interact with users will engage in more review fraud</li>
+<li>Negative fake reviews are less responsive to the restaurant’s recent ratings but are still responsive to the number of reviews that have been left</li>
+</ul>
+<blockquote><ol>
+<li>I notice that business age and review count are taken into one model. I think they may be correlated</li>
+</ol>
+</blockquote>
+
+<h2 id="Review-Fraud-and-Competition"><a href="#Review-Fraud-and-Competition" class="headerlink" title="Review Fraud and Competition"></a>Review Fraud and Competition</h2><h3 id="Quantifying-competition-between-restaurants"><a href="#Quantifying-competition-between-restaurants" class="headerlink" title="Quantifying competition between restaurants"></a>Quantifying competition between restaurants</h3><ul>
+<li>The restaurant industry has a relatively high attrition rate</li>
+<li>Breakdown competition by chain affiliation, food type, and spatial proximity</li>
+<li>Quantifying spatial proximity:<ul>
+<li>Threshold method used in <a href="/2021/04/Promotional-reviews-An-empirical-investigation-of-online-review-manipulation/" title="Promotional reviews: An empirical investigation of online review manipulation">Promotional reviews: An empirical investigation of online review manipulation</a> is not applicable here<ul>
+<li>Location is likely a more important for travellers but not for diners</li>
+<li>The geographic density of restaurants is much higher than that of hotels</li>
+</ul>
+</li>
+<li>Alternative: using the idea of smoothing kernel weights<br>$$<br>w_{ij}=K\left( \frac{d_{ij}}{h}\right)<br>$$<br>where $d_{ij}$ is the distance between the two restaurants; $K$ is a kernel function; and $h$ is a parameter called kernel bandwidth</li>
+<li>Use Gaussian kernel</li>
+</ul>
+</li>
+<li>Assuming no change of rate at which the restaurants manipulate reviews after the last review but still operating, use the first and last reviews as proxies for the operating dates</li>
+<li>Let $w_{it}$ be a vector containing all the factors mentioned before, eg.<br>$$<br>w_{it}^{(1)}=\sum_{i\neq j}w_{ij}1_{\{independent_j\}}1_{\{same~ type_{ij}\}}1_{\{open_{jt}\}}<br>$$</li>
+</ul>
+<h3 id="Results-competition-encourages-negative-review-fraud"><a href="#Results-competition-encourages-negative-review-fraud" class="headerlink" title="Results: competition encourages negative review fraud"></a>Results: competition encourages negative review fraud</h3><ul>
+<li>Increased competition from same-type independent restaurants is associated with increased negative review fraud</li>
+<li>A unit increase in competition by chains is associated with -0.025 fewer 1-star filtered reviews</li>
+<li>The effect of increased competition by different food-type independent restaurants is insignificant</li>
+</ul>
+<blockquote><ol>
+<li>Why does increase in competition by chains decrease the number of fake reviews? The authors mention that having a competitor enter can reflect a wide variety of factors, making the explanation difficult. This question may be worth to study</li>
+</ol>
+</blockquote>
+
+<h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><h3 id="Improving-fraud-detection-algorithms"><a href="#Improving-fraud-detection-algorithms" class="headerlink" title="Improving fraud detection algorithms"></a>Improving fraud detection algorithms</h3><ul>
+<li>This work can<ul>
+<li>Directly enter into the fraud detection algorithms</li>
+<li>Help validate algorithms</li>
+</ul>
+</li>
+<li>An important direction for future work is to investigate both real and perceived fairness issues related to algorithms fraud detection</li>
+</ul>
+<h3 id="Mechanisms-to-reduce-fraud"><a href="#Mechanisms-to-reduce-fraud" class="headerlink" title="Mechanisms to reduce fraud"></a>Mechanisms to reduce fraud</h3><ul>
+<li>Fraud detection algorithms</li>
+<li>Only allow verified purchases to leave a review</li>
+<li>Implement stings</li>
+<li>Leverage behavioral economics to reduce fraud, like highlighting the ethical element when necessary</li>
+</ul>
+<p><em>Luca, M., &amp; Zervas, G. (2016). Fake it till you make it: Reputation, competition, and Yelp review fraud. Management Science, 62(12), 3412-3427.</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/04/Interesting-projects-at-ByteDance/">Interesting projects at ByteDance</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

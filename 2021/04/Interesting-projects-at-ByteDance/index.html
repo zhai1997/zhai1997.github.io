@@ -142,6 +142,68 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
@@ -165,7 +227,129 @@
         </header>
 
         <div class="post-content">
-            
+            <h2 id="How-many-times-are-necessary-for-ads-to-make-the-purchase-of-customers-happen"><a href="#How-many-times-are-necessary-for-ads-to-make-the-purchase-of-customers-happen" class="headerlink" title="How many times are necessary for ads to make the purchase of customers happen"></a>How many times are necessary for ads to make the purchase of customers happen</h2><h3 id="The-context-and-commercial-value"><a href="#The-context-and-commercial-value" class="headerlink" title="The context and commercial value"></a>The context and commercial value</h3><ul>
+<li>The context:<ul>
+<li> Based on the assumption that their service will last for quite a long time, the ad departments of mainstream Internet companies want the life-long value of users, so they are trying to balance the user experience and the frequency of ads. The strategies used for this purpose are called Traffic Strategies</li>
+<li> While most of the traffic strategies are tested with quite a lot of well-designed experiments (AB Test) by Google, Facebook, Amazon repeatedly, they are still frequently questioned by people because they are related to the subtle customer behaviors</li>
+</ul>
+</li>
+<li>Commercial value:<ul>
+<li>Traffic Strategies are greatly valued by Internet companies because <ul>
+<li> They are free money on the table if we can find the proper parameter. In order to increase the income of the company, usually we have to brainstorm new business plans, do market research, hire the programmers, which requires significant investment. But Traffic Strategies only require us to change a parameter in the program</li>
+<li> They connect the user experience and income of the company, which are the most important metrics on the report to the leader of the company</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Among all the traffic strategies, Frequency Control is the most controversial. It has several rules, two of which are given as an example:<ul>
+<li> If one user saw the ad within a certain time, we will not show him the same ad again, even though our predicting model suggests that he will probably buy it this time</li>
+<li> If one user saw the ad for certain times ($n$) in the history without a purchase, we will not show the ad again, even though our predicting model suggests that he will probably buy it this time</li>
+</ul>
+</li>
+</ul>
+<h3 id="Description-of-the-problem"><a href="#Description-of-the-problem" class="headerlink" title="Description of the problem"></a>Description of the problem</h3><ul>
+<li>To find the proper value of $n$ is important<ul>
+<li> If $n$ is too large, we may annoy our users</li>
+<li> If $n$ is too small, we will leave money on the table</li>
+</ul>
+</li>
+<li>But it is also challenging merely based on the statistical method<ul>
+<li> ByteDance has the worldwide famous model which can predict the behavior of users, but it still sometimes gives the wrong prediction, which suggests there must exist some psychological factors that are not captured by machine learning</li>
+</ul>
+</li>
+<li>Showing the same advertisement repeatedly may exert different influences on the behaviors of users:<ul>
+<li>Users may feel annoyed when they see the same ad for many times</li>
+<li>They may need enough repeated exposure to the ad to purchase the product (eg. The ads of Naobaojin(脑白金), Bubugao(步步高点读机), Xiaoguancha(小罐茶), and so on show up on the TV repeatedly and it really makes almost all Chinese remember the name of the products and their main functions)</li>
+</ul>
+</li>
+<li>If we can somehow understand how the two influences above take place when consumers see an ad, it will generate great commercial value</li>
+</ul>
+<h3 id="What-we-have-done-at-ByteDance"><a href="#What-we-have-done-at-ByteDance" class="headerlink" title="What we have done at ByteDance"></a>What we have done at ByteDance</h3><ul>
+<li>We launched an experiment in which we disabled the Frequency Control<ul>
+<li>The income increases</li>
+<li>The users’ stay time decreases, which indicates they are annoyed</li>
+</ul>
+</li>
+<li>We analyzed the data, and found<ul>
+<li>The times required are correlated with the type of ads. If the ad needs the user to fill in a form, it needs a lot of times. If the ad (DOU+ AD) only needs the user to click “Like” button, it probably needs only one time</li>
+<li>Eventually, a converting button is added to both TikTok and Douyin. So, you can see a conspicuous button with “Download” on the bottom of the screen</li>
+</ul>
+</li>
+</ul>
+<h2 id="Will-simply-adding-new-channels-to-show-ads-work"><a href="#Will-simply-adding-new-channels-to-show-ads-work" class="headerlink" title="Will simply adding new channels to show ads work"></a>Will simply adding new channels to show ads work</h2><h3 id="The-context-and-commercial-value-1"><a href="#The-context-and-commercial-value-1" class="headerlink" title="The context and commercial value"></a>The context and commercial value</h3><ul>
+<li>The context:<ul>
+<li>FaceBook developed FaceBook Lite. So, it is time for TikTok to consider whether to develop TikTok Lite (smaller and faster but has fewer functions) to attract users from less developed countries</li>
+</ul>
+</li>
+<li>Commercial value:<ul>
+<li>For the domestic market, almost all players even Taobao and Douyin have no idea about the growth engine in the future, and they are anxious facing the challenge of Pinduoduo and Kuaishou, respectively. If simply developing a new APP with the same user generated contents(like Douyin Lite, Taobao special edition for bargains) can increase the income, it cannot be better for product managers</li>
+</ul>
+</li>
+</ul>
+<h3 id="Description-of-the-problem-1"><a href="#Description-of-the-problem-1" class="headerlink" title="Description of the problem"></a>Description of the problem</h3><ul>
+<li>How will developing a new channel with the same contents and slightly different characteristics (eg. More smooth on the cheaper phones, or money paid as incentives) influence the behaviors of users</li>
+<li>With a new slightly different app<ul>
+<li>Plus1: Users who did not have good experience with the main APP, may start to use the new APP</li>
+<li>Plus2: Users who are using the main APP, may also use the new APP as well</li>
+<li>Minus1: Users who are using the main APP and start to use the new APP now, may use the main APP less</li>
+</ul>
+</li>
+<li>The background of this story is that all media are competing for the limited time of users<ul>
+<li>Actually I find APPs are a kind of experience goods</li>
+<li>Limited time is the budget constraint for users</li>
+<li>The users are allocating their limited time to different things to eventually maximize their utilities</li>
+<li>APPs are mappings from the characteristics of users and the time to the utilities of users</li>
+</ul>
+</li>
+</ul>
+<h3 id="What-we-have-done-at-ByteDance-1"><a href="#What-we-have-done-at-ByteDance-1" class="headerlink" title="What we have done at ByteDance"></a>What we have done at ByteDance</h3><ul>
+<li>We want to study the case of introduction of Douyin Lite to see whether this introduction is profitable<ul>
+<li>The ideal method is to conduct randomized experiments, but the introduction of Douyin Lite has happened</li>
+<li>Built the model that can predict whether a user will adopt Douyin Lite with XGBoost, while making sure the features of the models are meaningful in the real world</li>
+<li>Used the trained model on nonadopters, and considered those mistakenly classified as adopters as similar and comparable to the adopters</li>
+<li>Compared the adopters and the “adopters” mistakenly selected by the model</li>
+<li>Concluded that <ul>
+<li>Adopters use our APPs more</li>
+<li>Adopters see more ads and make more purchase</li>
+<li>Adopters contribute more to the income of ByteDance</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Why-do-the-rich-like-ads-more-than-the-poor"><a href="#Why-do-the-rich-like-ads-more-than-the-poor" class="headerlink" title="Why do the rich like ads more than the poor"></a>Why do the rich like ads more than the poor</h2><h3 id="The-context-and-commercial-value-2"><a href="#The-context-and-commercial-value-2" class="headerlink" title="The context and commercial value"></a>The context and commercial value</h3><ul>
+<li>The poor contribute less to the income of Ad companies (namely, they buy fewer products from the advertisers), so a position on the billboard near the slums are worthless. Traditionally, we think it is due to the low purchase power of the poor</li>
+<li>But later as we introduced TikTok to America, India and Saudi Arabia, we found something quite different from the traditional ideas<ul>
+<li>In America, besides the fewer purchases, the reports of ads (click the dislike button) are less frequent than in China. In India, they are much more frequent</li>
+<li>In Saudi Arabia, we even detect two different groups of users in a single country. According to the extra information(the preferred language chosen by the users, the demographic information), we find that great proportion of those who extremely dislike ads are servants from Southeast Asia</li>
+</ul>
+</li>
+<li>Commercial Value: These issues severely weaken the efficiency of our Traffic Strategies, which are designed based on the experience from the Chinese market<ul>
+<li>Frequent reports indicate that they are unhappy when using our app, since we design the app in a way to make users difficult to find the dislike button</li>
+<li>Frequent reports may lower the estimation of the value of users in our predicting model, and result in fewer ads and the potential loss of money from the rich</li>
+</ul>
+</li>
+</ul>
+<h3 id="Description-of-the-problem-2"><a href="#Description-of-the-problem-2" class="headerlink" title="Description of the problem"></a>Description of the problem</h3><ul>
+<li>The social status may have several effects on the behaviors of customers when they see an ad<ul>
+<li>Habit: The rich grow up in the flourishing block where ads are everywhere, but the poor grow up in slums where no companies are willing to put a billboard (Similarly, the TV channels favored by the rich have more ads)</li>
+<li>The ads on TikTok are more likely to target the rich, since companies also know they may not earn the marketing cost back if they target the poor. So, when the poor repeatedly see an ad of something they are not willing to buy, they get annoyed</li>
+<li>The ads targeting the poor are of lower quality and actually have something near to illegal contents</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>The second may be not a problem for TikTok, because we have an well-developed algorithm to deliver different ads to different people</li>
+</ul>
+<h3 id="What-we-have-done-at-ByteDance-2"><a href="#What-we-have-done-at-ByteDance-2" class="headerlink" title="What we have done at ByteDance"></a>What we have done at ByteDance</h3><ul>
+<li>It is quite difficult to test which way of influence dominates<ul>
+<li>If we want to test the third way, we have to show different people the same ad, but the second way is sure to dominate in this experiment</li>
+<li>We guess the first reason may be the answer</li>
+</ul>
+</li>
+<li>Anyway, we conclude that the poor are bad target for commercial advertisement not only because they have lower purchase power, but also because they hate ads</li>
+</ul>
+
         </div>
 
         
@@ -188,8 +372,10 @@
         </section>
         <section class="post-nav">
             
+                <a class="prev" rel="prev" href="/2021/04/Fake-it-till-you-make-it-Reputation-competition-and-Yelp-review-fraud/">Fake it till you make it: Reputation, competition, and Yelp review fraud</a>
             
-            <a class="next" rel="next" href="/2021/04/Promotional-reviews-An-empirical-investigation-of-online-review-manipulation/">Promotional reviews: An empirical investigation of online review manipulation</a>
+            
+            <a class="next" rel="next" href="/2021/04/Socially-nudged-A-quasi-experimental-study-of-friends%E2%80%99-social-influence-in-online-product-ratings/">Socially nudged: A quasi-experimental study of friends’ social influence in online product ratings</a>
             
         </section>
 

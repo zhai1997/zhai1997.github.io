@@ -227,37 +227,37 @@
         </header>
 
         <div class="post-content">
-            <p>This paper is about the influence of book reviews on the sales of books. It is one of the most highly cited papers of <em>Journal of Marketing Research</em> The DID method in this paper later becomes a common practice of the literature in this field</p>
+            <p>This paper is about the influence of book reviews on the sales of books. It is one of the most highly cited papers of <em>Journal of Marketing Research</em>. The DID method in this paper later becomes a common practice of the literature in this field</p>
 <h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
-<li>There is no literature documenting that community content plays any role in cosumer decision making</li>
+<li>There is no literature documenting that community content plays any role in consumer decision making</li>
 <li>There are many reasons against the usefulness of community content<ul>
 <li>Why would consumers bother to create reviews for which they are not compensated </li>
 <li>Competitors can free ride on the investment in online reviews systems</li>
 <li>A site cedes control over the information displayed when providing user reviews</li>
-<li>Intersted parties can proliferate favorable reviews of their own products, making positive reviews less credible</li>
+<li>Interested parties can proliferate favorable reviews of their own products, making positive reviews less credible</li>
 <li>Only one who thinks he will probably enjoy one book will read it and then has the potential to make a comment, so the sample is biased</li>
 </ul>
 </li>
 </ul>
 <blockquote><ol>
 <li>Only some consumers would volunteer to comment a book, which may lead to the bias of comments. To be more specific, the reviews may only represent the opinions of some of consumers, perhaps the ones who extremely love or hate the book. </li>
-<li>It is common that some community content providers get free rided by dominant online retailers. For example, young ladies in China like to look for fashionable clothes and makeups on Xiaohongshu but they may buy them on Taobao, because Xiaohongshu has more abundant community contents while Taobao is more reliable and trustworthy on quality</li>
+<li>It is common that some community content providers get free ridden by dominant online retailers. For example, young ladies in China like to look for fashionable clothes and makeups on Xiaohongshu but they may buy them on Taobao, because Xiaohongshu has more abundant community contents while Taobao is more reliable and trustworthy on quality</li>
 <li>Some movies like <em>Rashōmon</em> enjoy a high rate on Douban, because only people who like classical Japanese movies would watch it. Usually, when movies get more popular, someone who does not like this specific kind of movies will also watch it by chance, and lower star reviews will emerge.</li>
 </ol>
 </blockquote>
 
 <h2 id="Empirical-Analysis"><a href="#Empirical-Analysis" class="headerlink" title="Empirical Analysis"></a>Empirical Analysis</h2><h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><ul>
-<li>Sample of sales: rely on $\ln(sales\_rank)$ from Amazon and BM to represent the sales of books becuase:<ul>
+<li>Sample of sales: rely on $\ln(sales\_rank)$ from Amazon and BM to represent the sales of books because:<ul>
 <li>No access to sales data</li>
 <li>The relationship between $\ln(sales\_rank)$ and $\ln(sales)$ is approximately linear</li>
-<li>Log method measures the pecentage change of dependent variables, thus eliminating scale effects</li>
+<li>Log method measures the percentage change of dependent variables, thus eliminating scale effects</li>
 </ul>
 </li>
 <li>Ratings, shipping categories, lengths of comments</li>
 </ul>
 <h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>The author introduces two fixed effects, which will influence the sales of books yet unobservable: </p>
 <ul>
-<li>Book fixed effect ($\nu_i$) is the charateristics of books, such as the popularity of the authors, the promotion by the publishers and the quality of the books. They may influence the reviews and sales at the same time, so we must put them in the regression model</li>
+<li>Book fixed effect ($\nu_i$) is the characteristics of books, such as the popularity of the authors, the promotion by the publishers and the quality of the books. They may influence the reviews and sales at the same time, so we must put them in the regression model</li>
 <li>Book-site fixed effect ($\mu_i^A$) is the matching between the books and the websites, thereby the author can eliminate the differences of users of each website </li>
 </ul>
 <p>$$\begin{aligned}<br>\ln (rank_i^A)=&amp;\mu_i^A+\nu_i+\alpha_A\ln (P_i^A)+\gamma^A\ln (P_i^B)+X\Gamma^A+S\Pi^A+\epsilon_i^A\\<br>\ln (rank_i^B)=&amp;\mu_i^B+\nu_i+\alpha_B\ln (P_i^B)+\gamma^B\ln (P_i^A)+X\Gamma^B+S\Pi^B+\epsilon_i^B<br>\end{aligned}$$</p>
@@ -265,7 +265,7 @@
 <p>Then the author shows the fixed effects can cancel out with some algebra and under some assumptions:</p>
 <ul>
 <li>Cross-sectional difference:<br>$$\ln (rank_i^A)-\ln(rank_i^B)=\beta^A\ln(P_i^A)+\beta^B\ln(P_i^B)+X\Gamma+S\Pi+\epsilon_i+(\mu_i^A-\mu_i^B)$$<br>If there is no book-site effect, then<br>$$\ln (rank_i^A)-\ln(rank_i^B)=\beta^A\ln(P_i^A)+\beta^B\ln(P_i^B)+X\Gamma+S\Pi+\epsilon_i$$</li>
-<li>Differnce-in-difference:<br>Take differnce across time to eliminate the book-site effects.<br>$$\Delta[\ln (rank_i^A)-\ln(rank_i^B)]=\beta^A\Delta\ln(P_i^A)+\beta^B\Delta\ln(P_i^B)+\Delta X\Gamma+\Delta S\Pi+\epsilon_i$$</li>
+<li>Difference-in-difference:<br>Take difference across time to eliminate the book-site effects.<br>$$\Delta[\ln (rank_i^A)-\ln(rank_i^B)]=\beta^A\Delta\ln(P_i^A)+\beta^B\Delta\ln(P_i^B)+\Delta X\Gamma+\Delta S\Pi+\epsilon_i$$</li>
 </ul>
 <h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><ul>
 <li>Reviews are overwhelmingly high on both sites. The reviews on bn are slightly more positive</li>
@@ -275,9 +275,9 @@
 <li>1-star reviews have higher impact than 5-star reviews. This may be due to the more credibility of lower star reviews.</li>
 </ul>
 <blockquote><ol>
-<li>Ratings of movies are generally lower than those of TV dramas on Douban. Moreover, the overall ratings on Douban are lower than Taopiaopiao, a platform selling movie tickets. The possible interperations can be:<ul>
+<li>Ratings of movies are generally lower than those of TV dramas on Douban. Moreover, the overall ratings on Douban are lower than Taopiaopiao, a platform selling movie tickets. The possible interpretations can be:<ul>
 <li>The differences of users of different websites</li>
-<li>The same consumer with the a certain comment about a movie may give different stars on differents websites. Because he may think 4-star is enough to tell others this is a good movie, but 4-star means average on Taopiaopiao</li>
+<li>The same consumer with the a certain comment about a movie may give different stars on different websites. Because he may think 4-star is enough to tell others this is a good movie, but 4-star means average on Taopiaopiao</li>
 <li>Since Taopiaopiao wants to sell more tickets to make profits, it may use some tricks to improve the ratings of movies</li>
 </ul>
 </li>
@@ -288,7 +288,7 @@
 
 <h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><ul>
 <li>This paper stops short of showing that retailers profit from providing review contents.</li>
-<li>Whether improving a customer’s satisfaction afftects customer loyalty is worth studying.</li>
+<li>Whether improving a customer’s satisfaction affects customer loyalty is worth studying.</li>
 <li>Review generating process<ul>
 <li>On the one hand, an increased dependence on posted reviews could make them less informative</li>
 <li>On the other hand, if an unfair or an incorrect review prompts a quick reaction, this could increase the overall value of reviews to customers</li>
@@ -296,7 +296,7 @@
 </li>
 </ul>
 <blockquote><ol>
-<li>Communities like Xiaohongshu have more interations among reviewers. They can easily comment on others’ posts and make friends during this process. I think this kind of communities can serve as a good place to observe and study the review generating process. Moreover, since Xiaohongshu is more like a forum, I belive there must be some other characteristics we can find</li>
+<li>Communities like Xiaohongshu have more interactions among reviewers. They can easily comment on others’ posts and make friends during this process. I think this kind of communities can serve as a good place to observe and study the review generating process. Moreover, since Xiaohongshu is more like a forum, I believe there must be some other characteristics we can find</li>
 <li>I find the differences between Word of Mouth and Advertising are more and more subtle. For example, if Li Jiaqi, a celebrity in China, says something good about a lipstick in a community merely in order to give the followers useful information to make a more enjoyable purchase, then we call it word of mouth. If he gets paid by the manufacturers of the lipsticks, we call it advertising. </li>
 </ol>
 </blockquote>

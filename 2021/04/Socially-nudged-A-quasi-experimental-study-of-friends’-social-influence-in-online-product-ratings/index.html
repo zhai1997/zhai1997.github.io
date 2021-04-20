@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Socially nudged: A quasi-experimental study of friends’ social influence in online product ratings | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Socially nudged: A quasi-experimental study of friends’ social influence in online product ratings</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Word-of-Mouth/">Word of Mouth</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper proposes a method empirically detect the peer influence on the online reviews, which is supposed to undermine the effectiveness of online reviews</p>
+<h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
+<li>Deviations in users’ ratings from their private information signals could undermine the usefulness of online rating systems</li>
+<li>Increasing number of online rating websites integrate social networking functions into their services</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="WOM-and-reporting-biases"><a href="#WOM-and-reporting-biases" class="headerlink" title="WOM and reporting biases"></a>WOM and reporting biases</h3><ul>
+<li>Dellarocas (2006) argues that although consumer ratings may still be informative when firms can manipulate online ratings, ratings generated under this mechanism can result in social welfare loss</li>
+<li>Literature about the generation of online ratings and its consequences<ul>
+<li>Li and Hitt (2008) develop a model to explain the dynamic pattern of the product ratings as a result of consumers’ self-selecting into early and later adopters. Later reviews and earlier reviews should not be reviewed in the same way</li>
+<li>Hu et al. (2009) further identify two sources of self-selection bias, namely, acquisition bias and underreporting bias</li>
+<li>Wu and Hube                 rman (2008) find exposure to previous public opinions leads reviewers to following process of posting increasingly extreme ratings</li>
+<li>Goes, et al. (2014) empirically demonstrate the “popularity effect” in online WOM resulting from user subscriptions</li>
+</ul>
+</li>
+<li>Literature about the generation of online ratings influenced by friends<ul>
+<li>Lee et al. (2014) find that learning is present in online ratings, but public ratings (not friends’) exert greater influence</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>The authors mention that benefits of social networks embedded in the rating platform are viral growth of users and fewer fraudulent ratings. The reviewers with many social connections are less likely to be fake reviewers</li>
+<li>WOM is a kind of UGC. There are other kinds of UGC that may lead to the potential purchase, like Xiaohongshu and Douyin Live, where the interactions are more frequent and abundant among users, which I believe will distort the behaviors of users more seriously</li>
+<li>In a word, the reviewers are biased sample from the population of users infiltrated by interested parties. Instead of honestly sharing their private information, they consider the social image of themselves, the opinions of their friends, the size of the rating holding platform (if fewer users, they may not want to make contributions)</li>
+<li>Read Dellarocas (2006) later</li>
+</ol>
+</blockquote>
+
+<blockquote><ol>
+<li>There are a lot of factors that can make the reviews deviate from the reviewers’ true information mentioned in this paper. In addition to the influence of friends<ol>
+<li>They may also want to make a social image, like they have good tastes about arts, which may explain why some obscure movies enjoy a high reputation on Douban</li>
+<li>Self-selection</li>
+<li>Impact of public rating information</li>
+<li>Review subscription</li>
+</ol>
+</li>
+<li>Even if we narrow down to the influence of friends, they may also be affected by<ol>
+<li>Observational learning. They know it is common and inevitable to have some adverse reactions after the surgery, so they will not express negative feelings about the adverse reactions in the reviews about the hospital</li>
+<li>Peer influence. They simply want to be like others to maintain close social connections or positive identification with the majority</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h3 id="Social-influence"><a href="#Social-influence" class="headerlink" title="Social influence"></a>Social influence</h3><ul>
+<li>Information about friends’ ratings casts influence on focal users’ rating behavior through two general mechanisms, informational influences and normative influences</li>
+<li>Correlations in ratings can result from social influence or simply the similarity in friends’ tastes (homophily)</li>
+<li>Distinguishing social influence from homophily is an empirical challenge<ul>
+<li>The ideal method is conducting randomized experiments. Such experiments are costly, because it is difficult to manipulate the social ties</li>
+<li>Field and quasi experiments are valid alternatives</li>
+<li>Another way is econometric manipulations, such as adding fixed effects and explicitly modelling the selection process, but they require strong modelling assumptions</li>
+<li>Exploiting natural instrumental variables or exogenous shocks can also be helpful</li>
+</ul>
+</li>
+</ul>
+<blockquote><p>As of now, I have found two kinds of interesting goods that are different from the typical goods in traditional microeconomics theories</p>
+<ol>
+<li> Ordinary good: We have reserve price based on our knowledge about the quality of the goods</li>
+<li> Experience good: Like movies, books or restaurants, before we purchase the goods, we do not know for sure the quality of the goods. As for experience good, online reviews are important for us to make a purchase decision. But we do not rely on online reviews to learn knowledge to make a post-consumption review</li>
+<li> Credence good: Like the consulting service by Bain or a surgery by a hospital, even after they show us the slides about their business plan, we are still not sure whether it will work or not. We may need online reviews to learn knowledge to make a post-consumption review</li>
+</ol>
+</blockquote>
+<h2 id="Research-Design"><a href="#Research-Design" class="headerlink" title="Research Design"></a>Research Design</h2><h3 id="Identification-of-social-influence-with-quasi-experiment-method"><a href="#Identification-of-social-influence-with-quasi-experiment-method" class="headerlink" title="Identification of social influence with quasi experiment method"></a>Identification of social influence with quasi experiment method</h3><ul>
+<li>The authors consider two situations:<ul>
+<li>After case: The focal users rating takes place after the friend relationship forms. The focal users will be reminded of the reviews of their friends</li>
+<li>Before case: The focal users rating take place before they make friends. The focal users are not reminded of the reviews of their friends</li>
+<li>Only taking reviewers who eventually become friends into consideration</li>
+<li>The Before Case serves as the benchmark to eliminate the homophily effect</li>
+</ul>
+</li>
+<li>The empirical model is<br>$$<br>\begin{aligned}<br>Rating_{ij}=&amp;\alpha +\beta_1 AvgFrdRating_{ij}+\beta_2 After_{ij}\\<br>&amp;+\beta_3 AvgFrdRating_{ij}\times After_{ij} + X_{ij}\gamma\\<br>&amp;+u_i+v_i+\epsilon_{ij}<br>\end{aligned}<br>$$<br>where $AvgFrdRating_{ij}$ is the the average of the ratings of user $i$’s friends. $After_{ij}$ denotes whether it is the after case or before case, namely, whether the reviews of friends are salient</li>
+</ul>
+<h3 id="Discussion-of-the-identification-strategy"><a href="#Discussion-of-the-identification-strategy" class="headerlink" title="Discussion of the identification strategy"></a>Discussion of the identification strategy</h3><ul>
+<li>Homophily: As the study only involves comparison between friends, the homophily is eliminated with the benchmark, Before Case</li>
+<li><strong>Endogenous timing of friend relationship formation</strong>: <ul>
+<li>People may also self-select the time they become friends,</li>
+<li>which leads to the correlation between the time they become friends and the similarity between them</li>
+<li>and thus exaggerates the social influence</li>
+<li>Carry out a few robustness checks<ul>
+<li>Consider the tenure of the friendship</li>
+<li>Consider an additional analysis at the friend-pair level and examine the rating similarity between the same pair of friends</li>
+<li>Conclude that a pair of friends does not naturally become more similar over time</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>From my understanding, the main purpose here is to<ol>
+<li>Rule out the possibility that earlier friends are systematically more similar than later friends at the time they become friends</li>
+<li>Rule out the possibility that as the time goes by, friends will become more similar to each other</li>
+</ol>
+</li>
+<li>Although the data suggest that generally friends do not become more similar to each other after they become friends, theoretically there are quite a lot of factors that may make friends similar to each other in the literature</li>
+<li>The argument of the authors may be:<ol>
+<li>Introduction of social network <strong>alone</strong> does not make friends similar to each other over time</li>
+<li>Seeing the reviews of friends dose make them similar to each other</li>
+<li>So, there is no difference between the earlier friends and later friends as they are almost equally exposed to the same number of the reviews on one particular book</li>
+<li>I would like to guess that there may be a correlation between the number of friends’ reviews focal users see and the influence of friends’ reviews on the focal users’ review</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+
+<ul>
+<li>Endogenous timing of ratings<ul>
+<li>In a perfectly randomized experiment, subjects’ roles are selected before the experiment</li>
+<li>In contrast, in this study, the roles of reviewers are selected by themselves, so the later reviewers’ behaviors may be systematically different from those of earlier reviewers</li>
+<li>This is not a problem for this study, because<ul>
+<li>The empirical test hinges on whether friends’ ratings are visible. So, whether the earlier and later reviewers behave differently or not will not influence the final result</li>
+<li>If later reviewers behave differently because of the social network, that is also the case of social influence</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Social influence before friend relationships<ul>
+<li>Because the formation of friend relationship requires mutual recognition, users are probably influenced by their friends even before their relationship is recorded by the website</li>
+<li>This is not a problem for this study, because earlier influence will lead to underestimation of social influence</li>
+</ul>
+</li>
+</ul>
+<h2 id="Research-Context-Data-and-Measures"><a href="#Research-Context-Data-and-Measures" class="headerlink" title="Research Context, Data and Measures"></a>Research Context, Data and Measures</h2><h3 id="Research-Context"><a href="#Research-Context" class="headerlink" title="Research Context"></a>Research Context</h3><blockquote><ol>
+<li>Embedding social network is widely used by Chinese Internet platforms to increase the engagement of users (costly for users to make friends on other website and happiness gained from chatting with others about hobbies). Here, the authors mention that Yelp gives users badges to make them willing to contribution more to the community. According to the results of this study, I believe the methods of Yelp may result in a better environment for users to generate unbiased and useful reviews. Therefore, how to balance the number and quality of reviews can be a potential research topic</li>
+<li>Reviewers writing reviews is a strategic situation in game theory, because they know their reviews may influence the feelings (utility) of others, and that others’ behaviors will also influence their own utilities in turn (like a potential happy chat about their common hobbies)</li>
+<li>In a word, there are 3 players in the game of online reviews, the reviewers, the review holders, and the review users. However, the distinguish between reviewers and review users are not quite clear. Usually, we consider ones who have purchased the products and have private information about the unobservable quality are reviewers. But actually, those who have not watched a movie can also post reviews on some platforms. In <a href="/2021/04/Promotional-reviews-An-empirical-investigation-of-online-review-manipulation/" title="Promotional reviews: An empirical investigation of online review manipulation">Promotional reviews: An empirical investigation of online review manipulation</a>, the authors mention that while users of Expedia who have not actually used the service cannot post the reviews, on TripAdvisor, those who have not purchased the service can also say something, which I believe will lead to a different game structure. I think TripAdvisor may be in the middle of forums (where no one would perceive the posts as written by someone who has used the products) and Expedia</li>
+</ol>
+</blockquote>
+
+<h3 id="Data-and-measures"><a href="#Data-and-measures" class="headerlink" title="Data and measures"></a>Data and measures</h3><ul>
+<li>Control variables<ul>
+<li>$Recency_{ij}$: Capture the decay of social influence with the number of days from the last rating of friends and the rating of focal users</li>
+<li>$BookAge_{ij}$: Capture the age of the reviewed book with the days from the book $j$ appeared in the data set to the focal rating</li>
+<li>$RatingIntensity_{ij}$: Measured by the average number of ratings per day before the focal rating</li>
+<li>$NumRating_{ij},AvgRating_{ij},VarRating_{ij}$: Measure the number, valence and disagreement of ratings</li>
+<li>$UserAge_{ij}$: The number of days from user $i$’s first appearance in the data set to the time of the focal review</li>
+<li>$NumBook_{ij}$: The number of books the user $i$ has rated</li>
+<li>$NumFrd_{ij}$: The number of friends the user $i$ has</li>
+</ul>
+</li>
+</ul>
+<h2 id="Results-and-Discussion"><a href="#Results-and-Discussion" class="headerlink" title="Results and Discussion"></a>Results and Discussion</h2><ul>
+<li>Naive model without the interaction item $After_{ij}\times AvgFrdRating_{ij}$:<ul>
+<li>The reviews of friends are positively correlated with the focal reviews</li>
+<li>A focal user’s review is lower when<ul>
+<li>He is more experienced</li>
+<li>The book has been more intensively rated</li>
+</ul>
+</li>
+<li>Main model:<ul>
+<li>On average, rating similarity almost triples are they become friends</li>
+<li>Individual raters exhibit a tendency of diverging from public ratings</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>It is interesting that as reviewers are more experienced, their reviews will be lower. I notice this effect is significant in 0.01 level. There may be several different explanations:<ol>
+<li>Different books: They pick the movies or books they are most interested in (or of the highest quality) when they begin to write reviews. The books they read later are actually worse</li>
+<li>Different opinions about the same books: As they read more and more books, they find more and more masterpieces or they learn some new knowledge (eg. There are quite a lot of easy ways to write songs that are at least not bad. So, even some popular songs sound bad to experienced reviewers with that kind of knowledge in mind). For this reason, even the totally same book may look less appealing to experienced reviewers than to beginners</li>
+<li>The same opinions about the same books, but different ratings: As time goes by, they start to hold different opinions about the average level of grades on the reviews holding platforms. For example, before, they think 4-star is pretty high, but later they find the average ratings on the platform are rising, which make them think to express the same attitude toward the book, they must give 4.5-star</li>
+</ol>
+</li>
+<li>It is also interesting to find people give lower grades to books intensively reviewed. There are two explanations:<ol>
+<li>His reviews are actually low: The intensively reviewed books are popular, so someone who is not the target customer of the book may also read it and give a negative review</li>
+<li>Intentionally give reviews lower than true feelings: People want to look different from others to show they were experts in this field and over-criticize popular books</li>
+</ol>
+</li>
+<li>These patterns are demonstrated by (Moe and Schweidel, 2012), read it later!</li>
+</ol>
+</blockquote>
+<blockquote><p>The tendency of raters to diverge from the public is also interesting:</p>
+<ol>
+<li>Celebrities tend to behave differently from others, but why ordinary people also want to deviate from the social judgement</li>
+<li>Individual raters like to behave differently from the public but similarly to their friends. The incentives behind these this seemingly paradox are quite interesting</li>
+<li>Read (Moe and Trusov, 2011) later!</li>
+</ol>
+</blockquote>
+<h2 id="Contingent-Social-Influence"><a href="#Contingent-Social-Influence" class="headerlink" title="Contingent Social Influence"></a>Contingent Social Influence</h2><p>Several factors may moderate the influence of social influence, which also suggest that the identified social influence changes opinions expression rather than induces a shift in user taste</p>
+<ul>
+<li>Social influence is more salient for extremely negative ratings while there is no such evidence in the subsample with extremely positive ratings</li>
+<li>More recent friends’ ratings indeed have a higher influence on focal ratings</li>
+<li>Friends’ influence is more salient for older books</li>
+<li>No significant relationship between rating intensity and social influence, which suggests that rather than following the mainstream, users conform to their friends in an attempt to develop and manage relationships that they regard as defining themselves in the community</li>
+<li>Having more friends implies a reduction in the average salience of social influence of friends</li>
+</ul>
+<h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><ul>
+<li>System designers, depending on their objectives, can use the results to nudge their users, like discounting the reviews that are influenced by friends</li>
+<li>For marketing practitioners, it is important to identify early adopters and take their social influence into consideration</li>
+<li>Based on the result that social influence is stronger for users with small social networks, which suggests that the social influence is particularly severe for newly introduced social networks</li>
+<li>Contributions to the literature<ul>
+<li>Proposes a method to assess the level of friends’ social influence on online product ratings</li>
+<li>Differs from previous studies in:<ul>
+<li>While previous studies examine social influence in adoption, this paper studies opinion reporting, which is free of observational learning in most cases</li>
+<li>While previous studies examine the public’s social influence in the generation of online product ratings, this paper studies the influence of friends</li>
+</ul>
+</li>
+<li>This research can be easily adapted to consider contingencies in social influence</li>
+</ul>
+</li>
+<li>Suggestions for future researches:<ul>
+<li>In the case of credence goods, it is possible for them to interpret their friend’ ratings as quality signals. Valuable contributions can be made to identify the exact mechanisms through which social influence takes place</li>
+<li>When users’ evaluations are significantly different from their friends, they may not choose to post anything</li>
+<li>It is possible for pre- and post-consumption to coexist</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>To post fake agreement or hide the disagreement. If more reviewers choose to hide their true feelings which are extremely different from their friends’, the results of the paper may underestimate the social influence</li>
+</ol>
+</blockquote>
+
+<p><em>Wang, C., Zhang, X., &amp; Hann, I. H. (2018). Socially nudged: A quasi-experimental study of friends’ social influence in online product ratings. Information Systems Research, 29(3), 641-655.</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/04/Interesting-projects-at-ByteDance/">Interesting projects at ByteDance</a>
+            
+            
+            <a class="next" rel="next" href="/2021/04/Promotional-reviews-An-empirical-investigation-of-online-review-manipulation/">Promotional reviews: An empirical investigation of online review manipulation</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

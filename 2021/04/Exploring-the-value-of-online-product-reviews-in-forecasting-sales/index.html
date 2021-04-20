@@ -227,9 +227,9 @@
         </header>
 
         <div class="post-content">
-            <p>This paper creatively introduces the online review data and diffusion model to the box office revenue prediction model, and the proposed model not only outperforms all mainstream models used in practice, but also has abundant empirical insights </p>
+            <p>This paper creatively introduces the online review data and diffusion model to the box office revenue prediction model, and the proposed model not only outperforms all mainstream models used in practice, but also has abundant empirical insightsH </p>
 <h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
-<li>Whereas marketing plays an important role in movies’ opening weekend, consumer word-of-mouth has been frequently cited as the sigle most important factor that determines the long-term success of movies and other experience goods</li>
+<li>Whereas marketing plays an important role in movies’ opening weekend, consumer word-of-mouth has been frequently cited as the single most important factor that determines the long-term success of movies and other experience goods</li>
 <li>Online reviews are potentially valuable tools for firms to monitor attitudes of customers and adapt the strategies</li>
 <li>Academics have inconsistent empirical results of what metrics of reviews have more explanatory power</li>
 </ul>
@@ -239,7 +239,7 @@
 </ol>
 </blockquote>
 
-<h2 id="Related-Wrok"><a href="#Related-Wrok" class="headerlink" title="Related Wrok"></a>Related Wrok</h2><h3 id="Forecasting-Models-of-Motion-Picture-Revenues"><a href="#Forecasting-Models-of-Motion-Picture-Revenues" class="headerlink" title="Forecasting Models of Motion Picture Revenues"></a>Forecasting Models of Motion Picture Revenues</h3><p>Models can be classified along three dimensions:</p>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="Forecasting-Models-of-Motion-Picture-Revenues"><a href="#Forecasting-Models-of-Motion-Picture-Revenues" class="headerlink" title="Forecasting Models of Motion Picture Revenues"></a>Forecasting Models of Motion Picture Revenues</h3><p>Models can be classified along three dimensions:</p>
 <ul>
 <li>Explanatory variables employed (eg. star power, movie genre and MPAA ratings, academy awards, advertising, timing of release)</li>
 <li>Timing of the forecast (eg. before the initial release, after the early box office revenues become known)</li>
@@ -251,26 +251,26 @@
 <li>Previous research has used volume, valence and dispersion to examine consumer postings<ul>
 <li>Volume: The more consumers discuss a product, the higher the chance that other consumers will be aware of it</li>
 <li>Valence: Positive opinions will encourage other consumers to adopt a product whereas negative opinions will discourage them</li>
-<li>Dispersion: Opinions spread quickly within commuinities, but slowly across them. Opinions with strong dispersion across communities are more likely to have substantial staying power</li>
+<li>Dispersion: Opinions spread quickly within communities, but slowly across them. Opinions with strong dispersion across communities are more likely to have substantial staying power</li>
 </ul>
 </li>
 </ul>
 <blockquote><ol>
-<li>The authors mention that Reingen et al. (1984) compare brand preference congruity between women that lived in the same house and those that did not, and find that those that lived together had more <em>congruent brand preferences</em>. The study infers that those that lived together had more opportunities for interaction and thus, that WOM communication was more prevalent. This reminds me of the researches about why people tend to be similar to each other when they bulid connections with each other.</li>
+<li>The authors mention that Reingen et al. (1984) compare brand preference congruity between women that lived in the same house and those that did not, and find that those that lived together had more <em>congruent brand preferences</em>. The study infers that those that lived together had more opportunities for interaction and thus, that WOM communication was more prevalent. This reminds me of the researches about why people tend to be similar to each other when they build connections with each other.</li>
 </ol>
 </blockquote>
 
 <h2 id="Data-and-Models"><a href="#Data-and-Models" class="headerlink" title="Data and Models"></a>Data and Models</h2><h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><ul>
-<li>From Yahoo! Movies, collected the names of movies, detailed review information, including all professional critic reviews and all user revies</li>
+<li>From Yahoo! Movies, collected the names of movies, detailed review information, including all professional critic reviews and all user reviews</li>
 <li>From Boxofficemojo, collected weekly box office and marketing expense</li>
 <li>From Hollywood Reporter, collected the star power of movies</li>
 <li>It is noteworthy that the relationship between user and professional reviews is not strong</li>
 </ul>
 <h3 id="Models"><a href="#Models" class="headerlink" title="Models"></a>Models</h3><ul>
-<li>Hazard rate defined as below is the instantaneous probability that a representative who has not yet adopted a product will do so at time $t$. $F(t)$ denotes the cummulative fraction of adopters at time $t$<br>$$<br>h(t)=\frac{Pr[\mathrm{adopts~at~time~}t \mathrm{~instantaneously}]}{Pr[\mathrm{has~not~yet~adopted~at~time~}t]}=\frac{F’(t)}{1-F(t)}<br>$$</li>
-<li>If the population size is $N$, and the purchase prive is $p$, the total market size is $M=Np$. The evolution of cumulative revenues $R(t)=MF(t)$ is governed by the differntial equation below:<br>$$<br>R’(t)=(M-R(t))h(t)<br>$$</li>
-<li>Bass (1969) proposes a special case of $h(t)$ as $h(t)=P+QF(t)$, where $P$ is interpreted as the external force which typically relates to advertising and product availability, and internal force which relates to the WOM is dependent on the number of people who have adpoted, thus denoted by $QF(t)$ </li>
-<li>In the movie industry, most advertising declines repidly postrelease. Moreover, people talk more about movies immediately after watching them, and less as time goes by. So the hazard function can be modified as:<br>$$<br>h(t)=P\delta^t+Q\int^t_{\tau=0}F’(t-\tau)\epsilon^\tau d\tau,~\delta\in [0,1],~\epsilon\in [0,1]<br>$$<br>where $\delta$ and $\epsilon$ are two discount factors</li>
+<li>Hazard rate defined as below is the instantaneous probability that a representative who has not yet adopted a product will do so at time $t$. $F(t)$ denotes the cumulative fraction of adopters at time $t$<br>$$<br>h(t)=\frac{Pr[\mathrm{adopts~at~time~}t \mathrm{~instantaneously}]}{Pr[\mathrm{has~not~yet~adopted~at~time~}t]}=\frac{F’(t)}{1-F(t)}<br>$$</li>
+<li>If the population size is $N$, and the purchase price is $p$, the total market size is $M=Np$. The evolution of cumulative revenues $R(t)=MF(t)$ is governed by the differential equation below:<br>$$<br>R’(t)=(M-R(t))h(t)<br>$$</li>
+<li>Bass (1969) proposes a special case of $h(t)$ as $h(t)=P+QF(t)$, where $P$ is interpreted as the external force which typically relates to advertising and product availability, and internal force which relates to the WOM is dependent on the number of people who have adopted, thus denoted by $QF(t)$ </li>
+<li>In the movie industry, most advertising declines rapidly postrelease. Moreover, people talk more about movies immediately after watching them, and less as time goes by. So the hazard function can be modified as:<br>$$<br>h(t)=P\delta^t+Q\int^t_{\tau=0}F’(t-\tau)\epsilon^\tau d\tau,~\delta\in [0,1],~\epsilon\in [0,1]<br>$$<br>where $\delta$ and $\epsilon$ are two discount factors</li>
 <li>With the help of modified $h(t)$, the revenues can be expressed as<br>$$<br>R’(t)=(M-R(t))\left( P\delta^t+\frac{Q}{M}\int^t_{\tau=0}R’(t-\tau)\epsilon^\tau d\tau \right)<br>$$</li>
 <li>Assuming recent adopters who contribute to a movie’s internal force of adoption are equal to last week’s adopters, then we can have the discrete-time formulation<br>$$<br>\begin{aligned}<br>&amp;Y_{it}=(M_i-R_{i(t-1)})\left( P_i\delta_i^t+\frac{Q_i}{M_i}Y_{i(t-1)}\right)  \\<br>&amp;R_{it}=Y_{it}+R_{i(t-1)},~t=1,2,\dots \\<br>&amp;\mathrm{and~} R_{i0}=Y_{i0}=0<br>\end{aligned}<br>$$</li>
 </ul>
@@ -283,8 +283,8 @@
 </li>
 <li>External influence $P_i$<ul>
 <li>External factors that induce a person to watch a movie, such as marketing and publicity, critics reviews and unobservable attributes (a movie’s plot, the quality of its trailer, etc)</li>
-<li>Equation $P_I$: Fucntion of the movie’s opening weekend revenues over the movie’s market potential</li>
-<li>Equation $P_{II}$: In case the box office revenues are not available, $P_{II}$ uses <strong>the volume of opening weekend box office revenues</strong>, marketing cost ($MKT$), professional critic reviews ($CRAVG$), and the presense of well-known stars ($STAR$), age and gender entropy ($AENTR, GENTR$)</li>
+<li>Equation $P_I$: Function of the movie’s opening weekend revenues over the movie’s market potential</li>
+<li>Equation $P_{II}$: In case the box office revenues are not available, $P_{II}$ uses <strong>the volume of opening weekend box office revenues</strong>, marketing cost ($MKT$), professional critic reviews ($CRAVG$), and the presence of well-known stars ($STAR$), age and gender entropy ($AENTR, GENTR$)</li>
 <li>Equation $P_{III}$: Only includes marketing and professional critic review data (no box office or online review data)</li>
 <li>Equation $P_{IV}$: Only includes online review data</li>
 </ul>
@@ -299,13 +299,13 @@
 <li>Demographic dummies</li>
 </ul>
 </li>
-<li>Equation $Q_{II}$: Without any online review matrics</li>
+<li>Equation $Q_{II}$: Without any online review metrics</li>
 </ul>
 </li>
 <li>Discount factor $\delta_i$:<ul>
 <li>The rate by which a movie’s external influences decay after its initial release</li>
 <li>$logit(\delta_I)$:<ul>
-<li>Valence of user reviews ($AVG$): Studios tend to sustain adversiting and publicity for well-received movies and cut their losses quickly for badly-recerived movies</li>
+<li>Valence of user reviews ($AVG$): Studios tend to sustain advertising and publicity for well-received movies and cut their losses quickly for badly-received movies</li>
 <li>Release strategy: Sleepers have slower decaying rate</li>
 </ul>
 </li>
@@ -352,10 +352,10 @@
 <h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><ul>
 <li>Contributes to a better understanding of how metrics of online reviews can add value to firm decision support</li>
 <li>Given abundant online reviews are available within hours of a new movie’s release, this model allows the generation of reliable forecasts much sooner than before</li>
-<li>This model can help exhibitor chains adapt exhibition capacity allocated to a new movie and may lead to more flexible contracts that allow exhibitors to reevaluate their dicisions immediately after the opening week</li>
+<li>This model can help exhibitor chains adapt exhibition capacity allocated to a new movie and may lead to more flexible contracts that allow exhibitors to reevaluate their decisions immediately after the opening week</li>
 <li>Empirical insights:<ul>
 <li>The early volume of online reviews can be used as a proxy for early sales</li>
-<li>The average valence of user reviews is statistically significant as the predictor of the coefficient of internal influence and rate of dacay of external marketing</li>
+<li>The average valence of user reviews is statistically significant as the predictor of the coefficient of internal influence and rate of decay of external marketing</li>
 <li>The gender entropy of online reviewers has statistical significance for both a movie’s initial appeal and the impact of WOM from previous moviegoers on future sales</li>
 </ul>
 </li>
