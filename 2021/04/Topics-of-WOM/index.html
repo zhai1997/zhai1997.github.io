@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Topics of WOM | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Topics of WOM</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Interesting-things-I-found/">Interesting things I found</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>The literature together describes a game with four players, the producer, the reviewer, the potential buyers and the review holding platforms. </p>
+<ul>
+<li><p>The information in this game is incomplete. The reviews posted are common knowledge, but the quality of the product is unknown at first, and becomes known to the buyer at different period depending on whether it is experience good or credence good (Dulleck and Kerschbamer, 2006)</p>
+</li>
+<li><p>The reviewers are buyers possibly with extremely positive or negative feelings about the purchase (Li and Hitt, 2008), infiltrated by interested parties (Mayzlin, Dover, and Chevalier, 2014) and non-buyers (Anderson and Simester, 2014). Instead of honestly sharing their private information, they consider the social image of themselves (Schlosse, 2005), the opinions of their friends (Wang, Zhang and Hann, 2018), etc.</p>
+</li>
+<li><p>The producer can use online reviews to predict the sales (Dellarocas, Zhang, and Awad, 2007), and may probably manipulate the reviews on the platform (Mayzlin, Dover, and Chevalier, 2014) due to certain economic incentives (Luca and Zervas, 2016).</p>
+</li>
+<li><p>The potential buyers use the reviews to infer unobservable information. The average level (Chevalier and Mayzlin, 2006) and distribution (Sun, 2012) of ratings will both influence the ratings, while the characteristics of products and customers moderate this process (Zhu and Zhang, 2010).</p>
+</li>
+</ul>
+<h2 id="Historical-path-of-the-development"><a href="#Historical-path-of-the-development" class="headerlink" title="Historical path of the development"></a>Historical path of the development</h2><h3 id="Change-in-topics"><a href="#Change-in-topics" class="headerlink" title="Change in topics"></a>Change in topics</h3><p>The influence of online reviews on the decision-making of customers.</p>
+<ul>
+<li><p>The earlier literature solved the most fundamental issue, whether the online reviews influence the sales or not (Chevalier and Mayzlin, 2006). Without the existence of the effects of WOM on sales, many later topics are meaningless, like the economic incentives behind the manipulation of reviews. With the correlation between online reviews and sales, Dellarocas, Zhang and Awad (2007) successfully introduced the box office revenue prediction model.</p>
+</li>
+<li><p>But later as more researchers were studying the effects of WOM on sales, conflicted results were found. For example, Chen, Wu, and Yoon (2004) found the opposite result to that of Chevalier and Mayzlin (2006). Zhu and Zhang (2010) proposed a convincing reconciliation to the mixed results of previous studies. They concluded that the characteristics of products and consumers. A lot of researchers followed this study to find factors that moderate the effect of ratings, like Rosario et al.(2016)</p>
+</li>
+<li><p>Besides the study on moderating effect, with the development of online review platform, more and more metrics are provided to customers, like the distribution of ratings, the details about the quality, etc. Some researchers began to study the influence of the newly published information on sales. For example, Sun (2012) studied the interactive influence of variance and mean of ratings. </p>
+</li>
+</ul>
+<p>When we know consumers actually rely on online reviews to make a decision, some researchers are worried about the usefulness and quality of online reviews.</p>
+<ul>
+<li><p>Manipulation by producers: Studying the fake reviews manipulated by producers is important, but empirically challenging, because the fake reviews are designed to be unobservable. Mayzlin, Dover, and Chevalier (2014) developed a novel method to detect the existence of review fraud without the data of fake reviews. Luca and Zervas (2016) further studied the economic incentives behind the manipulation of online reviews.</p>
+</li>
+<li><p>Social influence of friends: Why people become similar to one another after they build a social relationship is a popular topic in the study of Social Network. As some online review platform embedded the network function in the reviewing platform, Wang, Zhang and Hann (2018) studied the social influence when reviewers leave the ratings, which may undermine the efficacy of online reviews. </p>
+</li>
+<li><p>Reporting bias: Researchers found the bias of reporting (Reichling 2004) quite early, and Dellarocas and Wood (2008) were the first to quantify the extent of this bias and its influence.</p>
+</li>
+<li><p>With the systematic bias and distorted reviews, Gao, et al.(2015) compared the consumer generated online reviews with the offline rating data, and found that despite no reviews for physicians with low patient-perceived quality and exaggerated reviews for physicians with high patient-perceived quality, overall the online reviews correctly reflect the perceived quality by patients.</p>
+</li>
+</ul>
+<h3 id="Change-in-methodology"><a href="#Change-in-methodology" class="headerlink" title="Change in methodology"></a>Change in methodology</h3><p>Different factors will influence the review generating process and sales, which makes the empirical analysis difficult</p>
+<ul>
+<li>DID model was adopted by Chevalier and Mayzlin (2006) and Sun (2012) to eliminate the book fixed effects and book-site fixed effects.</li>
+<li>Zhu and Zhang (2010) also took the competition into consideration, so they introduced the characteristics of other games into the model, and also used DID method to eliminate unobservable variables.</li>
+<li>Mayzlin, Dover, and Chevalier (2014) used an unconventional DID model. They differenced types of hotels rather than time</li>
+<li>Zhu and Zhang (2010), Sun (2012), Mayzlin, Dover, and Chevalier (2014) also developed a theoretical model. The models in Sun (2012) and Mayzlin, Dover, and Chevalier (2014) are similar, in that they both assumed the quality is unknown to anyone and consumers’ taste belong to a taste space as a straight line.</li>
+</ul>
+<p>Moreover, it is well-known to be challenging to measure fake reviews and differentiate social influence from observational learning and homophily effects.</p>
+<ul>
+<li>Wang, Zhang and Hann (2018) used post-consumption reviews to eliminate observational learning, and comparison between friends who saw the salient reminding with ones who did not to eliminate homophily effects.</li>
+<li>Luca and Zevas (2016) used the filtered reviews by algorithms as the proxy and collected a second data set to do cross-validation.</li>
+</ul>
+<h2 id="Possible-research-issues"><a href="#Possible-research-issues" class="headerlink" title="Possible research issues"></a>Possible research issues</h2><h3 id="WOM-in-other-forms-like-Videos-and-Lives"><a href="#WOM-in-other-forms-like-Videos-and-Lives" class="headerlink" title="WOM in other forms, like Videos and Lives"></a>WOM in other forms, like Videos and Lives</h3><ul>
+<li>Actually, WOM does not have to be in text. With the development of technology, we can find WOM on many network platforms like Instagram, Douyin, WeChat Moments, etc. I believe on those platforms, we can find something new:<ul>
+<li>The distinction between advertising and WOM is subtle on social network platforms. According to the traditional definition, on Douyin Live, if a celebrity recommends a product to his followers only to help them make more rational purchases, we call it WOM. If he gets paid for it, we call it advertising. But in most cases, they do both things together, and even he got paid for promotion, he will try to make sure the product is good enough to maintain his reputation. Followers will not feel surprised if someone tells them the celebrity gets paid for the promotion.</li>
+<li>The WOM generating process is more complex on social network than on online review holding platforms. People can chat about the purchasing experience, argue on disagreements, and try the products in front of the camera.</li>
+</ul>
+</li>
+</ul>
+<h3 id="The-difference-of-the-average-ratings-and-difference-in-user-structures-across-platforms"><a href="#The-difference-of-the-average-ratings-and-difference-in-user-structures-across-platforms" class="headerlink" title="The difference of the average ratings and difference in user structures across platforms"></a>The difference of the average ratings and difference in user structures across platforms</h3><ul>
+<li>Schoenmueller et al. (2020) studied the different user structures of different platforms, which reminds me that a lot of papers mentioned the difference in average rating of a single product across platforms, but few studies explored this issue. I think there are three possible explanations:<ul>
+<li>Different platforms have different users.</li>
+<li>Same users with different perceptions about the rating scales of different platforms: One consumer holding a fixed opinion about a movie may give different stars on different platforms. For example, he may think 4-star is enough to tell others this is a good movie on Douban, but 4-star only means average on Taopiaopiao.</li>
+<li>Manipulation by the platform: Some platforms (especially those selling products) want to make profits, so they may use some tricks to improve the overall ratings of movies. Studying the economic incentives of review holding platforms is interesting.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Adoption-of-Cheap-Talk-theory-to-model-how-WOM-influence-potential-users"><a href="#Adoption-of-Cheap-Talk-theory-to-model-how-WOM-influence-potential-users" class="headerlink" title="Adoption of Cheap Talk theory to model how WOM influence potential users"></a>Adoption of Cheap Talk theory to model how WOM influence potential users</h3><ul>
+<li>I find researchers used to develop the theoretical model where the consumers have perfect information in the last stage. But actually the reviews they have are severely biased and distorted. How will they discount the usefulness of reviews is interesting. Economists developed a theory called Cheap Talk to model giving and receiving advice with no cost of advice (Sobel, 2013). I guess it will be helpful.</li>
+</ul>
+<h3 id="Do-online-reviews-add-to-the-polarization-of-products"><a href="#Do-online-reviews-add-to-the-polarization-of-products" class="headerlink" title="Do online reviews add to the polarization of products"></a>Do online reviews add to the polarization of products</h3><ul>
+<li>Reingen et al. (1984) found offline WOM made people living together share the same preference about products. On the Internet, people are all living together. Do online rating platforms make the popular movies more popular, and aggravate the revenues of less popular movies?</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li>Anderson, E. T., &amp; Simester, D. I. (2014). Reviews without a purchase: Low ratings, loyal customers, and deception. Journal of Marketing Research, 51(3), 249-269.</li>
+<li>Babić Rosario, A., Sotgiu, F., De Valck, K., &amp; Bijmolt, T. H. (2016). The effect of electronic word of mouth on sales: A meta-analytic review of platform, product, and metric factors. Journal of Marketing Research, 53(3), 297-318.</li>
+<li>Chevalier, J. A., &amp; Mayzlin, D. (2006). The effect of word of mouth on sales: Online book reviews. Journal of marketing research, 43(3), 345-354.</li>
+<li>Chen, P. Y., Wu, S. Y., &amp; Yoon, J. (2004). The impact of online recommendations and consumer feedback on sales. ICIS 2004 Proceedings, 58.</li>
+<li>Dellarocas, C., &amp; Wood, C. A. (2008). The sound of silence in online feedback: Estimating trading risks in the presence of reporting bias. Management science, 54(3), 460-476.</li>
+<li>Dellarocas, C., Zhang, X. M., &amp; Awad, N. F. (2007). Exploring the value of online product reviews in forecasting sales: The case of motion pictures. Journal of Interactive marketing, 21(4), 23-45.</li>
+<li>Dulleck, U., &amp; Kerschbamer, R. (2006). On doctors, mechanics, and computer specialists: The economics of credence goods. Journal of Economic literature, 44(1), 5-42.</li>
+<li>Gao, G., Greenwood, B. N., Agarwal, R., &amp; McCullough, J. S. (2015). Vocal Minority and Silent Majority. MIS quarterly, 39(3), 565-590.</li>
+<li>Li, X., &amp; Hitt, L. M. (2008). Self-selection and information role of online product reviews. Information Systems Research, 19(4), 456-474.</li>
+<li>Luca, M., &amp; Zervas, G. (2016). Fake it till you make it: Reputation, competition, and Yelp review fraud. Management Science, 62(12), 3412-3427.</li>
+<li>Mayzlin, D., Dover, Y., &amp; Chevalier, J. (2014). Promotional reviews: An empirical investigation of online review manipulation. American Economic Review, 104(8), 2421-55.</li>
+<li>Reichling, F. (2004). Effects of reputation mechanisms on fraud prevention in ebay auctions. Working Paper. Stanford University.</li>
+<li>Reingen, P. H., Foster, B. L., Brown, J. J., &amp; Seidman, S. B. (1984). Brand congruence in interpersonal relations: A social network analysis. Journal of Consumer Research, 11(3), 771-783.</li>
+<li>Schoenmueller, V., Netzer, O., &amp; Stahl, F. (2020). The polarity of online reviews: Prevalence, drivers and implications. Journal of Marketing Research, 57(5), 853-877.</li>
+<li>Sobel, J. (2013). Giving and receiving advice. Advances in economics and econometrics, 1, 305-341.</li>
+<li>Sun, M. (2012). How does the variance of product ratings matter?. Management Science, 58(4), 696-707.</li>
+<li>Wang, C., Zhang, X., &amp; Hann, I. H. (2018). Socially nudged: A quasi-experimental study of friends’ social influence in online product ratings. Information Systems Research, 29(3), 641-655.</li>
+<li>Zhu, F., &amp; Zhang, X. (2010). Impact of online consumer reviews on sales: The moderating role of product and consumer characteristics. Journal of marketing, 74(2), 133-148.</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Potential-research-topics/"># Potential research topics</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/04/Fake-it-till-you-make-it-Reputation-competition-and-Yelp-review-fraud/">Fake it till you make it: Reputation, competition, and Yelp review fraud</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
