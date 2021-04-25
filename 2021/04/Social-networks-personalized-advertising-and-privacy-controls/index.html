@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Social networks, personalized advertising, and privacy controls | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Social networks, personalized advertising, and privacy controls</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Social-Media/">Social Media</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper </p>
+<h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
+<li>Many Internet firms collect a large amount of personal data from their users and use these data to allow advertisers to target and personalize ads.<ul>
+<li>Consumers might perceive personalized ads as more appealing</li>
+<li>They may also view it as both creepy and off-putting if they believe that the firm violated their privacy</li>
+<li>The privacy concerns may lead to reactance, such that consumers resist the ad’s appeal. Reactance is a motivational stats in which consumers resist something they find coercive by behaving in the opposite way to that intended</li>
+</ul>
+</li>
+<li>Internet firms are unsure about whether they should directly address such concerns by strengthening privacy controls<ul>
+<li>Theoretically, this could minimize the potential for customer reactance because behavioral research shows that consumer perceptions of control reduce reactance (Taylor 1979) This reduction in reactance holds even if the controls are only tangentially related to the area in which reactance is evoked (Rothbaum, et al. 1982)</li>
+<li>The risk is that addressing consumer privacy concerns but continuing to use consumer data to personalize ads may make users less likely to respond to such ads </li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>Sense of control is an interesting topic. I read a research about this topic years ago. It finds that when we are young, we need play some childish and naive games to seek the feelings of control.</li>
+<li>Marketing is about persuasion. We want to make our ads as salient as possible. Sometimes, the marketers will hire salespersons to make nuisance calls to the potential buyers. How to reduce the reactance during this process is worth studying</li>
+<li>From my perspective, targeting advertising is definitely a Pareto improvement.<ol>
+<li>Users who see an ad and convert are better off than those who see an add but do not convert, because at least the former ones find a piece of useful information through ads, bearing the same disturbance of ads</li>
+<li>If the ads are targeted, those who do not like the ads will not see them, and those who may like the ads will see them. Every user is better off.</li>
+<li>The advertisers have better advertising effect</li>
+<li>The platforms earn more money from the ads</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+
+<h2 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h2><ul>
+<li>This is the only article to date that uses field data to examine the consequences of advertising outcomes for a firm responding to user privacy concerns by introducing improved controls</li>
+<li>Implications for privacy regulation</li>
+<li>This article builds on research that focuses on more general questions about the role of control in mediating privacy concerns<ul>
+<li>Early research on privacy tended to simply <strong>describe privacy as a matter of giving users control over their data</strong></li>
+<li>More recent research in information systems has challenged the traditional ideas and shown how individual-level control can mediate privacy concerns</li>
+<li>This article contributes to the online advertising literature that examining targeting in data-rich social media sites</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>Research has labeled social networking websites as problematic venues for advertising because of the low CTR (Marshall 2011). But I think compared with other platforms, the CTR on social networking websites may not be much lower (Holahan 2007)</li>
+<li>I think the reason behind the differences between the social network apps in western countries and those in China is that Western people like to network in a party, while Chinese like to network in an organization (colleague, classmates, family). The social networks of Chinese are close and small, whereas those of western people are loose and wide</li>
+</ol>
+</blockquote>
+
+<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><h3 id="Randomized-campaign"><a href="#Randomized-campaign" class="headerlink" title="Randomized campaign"></a>Randomized campaign</h3><ul>
+<li>Non-targeting ads generated disappointing results, so the nonprofit determine whether it could engage further with its potential supporters by both targeting and personalizing ad content<ul>
+<li>The nonprofit decided to target both graduates from 20 liberal arts colleges with a reputation for supporting female eduction anf Facebook users who had expressed affinity with 19 celebrities and writers who in the past had made statements supporting the education of girls in Africa</li>
+<li>Experimented with two ad formats: personalized and non-personalized</li>
+<li>Continued the non-targeted campaign as the baseline</li>
+</ul>
+</li>
+<li>On May 24, 2010, Facebook changed the privacy policy and gave users more controls over the privacy, while not influencing the ad system</li>
+</ul>
+<h3 id="Data-1"><a href="#Data-1" class="headerlink" title="Data"></a>Data</h3><ul>
+<li>For each of the 79 ad campaigns, daily data were collected on<ul>
+<li>The number of clicks</li>
+<li>The number of shows</li>
+</ul>
+</li>
+<li>The number of unique impressions</li>
+<li>Total unique clicks per day</li>
+<li>Information on the cost to the nonprofit per click and the eCPM</li>
+<li>Ad Reach Variable, which measures the number of Facebook users who were eligible to be shown the ad for any targeted campaign</li>
+<li>Data about publicity<ul>
+<li>The first set of data came from Factiva on the number of newspapers with stories that contained the words “privacy” and “Facebook”, how many words each article had devoted to the topic, whether the news article appeared in a renowned newspaper</li>
+<li>The second set of data came from Google Trends, which provided an index for the number of searches for “Facebook” and “privacy”</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>A possible concern about this kind of experiment is competition among similar ads in the model. Since they target similar groups and have similar contents. It is very possible that the three kinds of campaigns compete in the ad ranking system</li>
+<li>The fluctuation in the ad system is intense. It may be that the system luckily and accidentally find a group of audience who do not mind if their private information is used to personalize ads </li>
+</ol>
+</blockquote>
+
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><h3 id="Descriptive-analyses"><a href="#Descriptive-analyses" class="headerlink" title="Descriptive analyses"></a>Descriptive analyses</h3><ul>
+<li>Before the policy change, the personalized ads were underperforming relative to their generic counterparts</li>
+<li>After the policy change, the more expected pattern revealed, in which ads with personalized content were relatively more effective than generically worded but targeted ads or untargeted ads</li>
+<li>The effects of targeted ads without personalized content before and after the introduction of improved privacy controls were not significantly different</li>
+<li>Little change in the effectiveness of the untargeted campaign though with only one campaign</li>
+</ul>
+<h3 id="Empirical-analyses"><a href="#Empirical-analyses" class="headerlink" title="Empirical analyses"></a>Empirical analyses</h3><p>$$<br>\begin{aligned}<br>    ClickRate_{jt}=&amp;\beta  Personalized_j\times PostPolicy_t +\alpha Personalized_j \\<br>    &amp;+\theta_1 MediaAttention_t\times Personalized_j+\gamma_k+\delta_t+\epsilon_j<br>\end{aligned}<br>$$ </p>
+<ul>
+<li>$Personalized_j=1$ if the ad contained personalized contents, and $0$, otherwise</li>
+<li>$PostPolicy_t=1$ if the date was after the privacy-settings policy change took place, and $0$, otherwise</li>
+<li>$\beta$ captures the effect of interaction</li>
+<li>$\theta$ captures the effect of various controls that allow the effectiveness of personalized advertising to vary with media attention</li>
+<li>$\gamma_k$ is a vector of 39 mixed effects for the 20 targeting groups, eliminating the difference among different groups (eg. The fans of one celebrity care more about the eduction of girls in Africa)</li>
+<li>$\delta_t$ is a vector of date dummies. The dummies are collinear with $PostPolicy_t$, which means the $PostPolicy_t$ is dropped from the specification</li>
+</ul>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><ul>
+<li>A positive and significant increase in the performance of personalized ads compared with merely targeted ads after the introduction of enhanced user privacy controls</li>
+<li>The negative coefficient of Personalized, which is marginally significant, suggests that before the change in privacy settings, personalized ads were less effective than ads that did not use personalized ad copy</li>
+<li>The results are robust to different ways of controlling for the extensive media coverage</li>
+<li>R-square is relatively low across all specifications, maybe because<ul>
+<li>Consumers are skilled at avoiding online advertising when viewing web pages, which introduces measurement error</li>
+<li>The average effect on many Facebook users because they had no intention of ever clicking on ads</li>
+</ul>
+</li>
+<li>With any research that relies on natural experiment for identification, there are open questions about precisely what local average treatment effect is being estimated<ul>
+<li>Media control can eliminate the direct effect of media</li>
+<li>Media control cannot control for Facebook users’ awareness of the change in policy as a result of media publicity</li>
+</ul>
+</li>
+</ul>
+<blockquote><p>Why cannot searching behavior on Google for “Facebook Change Policy” or something like that reflect the awareness of users</p>
+</blockquote>
+
+<h3 id="Further-robustness-check"><a href="#Further-robustness-check" class="headerlink" title="Further robustness check"></a>Further robustness check</h3><p>The assumption that allows causality to be ascribed to the estimates is that there was no change in Facebook user and advertiser behavior or in the external environment that could provide alternative explanation of the shift in advertising response that was not associated with the change in privacy controls</p>
+<ul>
+<li>Concern 1: Though there could be an increase in the proportion of clicks for an ad, this increase might not have been helpful for the marketing aims of the nonprofit</li>
+<li>Concern 2: The results reflect a change in the number of Facebook users</li>
+<li>Concern 3: Although observed demographics were reasonably similar, there is always the possibility that the composition of Facebook users changed in an unobserved way and that this change influenced which ads were shown in the period after the introduction of privacy controls</li>
+<li>Concern 4: Rather than a change in user composition, the measured effect was driven by dramatic change in how people use Facebook</li>
+<li>Concern 5: The results could reflect a change in the composition of advertisers</li>
+</ul>
+<h3 id="Mechanism-rarity-of-user-information"><a href="#Mechanism-rarity-of-user-information" class="headerlink" title="Mechanism: rarity of user information"></a>Mechanism: rarity of user information</h3><ul>
+<li>A potential explanation for why addressing privacy concerns by improving privacy controls was associated with improved advertising performance is that it reduced consumers’ level of reactance to personalized advertising<ul>
+<li>Reactance to personalized advertising is greater for ads that use more unique information<ul>
+<li>Further introduce the interaction item with $AdReach$, and the negative coefficient on $PostPolicy\times Personalized\times AdReach$ suggests that the positive effect is smaller for ads that had a larger ad reach</li>
+</ul>
+</li>
+<li>It is not clear whether this effect will be the greatest for users who care about privacy controls<ul>
+<li>Consumers who care about privacy and use privacy settings may be more upset if they set high levels of privacy restrictions and still receive highly personalized ads</li>
+<li>Consumers who are more aware of privacy matters on Facebook may have experienced the most reactance before facebook may have experienced the most reactance before Facebook addressed privacy complaints, so they may be also the most reassured that they could now explicitly prevent their privacy from being shared</li>
+<li>As more people in the targeted group use privacy controls, the greater is the effect of introducing privacy controls</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><ul>
+<li>This research <ul>
+<li>Parallels with the research that emphasizes that to succeed in the new world of social media, brands must relinquish control</li>
+<li>Has important consequences for current policy debate, which views the introduction of privacy controls as harmful to advertising outcomes (Goldfarb and Tucker 2011b)</li>
+</ul>
+</li>
+<li>Limitations<ul>
+<li>The randomized experiment was conducted by a nonprofit, which seems less pernicious to users. So, the result may be not applicable to commercial ads</li>
+<li>The randomized experiment was conducted at a time when privacy concerns were particularly sensitive and salient in customers’ eyes</li>
+<li>The analysis focused on a particular platform with a specific business model and community of users. So, the result may not be applicable to other platforms</li>
+<li>It is not clear how long the measured effects persisted after the introduction of privacy controls</li>
+<li>It is difficult to project general economic effects of such policy changes without more information on the penetration of personalized advertising on platforms </li>
+<li>The type of privacy control introduction by Facebook was just one of the multiple ways that platforms can give controls over privacy to users</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        <a href="/tags/Privacy/"># Privacy</a>
+                    
+                        <a href="/tags/Online-Advertising/"># Online Advertising</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/04/Social-ties-and-user-content-generation-Evidence-from-Flickr/">Social ties and user content generation: Evidence from Flickr</a>
+            
+            
+            <a class="next" rel="next" href="/2021/04/Interesting-projects-at-ByteDance/">Interesting projects at ByteDance</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

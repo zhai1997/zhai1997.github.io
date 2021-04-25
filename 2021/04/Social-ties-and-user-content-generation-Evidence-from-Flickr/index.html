@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Social ties and user content generation: Evidence from Flickr | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Social ties and user content generation: Evidence from Flickr</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Social-Media/">Social Media</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper examines the relationship between two important functions of Social Media platforms, social ties and content generating, and further proposes that the popularity (social status on the Internet) moderates the relationship. The authors creatively analyzed a process where homophily, self-identity and contagion dominate at different stages and in different cases. </p>
+<h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
+<li>Background<ul>
+<li>Explosive growth of UGC with the help of social networking sites</li>
+<li>The online platforms integrate both content generation and content sharing</li>
+<li>UGC has become an integral part of the culture business and a means by which users may present themselves</li>
+</ul>
+</li>
+<li>The quantity, variety and quality of the content users contribute are vital to social media, because:<ul>
+<li>The appeal and existence of social media sites depend on uses’ contributions</li>
+<li>With the fierce competition, the variety and the quality of UGC help social media differentiate themselves from and gain advantages over the competitors</li>
+<li>UGC lends social media sites a strong competitive status against professional media content providers</li>
+<li>Original and diverse content can attract a wider user base, increasing the site’s value site’s value to advertisers</li>
+</ul>
+</li>
+<li>Contributions:<ul>
+<li>Characterize and document the content being generated on social media, beyond the questions of whether and how much the users contribute to online sharing communities</li>
+<li>Examine the relationship between social ties and the content generated by users</li>
+<li>Empirically test the hypotheses regarding cultural processes</li>
+<li>Complement the existing literature in cultural sociology that relies largely on surveys for data collection</li>
+</ul>
+</li>
+</ul>
+<h2 id="The-Research-Context-Flickr"><a href="#The-Research-Context-Flickr" class="headerlink" title="The Research Context: Flickr"></a>The Research Context: Flickr</h2><ul>
+<li>Two functions: photo management and social interactions</li>
+<li>Tags, user-defined keywords or category labels that provide summary description about photos, can be attached to uploaded photos</li>
+<li>A contact on Flickr, unlike one on Facebook, can be one-way. It is more like “subscribe”</li>
+<li>The fitness of Flickr<ul>
+<li>Flickr is a content-centric social medium, which can provide a suitable context for the study of user content generating</li>
+<li>To understand a user’s interests and tastes, it is better to analyze a single format without fearing the loss of user preference information that is disclosed in other media formats</li>
+<li>Tags help measure the similarity between photos</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>In western countries, the UGC platforms and social network platforms are usually the same things. But in China and Korea, we like to treat them separately. WeChat is used as social network platform, and Douyin is used as UGC platforms. Although WeChat is trying to monetize through UGC like WeChat Moment and WeChat video, and Douyin is trying to add to the loyalty through social network functions, it is still quite different from the social medial in western countries</li>
+</ol>
+</blockquote>
+
+<h2 id="Theoretical-background-and-hypothesis"><a href="#Theoretical-background-and-hypothesis" class="headerlink" title="Theoretical background and hypothesis"></a>Theoretical background and hypothesis</h2><ul>
+<li>Previous literature<ul>
+<li>The literature on content generation has focused primarily on what influences users’ levels of participation<ul>
+<li>Users’ characteristics, such as community commitment (Bateman et al. 2011)</li>
+<li>Characteristics of the existing network, such as group size (Zhang and Zhu 2011)</li>
+<li>Information system design features, such as provision of quality feedback (Moon and Sproull 2008)</li>
+</ul>
+</li>
+<li>Other researchers examined how users allocate their time spent on mobile devices between content generation and content consumption (Ghose and Han 2011)</li>
+</ul>
+</li>
+<li>H1: Around the time of forming a tie, the users in the dyad upload photos that are more similar that they were before the formation of the dyadic tie<ul>
+<li>Homophily: Two users could become social contacts because they have participated in the same event, they are interested in certain types of photographs, or they are located near each other, which may lead to the similarity</li>
+</ul>
+</li>
+<li>H2: After a social tie is formed, the types of photos that the users in the dyad upload gradually become less similar<ul>
+<li>Abundant evidence on contagion obtained using two approaches<ul>
+<li>Rely on statistical methods and sociological perspectives on network topologies and dynamics to study the relationship between social network structures and the diffusion of a variety of behaviors</li>
+<li>Employ social psychological theories to reveal teh driving force driving factors of contagion and transmission</li>
+</ul>
+</li>
+<li>Theories of social identity suggest that the force driving user content generation is the desire to establish a distinct identity (Schau and Gilly 2003)<ul>
+<li>Dellarocas et al. (2010) found consumers prefer to contribute reviews for obscure movies and big hits over movies with intermediate popularity</li>
+<li>Individuals differentiate themselves to help construct and maintain self-identity and self-worth (the internal process) or to signal their identity to others (the external process)</li>
+<li>Internal process: The optimal distinctiveness theory states that people strive to optimize their self-evaluations by identifying with groups or social categories that are neither too inclusive nor too differentiating</li>
+<li>External process: Identity signalling has been proposed to explain why individuals differentiate themselves from others</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>his study is quite similar to <a href="/2021/04/Socially-nudged-A-quasi-experimental-study-of-friends%E2%80%99-social-influence-in-online-product-ratings/" title="Socially nudged: A quasi-experimental study of friends’ social influence in online product ratings">Socially nudged: A quasi-experimental study of friends’ social influence in online product ratings</a>, where the authors also found two conflicted trends, converging to friends and diverging from the public</li>
+<li>I guess the reason why the similarity between dyads after they become friends is higher than before is contagion</li>
+</ol>
+</blockquote>
+
+<ul>
+<li>H3: The popularity difference between the users in the dyad moderates the relationship between the social ties and photo similarity such that the similarity between the photos declines more after tie formation in dyads exhibiting smaller differences in popularity<ul>
+<li>Blau (1974) has suggested that actors in social networks can be different in multiple dimensions and has distinguished two types of actor attributes as the parameters of social structure: normative (eg. sex and occupation) and graduated (status rank order)</li>
+</ul>
+</li>
+<li>H4: Social ties directed from a lower-popularity photo uploader to a higher-popularity uploader are associated with a higher similarity between the photos uploaded by members of the dyad, compared to social ties initiated in reverse direction</li>
+</ul>
+<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><ul>
+<li>Collected in a snowball fashion</li>
+<li>User dyads were selected for inclusion in the study sample when they satisfy the following criteria<ul>
+<li>The dyadic social relations were established within the study’s 41-day period</li>
+<li>Both users in the dyad are among the “initial users” in the snowball sample</li>
+<li>Both users must have uploaded at least one photo before and after they became linked</li>
+<li>Dropped users whose number of uploads during the period is extremely large </li>
+</ul>
+</li>
+</ul>
+<h2 id="Analysis-and-Results"><a href="#Analysis-and-Results" class="headerlink" title="Analysis and Results"></a>Analysis and Results</h2><h3 id="Photo-similarity-measure"><a href="#Photo-similarity-measure" class="headerlink" title="Photo similarity measure"></a>Photo similarity measure</h3><ul>
+<li>Use a time-evolving vector to represent a user’s Flickr photostream. Suppose there are $M$ possible distinct tags. The uploaded photos by user $i$ on day $t$ are described by a $M$-dimensional vector, where the $k$th element, $Tag_{itk}$ indicates the extent to which the user $i$’s photos are associated with the $k$-th tag</li>
+<li>Use cosine similarity</li>
+<li>Include the $n$ most recent photos uploaded by each user by day $t$</li>
+</ul>
+<blockquote><p>I think the selection of $n$ is quite tricky. If it is too large, we may reflect the behaviors of users long time ago. If it is too small, the similarity may be also too small to analyze</p>
+</blockquote>
+
+<h3 id="Descriptive-analyses"><a href="#Descriptive-analyses" class="headerlink" title="Descriptive analyses"></a>Descriptive analyses</h3><ul>
+<li>The dyads’ average similarity increases rapidly close to the establishment of their ties.</li>
+<li>During the period after the dyad forms a tie, the similarity slowly declines</li>
+<li>After the dyad forms a tie, the average similarity still appears to be higher than it had been long before</li>
+<li>Dyads without a tie demonstrates stable similarity over time, which helps rule out the natural drift</li>
+<li>The change in photo similarity over time among subgroups of Flickr users:<ul>
+<li>Patterns are similar between two-way ties and one-way ties</li>
+<li>The similarity appears to continue increasing in dyads with very different levels of user popularity but to decline in dyads whose user popularity but to decline in dyads whose users are close in popularity</li>
+</ul>
+</li>
+</ul>
+<h3 id="Empirical-model"><a href="#Empirical-model" class="headerlink" title="Empirical model"></a>Empirical model</h3><p>$$<br>\begin{aligned}<br>\ln (SIM_{ijt}+1)=&amp;\beta_0+\beta_1\cdot Tie1_{ijt}+\beta_2\cdot Tie2_{ijt}+\beta_3 OutDegree_{it}+\beta_4 OutDegree_{jt}\\<br>&amp;+\beta_5 NumOfCommonFrd_{ijt}+\beta_6 NumOfCommonGP_{ijt}\\<br>&amp;+\beta_7 SIM_{-i,jt}+\mu_{ij}+\alpha_d+\epsilon_{ijt}<br>\end{aligned}<br>$$</p>
+<ul>
+<li>$SIM_{ijt}$ is the cosine similarity between $i$ and $j$ on day $t$</li>
+<li>$Tie1=1$ for $t\geq -3$, $0$ otherwise</li>
+<li>$Tie2=1$ for $t\geq 3$, $0$ otherwise</li>
+<li>$OutDegree_{it}$ is $i$’s out-degree centrality on day $t$</li>
+<li>$NumOfCommonFrd_{ijt}$ is the number of common friends shared by the dyad $(i,j)$ on day $t$</li>
+<li>$NumOfCommonGP_{ijt}$ is the number of common groups shared by the dyad  $(i,j)$ on day $t$</li>
+<li>$\mu_{ij}$ is the fixed effect specific to the dyad $(i,j)$, in order to make sure $Tie1$ and $Tie2$ only captures to the time-variant similarity (Assuming no natural drift of tastes)</li>
+<li>$\alpha_d$ is the time fixed effects that control for time trends that are common across all Flicker users</li>
+<li>$SIM_{-i,jt}$ is the similarity between the photos by $i$’s other contacts and $j$’s other contacts, approximately measuring the location-specific shock</li>
+<li>$Fav_i$ denotes user $i$’s popularity as measured by the average number of favorites per photo that the user’s photostream received by the time the dyad was linked. This research adopts $|Fav_i-Fav_j|$ to measure the popularity different in the dyad</li>
+</ul>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><ul>
+<li>The launch of a tie is associated with a significant increase in the dyad’s content similarity </li>
+<li>The photo similarity decreases after tie formation</li>
+<li>People who are similar in status tend to avoid head-on competition and to develop their own specialties</li>
+<li>Photo-taking behavior is more likely to shed light on the internal process, while photo-uploading behavior reveals the identity that individuals would like to signal to others</li>
+<li>A dyad with different popularity levels produces even more similar content if a less popular user has initiated the social tie with a more popular user. Learning is a possible explanation for this observed convergence in the uploaded photos</li>
+</ul>
+<h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><ul>
+<li>Social networking sites striving for content diversity should be careful in adopting the strategies that promote socialization</li>
+<li>This study highlights individuals’ desire for uniqueness when using online communities. The tools adopted by online communities that enable their users to personalize their content are likely to add value for those users</li>
+<li>Limitations:<ul>
+<li>The measure of content similarity does not account for the fact that some tags represent closer semantic categories than others</li>
+<li>Identifying peer influence is empirically challenging. It is still possible that some factors are not accounted for, like spatially correlated shocks</li>
+<li>The natural drift argument has not been completely eliminated as a possible alternative explanation. Ths social link could be attributed to a safari trip. They post similar contents during the trip, and after that the similarity returns to the mean level</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>The optimal friend recommendation system should pick people similar to each other and enjoy similar popularity</li>
+</ol>
+</blockquote>
+
+
+
+
+
+<p>Zeng, X., &amp; Wei, L. (2013). Social ties and user content generation: Evidence from Flickr. Information Systems Research, 24(1), 71-87.</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        <a href="/tags/Social-Influence/"># Social Influence</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/04/Topics-of-WOM/">Topics of WOM</a>
+            
+            
+            <a class="next" rel="next" href="/2021/04/Social-networks-personalized-advertising-and-privacy-controls/">Social networks, personalized advertising, and privacy controls</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
