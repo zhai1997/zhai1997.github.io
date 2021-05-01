@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>To be or not to be linked: Online social networks and job search by unemployed workforce | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">To be or not to be linked: Online social networks and job search by unemployed workforce</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Social-Media/">Social Media</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Introduction-and-Motivation"><a href="#Introduction-and-Motivation" class="headerlink" title="Introduction and Motivation"></a>Introduction and Motivation</h2><ul>
+<li>LinkedIn users can search for a job in three ways<ul>
+<li>Searching for jobs posted and advertised on LinkedIn</li>
+<li>Contacting friends and family in their network for leads and referrals</li>
+<li>Finding and contacting recruiters and hiring managers</li>
+<li>Users may also be contacted by an employer/recruiter regarding a potential job opportunity</li>
+</ul>
+</li>
+<li>Social connections have been recognized as potentially helpful because they provide direct access to hiring managers while improving trust and confidence in the quality of information shared through a common connection</li>
+<li>There are two widely used classifications of interpersonal ties<ul>
+<li>Weak ties enable discovery of more novel information, like job leads</li>
+<li>Strong ties are more helpful in gaining job offers</li>
+</ul>
+</li>
+</ul>
+<h2 id="Literature"><a href="#Literature" class="headerlink" title="Literature"></a>Literature</h2><p>Draw from 3 major strands in the literature</p>
+<ul>
+<li>The modes of job research have been evolving with the adoption of new technologies<ul>
+<li>The internet is shown to be ineffective in reducing the unemployment duration of job seekers</li>
+</ul>
+</li>
+<li>The role of social networks on job search<ul>
+<li>The value of social networks in the labor market is derived from the trust and confidence in the quality of information shared by common connections</li>
+<li>The literature also provides somewhat conflicting assessments of the value of strong and weak ties on job outcomes</li>
+<li>A tie’s position in a network is shown to matter more than the tie strength</li>
+<li>A large number of connections tends to have negative effect on job leads when it exceeds a threshold</li>
+<li>If the size of social networks is correlated with job outcomes, then it should also be correlated with search intensity</li>
+</ul>
+</li>
+<li>Economic models of job search</li>
+</ul>
+<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><ul>
+<li>Survey contained questions about <ul>
+<li>The individual’s current employment status</li>
+<li>Motivations for the job search </li>
+<li>Past and present job search strategies</li>
+<li>Job outcomes</li>
+<li>Familiarity and use of online SNSs</li>
+<li>Composition of OSNs for job search</li>
+</ul>
+</li>
+<li>Methods to verify the credibility of survey data<ul>
+<li>Pilot surveys, which allowed the researchers to edit the survey to add more clarity, as well as to change some questions</li>
+<li>Verified the accuracy of conditional responses (the number of offers are smaller than the number of leads, etc)</li>
+<li>Matched answers with actual publicly available data</li>
+<li>Built redundancies into the survey (compared the added number of job outcomes with the number on their OSNs)</li>
+</ul>
+</li>
+</ul>
+<h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><p>The relationship between social connections, job outcomes and search effort is complex. </p>
+<ul>
+<li>The authors care about<ul>
+<li>How people allocate their time across different modes</li>
+<li>How online connections affect theses choices</li>
+<li>Whether online connections affect job outcomes</li>
+</ul>
+</li>
+<li>Job outcomes and allocation of search time are interacted<ul>
+<li>Job outcomes are affected by how diligently users search for jobs using a particular mode</li>
+<li>The job search decision itself is driven by users’ belief about whether they can find a job</li>
+</ul>
+</li>
+</ul>
+<h3 id="Job-search-allocation"><a href="#Job-search-allocation" class="headerlink" title="Job search allocation"></a>Job search allocation</h3><ul>
+<li>Job seekers are rational and trade the costs of search with the benefits of being employed</li>
+<li>Utility of an unemployed individual who spends $s_{ij}$ time searching for a job on mode $j$:<br>$$<br>\begin{aligned}<br>U_{ijt}(w_R,s_{ij})=&amp;v_{ij}(L_i-s_{ij},Y_i-c_j(s_{ij}))+\pi_{ij}(s_{ij},X_i,E_i)\cdot p_j(w\geq w_R)\cdot E(\psi_{ij}(w))\\<br>&amp;+(\pi_{ij}(s_{ij},X_i,E_i))\cdot (1-p(w\geq w_R))\cdot U_{t+1}+(1-\pi_{ij}(s_{ij},X_i,E_i))\cdot U_{t+1}<br>\end{aligned}<br>$$<br>where $i$ indexes an individual, $j$ indexes the search mode, and $t$ indexes time. <ul>
+<li>$v_{ij}$ is the current period utility from leisure and outside income. Searching costs time $s_{ij}$ and money $c_j(s_{ij})$. $L_i$ is the leisure time for individual $i$ and $Y_i$ is the nonwage income</li>
+<li>The second term in the utility function is the expected utility of being employed if the probability is $\pi$ and the offered wage ($w_t$) is higher than the reservation wage ($w_{R,t}$). $X_i$ is the user’s demographic and other characteristics and $E_i$ represents users’ ties in the social structure</li>
+<li>The third term is the probability that the user remains unemployed because the offered wage is not higher than his or her reservation wage</li>
+<li>The fourth term indicates that the user might not get any offer, despite the search effort</li>
+</ul>
+</li>
+<li>Assuming the wage offer distribution is $f(w)$, we can rewrite the formula as<br>$$<br>\begin{aligned}<br>U_{i,j,t}(s_{ij})-U_{i,j,t+1}&amp;=v_{ij}(L_i-s_{ij},Y_i-c_{ij}(s_{ij}))+\pi_{ijt}(s_{ij},X_i,E_{ij})\cdot \\<br>&amp;\int^{\infty}_{w_R}[\psi_{ij}(w)-U_{i,j,t+1}(w_R,s_{ij})]\cdot f(w)dw<br>\end{aligned}<br>$$</li>
+<li>The offer probability is a linear combination of the offer arrival rate ($\lambda$) and the search effort allocated to a job search mode<br>$$<br>\pi_{ij}(s_{ij},X_i,E_{ij})=\lambda_{ij}(X_i,E_{ij})\cdot (\tau_0+\tau_1 s_{ij})<br>$$<br>where $\lambda$ is the offer arrival rate</li>
+<li>Also assume a functional form for the search cost<br>$$<br>c_{ij}(s_{ij})=\gamma_j\exp\left(-\frac{\delta_jX_i+\eta_jE_i}{\gamma_j}\right)\cdot \left[ \exp\left(\frac{s_{ij}}{\gamma_j}\right)-1 \right]<br>$$</li>
+<li>Optimal search time $s_{ij}^\star$ is<br>$$<br>s_{ij}^\star=(\gamma_i\log \tau_1)+(\delta_j+\gamma_j\varphi_1)\cdot X_i+(\eta_j+\varphi_{2j}\gamma_j)E_{ij}+\gamma_j\log(R_{ij})<br>$$</li>
+</ul>
+<h3 id="Effect-of-social-ties-and-job-outcomes"><a href="#Effect-of-social-ties-and-job-outcomes" class="headerlink" title="Effect of social ties and job outcomes"></a>Effect of social ties and job outcomes</h3><ul>
+<li>Ties $E$ can affect job outcomes in two ways. <ul>
+<li>Connections affect the search effort</li>
+<li>Connections affect job outcomes, independent of search effort<br>$$<br>\frac{d\pi_{ij}}{dE_i}=\frac{\partial \pi_{ij}}{\partial E_i}+\frac{\partial\pi_{ij}}{\partial s_j}\cdot \frac{ds_j}{dE_i}<br>$$</li>
+</ul>
+</li>
+<li>Write the job offer as a function of outcomes (i.e., interviews which is a function of job leads, which is a function of search)<br>$$<br>\pi_{ij}^{JO}(s_{ij},X_i,E_{ij})=f(\pi_{ij}^{JI}(\pi_{ij}^{JL}(s_{ij}(X_i,E_{ij}),X_i,E_{ij}),X_i,E_{ij}),X_i,E_{ij})<br>$$</li>
+</ul>
+<h2 id="Empirical-Analysis-and-Results"><a href="#Empirical-Analysis-and-Results" class="headerlink" title="Empirical Analysis and Results"></a>Empirical Analysis and Results</h2><h3 id="Joint-models-of-search-effort-and-job-outcomes"><a href="#Joint-models-of-search-effort-and-job-outcomes" class="headerlink" title="Joint models of search effort and job outcomes"></a>Joint models of search effort and job outcomes</h3><ul>
+<li>Because search effort and job outcomes are correlated, a joint model better represents the data</li>
+<li>The estimated equation for search time can be expressed as<br>$$<br>s_{ij}=\omega_i+\theta_j+\alpha_1\textbf{X}_i+\alpha_2\textbf{E}_i+\alpha_{2a}\textbf{E}_i D_{SN}+\alpha_3\log(R_{ij})+\alpha_4E_i^f+\alpha_5 X_i^{dur}+\epsilon_{ij}^s<br>$$<br>where $\omega_i$ is a user-specific random effect, and $\theta_j$ is a mode-specific, fixed-effect dummy. $D_{SN}$ is a dummy variable indicating whether it is OSNs. $E_i^f$ controls the number of Facebook connections for user $i$</li>
+</ul>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><ul>
+<li>Search effort<ul>
+<li>Job seekers allocate most time searching for jobs on the Internet, followed by their OSN, which reflects the significance of job search on online SNSs</li>
+<li>People who have more strong ties spend more time on job search</li>
+<li><strong>Weak ties have a small negative effect</strong></li>
+<li><strong>Users with more weak ties are searching more on SNSs, but they seem to be reducing the efforts on other modes</strong></li>
+<li>A 1% increase in unemployment duration increases the search intensity by 0.27%</li>
+<li>People with 1% higher pre-unemployment wage spend 3.4% less time on job search, which could be attributed to the smaller pool of job opportunities that offer a higher wage</li>
+<li>Online ties are more relevant for job search behavior on SNSs</li>
+</ul>
+</li>
+<li>Job leads<ul>
+<li>Search effort increases job leads significantly</li>
+<li>Internet generates the most leads, followed by SNSs</li>
+<li>Both strong ties and weak ties generate more job leads, while strong ties generate leads at a higher rate</li>
+</ul>
+</li>
+<li>Job interviews<ul>
+<li>OSNs are not as effective as the Internet in converting leads to interviews</li>
+<li>Strong ties have a significant and positive effect on job interviews</li>
+<li>Weak ties have statistically insignificant estimate</li>
+<li>Ties have no significant special effect on job interviews generated from OSNs, probably due to the fact that the effect of strong ties extends on average to all modes and not just to OSNs</li>
+<li> A longer unemployment spell contributes to a lower number of interviews</li>
+</ul>
+</li>
+<li>Job offers<ul>
+<li>Strong ties play a significant and positive role in job offers</li>
+<li>Weak ties indicate a negative effect<ul>
+<li>The authors expect that weak ties are unable to invest necessary effort in recommending an individual for a job offer because of limited information about the skills of individual and potential concerns associated with their unemployment status</li>
+<li>The degree of influence a person wields among her connections is inversely proportional to the time she spends with all her connections</li>
+</ul>
+</li>
+<li>Online strong ties do not have a larger impact on offers received from OSNs</li>
+<li>More experience results in fewer job offers</li>
+</ul>
+</li>
+</ul>
+<h3 id="Role-of-social-connections"><a href="#Role-of-social-connections" class="headerlink" title="Role of social connections"></a>Role of social connections</h3><ul>
+<li>An increase in weak ties essentially has a small positive effect on job lead s but not on job interviews and offers</li>
+<li>Strong ties have a significant effect on all steps</li>
+<li>Cost of search is higher for OSNs than on Internet</li>
+</ul>
+<blockquote><ol>
+<li>The number of strong ties and the number of weak ties are highly correlated. Will the collinearity distort the coefficients?</li>
+<li>The authors mention that the inefficiency of OSNs in converting leads to interviews result from that more job applications can be submitted through the Internet</li>
+<li><strong>Another possible explanation: The difference between the jobs people apply for through weak ties and strong ties is interesting. I guess the strong ties are in their close social networks, so the jobs they apply through strong ties are at their abilities. But the jobs they apply for through strong ties may be beyond their abilities</strong></li>
+<li>The fact that online strong ties do not have a larger impact on offers received from OSNs is quite strange</li>
+<li>Strange: More experience results in fewer job offers</li>
+</ol>
+</blockquote>
+<h2 id="Implications-and-Suggestions"><a href="#Implications-and-Suggestions" class="headerlink" title="Implications and Suggestions"></a>Implications and Suggestions</h2><ul>
+<li>This study. like most survey-based studies, faces the limitation of not representing the entire population</li>
+<li>Estimate the multiple nonlinear model separately</li>
+<li>Individuals are impatient while unemployed, so they may be willing to work at a lower wage</li>
+</ul>
+<p><em>Garg, R., &amp; Telang, R. (2018). To be or not to be linked: Online social networks and job search by unemployed workforce. Management Science, 64(8), 3926-3941.</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        <a href="/tags/Labor-Market/"># Labor Market</a>
+                    
+                        <a href="/tags/Social-Network/"># Social Network</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/04/Topics-of-WOM/">Topics of WOM</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
