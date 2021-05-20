@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Giving and Receiving Advice | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Giving and Receiving Advice</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Cheap-Talk/">Cheap Talk</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper classifies the literature on strategic communication along four dimensions:</p>
+<ul>
+<li>Decision makers and experts have different preferences</li>
+<li>Technological considerations describe the domain of uncertainty, the cost of acquiring information and the cost of  manipulating information</li>
+<li>The institution determines who has responsibility for making decisions and the rules that govern communication</li>
+<li>Cultural factors describe the way in which agents interpret languages</li>
+</ul>
+<h2 id="Strategic-Considerations"><a href="#Strategic-Considerations" class="headerlink" title="Strategic Considerations"></a>Strategic Considerations</h2><ul>
+<li>In cheap talk games, the set of messages available to the Sender does not depend on the state of the world </li>
+<li>If the Receiver has a best response to the prior distribution, the cheap talk games have a babbling equilibrium in which there is no communication, which motivates the discussion <ul>
+<li>Under what conditions is babbling the only equilibrium outcome</li>
+<li>Under what conditions is there a fully revealing equilibrium</li>
+</ul>
+</li>
+<li>Communication can be classified into three categories according to their effects<ul>
+<li>Informative (Change the belief): $\mu(\cdot|m)$ is not constant on the equilibrium path</li>
+<li>Influential (Change the strategy of Receiver): $\alpha(\cdot|m)$ is not constant on the equilibrium path</li>
+<li>Payoff Relevant (Permit Receiver to improve his payoff relative to the babbling equilibrium): $E[U_R(\alpha^\star(\sigma^\star),0)]&gt;\max_{\alpha\in A} E[U_R(a,\theta)]$</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>The online reviews actually are not totally cheap. But it is different from the arguments in Cost of Information Acquisition, in that the cost is not acquiring information but expressing the information. </li>
+<li>If we cannot have deeper analysis, at least we can prove under what conditions can the online ratings be informative or influential and further payoff relevant</li>
+</ol>
+</blockquote>
+
+<h4 id="Similar-preferences-between-S-and-R"><a href="#Similar-preferences-between-S-and-R" class="headerlink" title="Similar preferences between S and R"></a>Similar preferences between S and R</h4><ul>
+<li>A necessary condition for the existence of influential communication is that the Sender and the Receiver have some interests in common. There must exist non-empty sets of types $T_1$ and $T_2$, and distinct actions $a_1$ and $a_2$ such that<ul>
+<li>$a_i$ is a best response (for the Receiver) to $\theta\in T_i$</li>
+<li>If $\theta\in T_i$, the type $\theta$ Sender prefers $a_i$ to $a_j$</li>
+</ul>
+</li>
+<li>These conditions identify shared interest between Sender and Receiver because conditional on $\theta\in T_i$, the Sender and Receiver have the same preferences over $\{a_1,a_2\}$</li>
+<li>Interests between S and R arise naturally when A is multidimensional (Chekraborty and Harbaugh, 2007)<ul>
+<li>State-dependent case<ul>
+<li>Assume that both the state space and the action space are two dimensional</li>
+<li>Assume that Sender has linear and increasing preferences over the R’s actions</li>
+<li>Assume that the marginal rate of substitution depends on the state space and the action space </li>
+<li>The equilibrium where Senders communicates categorical information - which component is higher</li>
+</ul>
+</li>
+<li>State-independent case (Chekraborty and Harbaugh, 2010)<ul>
+<li>Assume that the marginal rate of substitution only depends on the action</li>
+<li>An informative equilibrium exists if it is possible to partition the state space into two non-empty regions $\Theta_1$ and $\Theta_2$, such that if $a_i$ is the Receiver’s best response given that $\theta\in\Theta_i$, then $U_S(a_1)=U_S(a_2)$</li>
+<li>In this case, the Sender would be different between the two actions, and it would be a best response to communicate which $\Theta$ contains her type</li>
+</ul>
+</li>
+<li>The clear intuition that large differences in preferences make effective communication impossible still holds (Levy and Razin, 2007)</li>
+</ul>
+</li>
+<li>In all cheap talk models, the R weakly prefers an informative equilibrium to the babbling outcome. The S’s ex ante preferences are less clear</li>
+</ul>
+<blockquote><ol>
+<li>The utility function of true reviewers is different from those of potential buyers in a subtle way, so they sometimes provide false information. Lots of literature studied the incentives of reviewers to post reviews. Besides benefiting communities (namely potential buyers)(Zhang and Zhu, 2011), the reviewers participate in free contribution to the community in order to show their tastes or identity (Schau and Gilly, 2003; Schlosse, 2005), make friends (Wang, Zhang and Hann, 2018), etc</li>
+<li>However, the promotional reviewers have utility function which is quite different from those of potential buyers, so they intend to provide deceptive information (Mayzlin, Dover, and Chevalier, 2014). </li>
+<li>The utility functions of non-buyers are strange. Anderson and Simester (2014) find that they are the most loyal customers and that they give lower ratings. It is probably because they love the company, so when the company does something he does not like, he will feel extremely sad.</li>
+</ol>
+</blockquote>
+
+<h4 id="The-dependency-of-S’s-preferences-on-the-type"><a href="#The-dependency-of-S’s-preferences-on-the-type" class="headerlink" title="The dependency of S’s preferences on the type"></a>The dependency of S’s preferences on the type</h4><ul>
+<li>In addition to the S and R having some interests in common, in typical situations, influential communication requires a conflict of interest between Sender types<ul>
+<li>If S strictly prefers action $a$ of R, S must send a message that induces this action. While it is possible that the S’s message is informative (there may be different messages that lead to the same action), R does not use the information to make decision</li>
+</ul>
+</li>
+<li>When the set of actions is not linearly ordered, there will be conflicts between the Sender types even when in the simplest economic examples.</li>
+</ul>
+<blockquote><ol>
+<li>The core difference between WOM and theoretical cheap talk model is that the S’s utility functions also depend on the belief about how many Rs will make choices according to the message</li>
+<li>The god decides both the type of Ss, Rs and movies. They are in a multi-dimensional space. The sender and receiver know their own type plus a random error, the sender knows the distance between the movie and his type times how niche the movie is</li>
+<li>However, it is still hard to say it is the belief about the actions of R or the payoff improvement of R are in the utility function of S. I guess it is the payoff!!</li>
+</ol>
+</blockquote>
+
+<h4 id="Payoff-relevant-communication"><a href="#Payoff-relevant-communication" class="headerlink" title="Payoff-relevant communication"></a>Payoff-relevant communication</h4><ul>
+<li><strong>Conflict between Sender types is a necessary condition for payoff-relevant communications</strong></li>
+<li>But this condition holds in interesting environments. A necessary and sufficient condition for fully revealing equilibria is a strong form of common interests</li>
+</ul>
+<h2 id="Equilibrium-Selection"><a href="#Equilibrium-Selection" class="headerlink" title="Equilibrium Selection"></a>Equilibrium Selection</h2><h4 id="Three-kinds-of-indeterminacy"><a href="#Three-kinds-of-indeterminacy" class="headerlink" title="Three kinds of indeterminacy"></a>Three kinds of indeterminacy</h4><ul>
+<li>Effective communication requires coordination. The sender must send informative message and the receiver must understand them.</li>
+<li>There are three kinds of indeterminacy in cheap talk models:<ul>
+<li>Multiple off-the-path responses</li>
+<li>Multiple meanings of messages</li>
+<li>Multiple equilibrium associations between types and actions</li>
+</ul>
+</li>
+<li>Multiple off-the-path responses<ul>
+<li>The focus of attention in standard signaling games. For these games. selection arguments based on Kohlberg and Mertens (1986) ‘s notion of strategic stability frequently focus attention on separating outcomes that are efficient from the point of review of the S</li>
+</ul>
+</li>
+<li>Multiple meaning of messages<ul>
+<li>One can take any equilibrium outcome and form a new equilibrium outcome by permuting the messages</li>
+</ul>
+</li>
+<li>In equilibrium there will generally be many associations of types to actions</li>
+<li>The first kind of indeterminacy is familiar and does not prevent the modeler from making definite predictions about outcomes </li>
+<li>Possibly the second kind of indeterminacy is an advantage of the modeling approach. If the analyst does not care about the actual choice of messages but only about the payoff-relevant association of actions to types, this kind of multiplicity of equilibrium is not a problem</li>
+<li>One cannot dismiss the existence of the third indeterminacy</li>
+</ul>
+<h4 id="Refinement-of-E"><a href="#Refinement-of-E" class="headerlink" title="Refinement of E"></a>Refinement of E</h4><ul>
+<li>Farrel (1993) attacks the multiple-E problem by requiring that some out-of-equilibrium messages have unambiguous interpretations.<ul>
+<li>There always exist unused messages and argues that given an equilibrium profile ($\alpha^\star,\sigma^\star$) the R would interpret a new message to mean “My type is an element of $K$. Take action $a^\star$” if there exists an action $a^\star\in A$ and a set $K\in\Theta$ such that<br>$$<br>a^\star \text{solves} \max \sum_{\theta\in K}U_R(a,\theta)p(\theta)<br>$$<br>and<br>$$<br>K=\{\theta : U_S(a^\star ,\theta)&gt;E[U_S(\alpha^\star(\sigma^\star(\theta)),\theta)]\}<br>$$<br>The two equations above mean that both S and R are better off. Farrell names $K$ a credible neologism.</li>
+</ul>
+</li>
+<li>Evolutionary arguments on repeated games (Robson, 1990)<ul>
+<li>Imagine an environment in which large populations play the basic game in pairs and in which, after each period, successful strategies become more prevalent, less successful strategies die out, and novel strategies may invade.</li>
+<li>There can be an invasion of strategy that uses the novel message. When the invading strategy meets a member of the existing population, it does not lose. When it meets another individual playing the invading strategy, the invaders can use the novel message as a “secret handshake”. </li>
+<li>The invading strategy therefore earns a strictly higher payoff than the existing strategies and will move the populations towards efficient outcome</li>
+<li>Weakness: Require strong common interests</li>
+</ul>
+</li>
+<li>More recent work uses the existence of behavioral types or payoff perturbations to select equilibria in variations of the standard one-dimensional cheap-talk model<ul>
+<li>Chen (2008) assumes that with positive probability the S reports her type honestly and with positive probability R interprets a message literally. </li>
+<li>Result: only one of the E is the limit of E in the perturbed as the probability of behavior types goes to zero</li>
+<li>Kartik (2009) assumes that S faces a cost of lying and gives conditions under which only one of the E outcomes in the standard cheap talk model is the limit of refined E of the perturbed game</li>
+</ul>
+</li>
+<li>The paper then analyzes differences between the mapping from point to point and space to space</li>
+<li>Cheap talk models treat messages abstractly. Messages have no intrinsic meaning. The author is convinced that a productive approach to this problem is to impose restrictions on the use of messages within a game that capture the way messages are used outside this specific situation</li>
+</ul>
+<blockquote><ol>
+<li>We can give the message a certain meaning to eliminate the uncertainty about the meanings of messages</li>
+<li>We can consider the equilibrium selection after we built our model</li>
+<li>WOM Cheap Talk does not have babbling equilibrium where everyone says the same thing. It has an equilibrium where no one is saying or listening.</li>
+<li>The review holding platform are intermediate (Consulting firm) to change the beliefs of both Senders and Receivers. For example, they tell S how many people view their websites everyday, and they tell R how hard they are working to detect and punish fake reviews</li>
+<li>There is a threshold of payoff function for the reviews to happen</li>
+<li>The embedding of social network function on the platform will ruin the usefulness of information</li>
+<li>The payoff function of S have two terms, for their own sake and for the sake of others</li>
+</ol>
+</blockquote>
+
+<h4 id="Many-Senders"><a href="#Many-Senders" class="headerlink" title="Many Senders"></a>Many Senders</h4><ul>
+<li>The literature identifies two ways in which having multiple informants may make an uninformed decision maker better off<ul>
+<li>Having multiple S allows the R to check facts (All S receive the same information)</li>
+<li>Multiple S supplying complementary information may permit the R to reconstruct the state</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>Having multiple S allows R to better infer the type the movie.</li>
+<li>The space of movies has two more dimensions than the space of consumers</li>
+</ol>
+</blockquote>
+<p><em>Sobel, J. (2013). Giving and receiving advice. Advances in economics and econometrics, 1, 305-341.</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        <a href="/tags/Cheap-Talk/"># Cheap Talk</a>
+                    
+                        <a href="/tags/Theories-about-WOM/"># Theories about WOM</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/05/To-be-or-not-to-be-linked-Online-social-networks-and-job-search-by-unemployed-workforce/">To be or not to be linked: Online social networks and job search by unemployed workforce</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
