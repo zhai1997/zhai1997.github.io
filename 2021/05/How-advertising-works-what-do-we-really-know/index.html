@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>How advertising works: what do we really know? | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">How advertising works: what do we really know?</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Advertising/">Advertising</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper is the most highly cited literature reviews on advertising, which I believe can help someone who has limited knowledge about advertising get started, although it was written long before</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>With much advertising expenditure wasted in ineffective campaigns, advertisers should be concerned with how advertising affects consumers, in order to formulate more effective advertising strategies</li>
+<li>The first formal advertising model was AIDA (Attention -&gt; Interest -&gt; Desire -&gt; Action). These types of “hierarchy of effects” models have dominated the literature ever since</li>
+</ul>
+<h4 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h4><ul>
+<li>The intermediate type of response implies that, consciously or unconsciously, advertising must have some metal effect (e.g. awareness, memory, attitude toward the brand) before it can affect behavior. </li>
+<li>Cognition, the “thinking” dimension of a person’s response, and affect, the “feeling” dimension, are portrayed as two major intermediate advertising effects.</li>
+<li>The consumers’ mind is not a blank sheet awaiting advertising but rather already contains conscious and unconscious memories of product purchasing and usage. Thus behavior feeds back to experience</li>
+<li>Individual responses to advertising are mediated by factors such as motivation and ability to process information and attitudes toward the ad</li>
+</ul>
+<blockquote><ol>
+<li>The most attractive part of advertising is the unconscious attitude of consumers towards advertising. Traditional studies use offline questionnaires to collect information, which force them to put the unconscious feelings into thinking process, and then biased answers are generated</li>
+<li>Unconscious attitude is like a ghost which is never observable and can only be inferred</li>
+<li>The demographics of the consumers influence the ability to process information, attitudes toward ads, involvement, and further influences the weight of the three axes</li>
+<li>How are CTR and CVR different? We can use CTR, CVR and reports to measure the emotion of consumers</li>
+<li>Probably, we can target two ads of the same product, maybe one with more informational contents and one with more emotional contents, to both the poor and the rich</li>
+</ol>
+</blockquote>
+
+<h2 id="Market-Response-Model"><a href="#Market-Response-Model" class="headerlink" title="Market Response Model (-)"></a>Market Response Model (-)</h2><ul>
+<li>Elasticities</li>
+<li>Market response models, which are econometrics models of market response to advertising, do not consider intermediate effects at all</li>
+<li>Instead, they typically relate advertising, pricing, and promotional measures to behavioral measures (treat them equally). For example, measurement of loyalty would be based on repeat purchasing behavior rather than an attitude of mind</li>
+<li>Market response model can further be classified into aggregate level and individual level<ul>
+<li>Aggregate-level studies use market-level data, such as brand advertising expenditures or gross rating points, and brand sales or market share</li>
+<li>Individual-level studies use measures such as individual brand choice and the number of exposure for an individual from single data source</li>
+</ul>
+</li>
+</ul>
+<h4 id="Conclusions"><a href="#Conclusions" class="headerlink" title="Conclusions"></a>Conclusions</h4><ul>
+<li>Conclusion 1: Advertising elasticities range from 0 to 0.2</li>
+<li>Conclusion 2: Advertising elasticities for durables are higher than those for non-durables</li>
+<li>Conclusion 3: Promotional elasticities are up to 20 times higher than advertising elasticities</li>
+<li>Conclusion 4: Advertising elasticities are dynamic and decreases during the product life. Advertising elasticities are therefor higher for new than for established brands</li>
+<li>Conclusion 5: Purchase reinforcement and habitual loyalty effects are stronger than advertising carryover effects</li>
+<li>Conclusion 6: 90% of the advertising effects dissipate after three to fifteen months</li>
+<li>Conclusion 7: Returns to advertising are usually diminishing; the first exposure is the most influential for short-term sales and share gains</li>
+<li>Conclusion 8: For frequently purchased package goods, share returns to advertising diminish fast, typically after the third exposure. After the third exposure, advertisers should focus on reach rather than frequency</li>
+<li>Advertising helps a brand by making consumers less price sensitive, while promotion makes consumers more price sensitive</li>
+<li>Short-term effects are the prerequisite for the long-term effects</li>
+</ul>
+<blockquote><ol>
+<li>We now have CTR, CVR and other measures besides sales, expenditure, etc. And they actually capture the intermediate effects, which makes the market response model more promising now</li>
+<li>Econometrician like to look for proxy, but psychologists like to measure the effects directly</li>
+<li>We will study the individual-level data to study the emotion of consumers</li>
+<li>Previous studies of market response model mainly studies the effect of difference among products</li>
+<li>The advertising effect is lower than habitual loyalty in the long run, and weaker than promotion</li>
+<li>The extensive promotions in 7-11 are good or not?</li>
+</ol>
+</blockquote>
+
+<h2 id="Cognitive-Information-C-Model"><a href="#Cognitive-Information-C-Model" class="headerlink" title="Cognitive Information (C Model)"></a>Cognitive Information (C Model)</h2><ul>
+<li>Tell consumers something (like price)</li>
+<li>Assumes that consumer preferences, for example, the relative weights of attribute importance, are not changed by advertising and that consumer decisions are only rational. They rationally make decisions with the information provided by advertising</li>
+<li>Classification of goods: <ul>
+<li>Experience: use and then know the (probably subjective) quality</li>
+<li>Search: search and then know the objective quality</li>
+<li>Credence: use and still do not know the quality</li>
+<li>Classification of products into Experience, Search and Credence may be problematic, and it is properer to say experience attributes instead of experience products</li>
+</ul>
+</li>
+</ul>
+<h4 id="Conclusions-1"><a href="#Conclusions-1" class="headerlink" title="Conclusions"></a>Conclusions</h4><ul>
+<li>Conclusion 9: Advertising is expected to be more effective for experience and credence than for search goods because it provides information that inspection does not. Furthermore, advertisements for search goods contain more product-oriented information than do experience goods advertisements</li>
+<li>Conclusion 10: Increased advertising signals high quality when costs of producing quality are low and consumers are less responsive to advertising</li>
+<li>Conclusion 11: Price advertising increases price sensitivity, whereas non-price advertising decreases price sensitivity. Furthermore, price sensitivity leads to low price</li>
+<li>Conclusion 12: When consumers rely on memory to retrieve product information, advertising increases price sensitivity; when consumers rely on point-of-purchase information, advertising decreases price sensitivity</li>
+<li>Positioning theory: A brand must differentiate itself, if possible, through tangible product attributes and then communicate that differentiation positively</li>
+</ul>
+<blockquote><ol>
+<li>The point that “Advertising is expected to be more effective for experience and credence than for search goods because it provides information that inspection does not” is quite similar to the moderator in WOM</li>
+<li>Price sensitivity should be considered in our research. We can hypotheses the poor have higher price sensitivity. And show price in treat group</li>
+</ol>
+</blockquote>
+
+<h2 id="Pure-Affect-Model-A-Model"><a href="#Pure-Affect-Model-A-Model" class="headerlink" title="Pure Affect Model (A Model)"></a>Pure Affect Model (A Model)</h2><ul>
+<li>Focus on the familiarity and feelings advertisements may evoke</li>
+</ul>
+<h4 id="Conclusions-2"><a href="#Conclusions-2" class="headerlink" title="Conclusions"></a>Conclusions</h4><ul>
+<li>Conclusion 13: Advertising need not be informative to be effective, nor need be verbal only; emotional and visual elements enhance preferences</li>
+<li>Awareness of the advertisement is not necessary though the awareness of brand is </li>
+<li>Consumers form their their preferences on the basis of elements such as liking, feelings, and emotions induced by the advertisement or familiarity triggered by mere exposure to the advertisement, rather than product/brand attribute information</li>
+<li>Unfamiliar advertising messages create hostility and take longer to reach their optimal effectiveness </li>
+<li>Wear-in effect: Similar to the things we mentioned in Market Response Model. A minimum (threshold) number of exposures is necessary for the ad to have an effect on the consumer</li>
+<li>Wear-out effect: (Also similar to what we mentioned in Market Response Model) The two-factor theory (Berlyne, 1970) also suggests a wear-out effect: After several exposures, the effect of advertising decreases</li>
+<li>Affective responses to advertising can be classified further to two types: <ul>
+<li>One leads to the formation of an attitude toward the ad</li>
+<li>One leads to the formation of an attitude toward the ad (namely, an expression of the likability of the advertisement itself)</li>
+</ul>
+</li>
+<li>Conclusion 14: Brand attitudes are not formed exclusively on the basis of beliefs about the product/brand attributes. They also can be based on emotions. For example, attitude toward the ad is a significant moderator in the formation of brand attitudes</li>
+<li>Conclusion 15: Ad likability highly correlates with brand preference</li>
+<li>Conclusion 16: Attitude toward the ad affects brand attitudes only in non-elaborate situations</li>
+<li>However, there is a disagreement about how much the ad likability affects the attitudes to brands\</li>
+<li><strong>The absence of cognition suggested by pure affect models is difficult to show, because cognition usually intervenes in measurement</strong></li>
+<li>Asking about feelings brings cognitive process into play and induces cognitive bias, a bias toward cognitive methods and models. </li>
+<li>Non-cognitive measures have been developed, such as projective techniques and the Facial Action Coding</li>
+<li>Using EEG (electroencephalograph), researchers find bilateral processing, and this processing is greatest for rational commercials and least for emotional ones</li>
+<li>Cognitive bias problems aside, models based purely on affective responses are rather improbable, because some awareness appears to be a necessary condition for advertising effectiveness</li>
+<li>Shapiro, Heckler, and MacInnis (1997) show how non-cognitive processing of advertisements lead to more favorable <strong>ad</strong> evaluation than cognitive processing</li>
+</ul>
+<blockquote><ol>
+<li>The pure affect model is rather subtle. But advertising is art, not only a piece of information, and it will definitely influence the emotions of customers</li>
+<li>I notice a lot of ads with long, complex and perhaps irrelevant stories. I guess they are merely trying to influence the sentiments of consumers</li>
+<li>Simply leaving an image in the consumers’ work</li>
+<li>The difference between advertisements and contents are increasingly subtle<ol>
+<li>Companies like ByteDance are trying to make advertisements look like the contents</li>
+<li>I guess they are trying to minimize the effects of simple aversion to advertising</li>
+<li>They also allow the contents to contain advertisements to encourage uploading</li>
+<li>There lack findings about the nature aversion to ads</li>
+</ol>
+</li>
+<li>Ad is also an art. Ads that do not look like ads, and ads that contain artistic contents have a lower possibility of being disgusted</li>
+<li>The attitude toward ad strongly influences the attitude toward brand</li>
+<li>Click-through is non-cognitive process, and I believe it is better than those strange and unreliable techniques</li>
+<li>The poor do not like ads, because they grow up with worse and fewer ads</li>
+<li>Read Shapiro, Heckler, and MacInnis (1997) and see how they distinguish between the two effects</li>
+</ol>
+</blockquote>
+
+<h2 id="Persuasive-Hierarchy-Models-CA-Model"><a href="#Persuasive-Hierarchy-Models-CA-Model" class="headerlink" title="Persuasive Hierarchy Models (CA Model)"></a>Persuasive Hierarchy Models (CA Model)</h2><ul>
+<li>C always happens before A, advertising is perceived as persuading the consumer to buy more, and E does not feature at all</li>
+<li>The idea that, if advertising is to promote sales, it must inform and then persuade has intuitive appeal</li>
+<li>Persuasive models introduced the concept of a hierarchy of effects, that is, an order in which things happen, with the implication that the earlier effects, being necessary preconditions, are more important</li>
+<li>The number of stages in the literature may be increased and refined, but the underlying pattern is cognition -&gt; affect -&gt; behavior</li>
+<li>Two important mediating factors (the filters in Figure 1) of individual response to advertising, involvement and attitude toward the ad, have been studied extensively within the persuasive hierarchy framework</li>
+<li>One of the most comprehensive persuasive models is the Elaboration Likelihood Model (ELM) (Petty and Cacioppo, 1981)<ul>
+<li>The ELM distinguishes elaborate (attribute evaluation) and non-elaborate (paying attention to execution elements, for example, celebrity endorsers)</li>
+<li>Elaboration is essentially cognitive, and the model introduces alternative paths for consumers’ response to ads</li>
+<li>The two alternative paths, however, follow the same CA sequence</li>
+</ul>
+</li>
+</ul>
+<h4 id="Involvement"><a href="#Involvement" class="headerlink" title="Involvement"></a>Involvement</h4><ul>
+<li>Krugman (1965, 1967) operationalizes involvement as the number of linkages made between advertised and product and the consumers’ life during the exposure to an ad</li>
+<li>Rothschild (1984) defines involvement as “an unobservable state of motivation, arousal or interest”</li>
+</ul>
+<h4 id="Conclusions-3"><a href="#Conclusions-3" class="headerlink" title="Conclusions"></a>Conclusions</h4><ul>
+<li>Conclusion 17: In low-involvement situations, repetition of different versions of an advertisement prevents early decay of advertising effects</li>
+<li>Conclusion 18: Recall and attitudes can be maintained at a high level if an advertising campaign consists of a series of advertisements</li>
+<li>Conclusion 19: Attitude-behavior correlations range between 0 and 0.30</li>
+<li>Conclusion 20: The concept of a single hierarchy of effects is not supported</li>
+<li>Greenwald and Leavitt (1984) after reviewing definitions of involvement, relate levels of involvement to stages of consumer information processing<ul>
+<li>They propose that complex advertisements, which require inferences of brand quality based on persuasive arguments, should require a high level of involvement - mainly elaboration. </li>
+<li>In contrast, advertising that links a brand to attractive objects should only require focal attention - a lower level of involvement </li>
+</ul>
+</li>
+<li>Batra and Ray (1985) challenge ELM in which attitudes toward the brand are “utilitarian” or based exclusively on beliefs about hard product attributes. They, instead, suggest that consumers may develop a “hedonic” effect based on pure liking without an evaluation<ul>
+<li>The multidimensionality is the result of the different ways attitudes may form</li>
+</ul>
+</li>
+<li>Applications of persuasive hierarchy models highlight the importance of involvement as a moderator of advertising effects</li>
+<li>Dröge (1989) shows that attitude toward the ad positively affects attitudes toward the brand only in low-involvement situations</li>
+<li>Different people respond to different ads in different ways, depending on their involvement</li>
+</ul>
+<blockquote><ol>
+<li>Talk about these ideas with Li, Xueyun and Haoyang</li>
+<li>The effects of series ads are impressing</li>
+<li>Conclusion 19 is not realistic and can be challenged</li>
+<li>Involvement may differ from groups to groups, and it may depend on the time period in a day</li>
+<li>An experiment can fix a time period to deliver ads</li>
+<li>Also can use different information of ads and landing pages to measure different effects</li>
+<li>But time period in a day can be further intervened with how busy the consumers are. For example, consumers with higher payment are generally busier than those with lower payment</li>
+<li>I think ELM and BB(1985) are the same things. People who are more hedonic tend to think less</li>
+<li>Why the poor act less elaborately<ol>
+<li>The <strong>natural aversions to ads</strong> may make the poor less involved ane tend to think less elaborately</li>
+<li> Will it be that the poor have lower abilities to understand ads (less probably and controlled), so they act less elaborately</li>
+<li> The poor have more time, which may make them think more elaborately</li>
+<li> Will it be that the poor have lower aesthetics appreciation power (controlled), so they act less elaborately</li>
+</ol>
+</li>
+<li>Two ways the natural aversion influences<ol>
+<li> Natural aversion to ads is affective</li>
+<li> Natural aversion is attitude instead of involvement</li>
+</ol>
+</li>
+<li>The fact that attitudes correlated poorly with behaviors is quite strange, possibly because cognitive bias</li>
+<li>Natural, because the aversion comes into being before the ads are shown</li>
+</ol>
+</blockquote>
+
+<h2 id="Low-Involvement-Hierarchy-CEA-Model"><a href="#Low-Involvement-Hierarchy-CEA-Model" class="headerlink" title="Low-Involvement Hierarchy (CEA Model)"></a>Low-Involvement Hierarchy (CEA Model)</h2><ul>
+<li>Cognition -&gt; experience -&gt; affect, though “cognition” may mean no more than passing awareness in categories in which the consumer has low involvement</li>
+<li>Advertising merely serves to reinforce behavior rather than causing it</li>
+<li>Advertising may create awareness, but affect and brand preferences are formed after product trial and experience</li>
+<li>It is associated with the routinized choice behavior more likely to occur in low-involvement situations</li>
+</ul>
+<h4 id="Conclusions-4"><a href="#Conclusions-4" class="headerlink" title="Conclusions"></a>Conclusions</h4><ul>
+<li>Conclusion 21: Product usage experience dominates advertising influence on beliefs, attitudes and behavior</li>
+<li>Conclusion 22: Advertising is superior to product usage in communicating quality for credence goods; product experience dominates advertising for search and low-experience goods (attributes)</li>
+<li>Conclusion 23: Advertising has a stronger effect on consumers with high behavioral loyalty</li>
+<li>Conclusion 24: Advertising is relatively more effective when it precedes usage experience (predictive framing), in particular when such experience is negative</li>
+</ul>
+<blockquote><ol>
+<li>Framing effects are quite interesting!</li>
+<li>Reinforcement effects -&gt; more effective on loyal consumers</li>
+</ol>
+</blockquote>
+
+<h2 id="Integrative-Model-C-A-E-Model"><a href="#Integrative-Model-C-A-E-Model" class="headerlink" title="Integrative Model ((C)(A)(E) Model)"></a>Integrative Model ((C)(A)(E) Model)</h2><ul>
+<li>The order of a particular effect in the sequence is not fixed and depends on the context, product category, and level of involvement</li>
+</ul>
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><ul>
+<li>Conclusion 25: The relative importance of C and A depend on context. Beliefs generally build cumulatively with awareness, trial word of mouth, promotions, and advertising. These effects act interactively and simultaneously</li>
+<li>The FCB grid (1980, 1986) uses involvement and think/feel as the two dimensions for classifying product categories<ul>
+<li>Advertising should be designed according to the quadrant in which the product category belonged.</li>
+<li>For example, frequently purchased packaged goods were likely to be low involvement and affect motivated</li>
+</ul>
+</li>
+<li>Smith and Swinyard (1982) distinguish between higher order and lower order beliefs to introduce context specificity in the way advertising affects the individual consumers<ul>
+<li>For low involvement goods (CEA), for which the trial is easy and inexpensive (eg. frequently purchased products), advertising is more advertising is more likely to affect lower order beliefs, mostly by increasing awareness and introducing uncertainty.</li>
+<li>Higher order beliefs are formed only after many trial purchases</li>
+<li>For high-involvement products (CA) for which trial is risky and expensive (eg. household appliances), higher order beliefs are formed immediately, but they need not be based exclusively on advertising</li>
+</ul>
+</li>
+</ul>
+<h2 id="Hierarchy-Free-Model"><a href="#Hierarchy-Free-Model" class="headerlink" title="Hierarchy-Free Model"></a>Hierarchy-Free Model</h2><ul>
+<li>No particular processing sequence is assumed, and it is a more person-centered view of advertising</li>
+<li>Treats advertising as a part of brand totality</li>
+<li>Anthropomorphizing the brand and accommodating it in consumers’ real world may help the understanding of marketers and copywriters and clarify the nature of the communications they are creating</li>
+<li>Stern usefully distinguishes sympathy from empathy. The length of the commercial gave time to recognize the plight of the protagonists but not to identity with them</li>
+<li>Neuroscience indicates that the brain receives and handles information in a parallel fashion</li>
+</ul>
+<blockquote><ol>
+<li>It is quite like Kumamon</li>
+</ol>
+</blockquote>
+<h2 id="Generalizations"><a href="#Generalizations" class="headerlink" title="Generalizations"></a>Generalizations</h2><ul>
+<li>G1: Experience, affect and cognition are the three factors intermediate advertising effects, and the omission of any one can lead to overestimation of the effect of the others</li>
+<li>G2: Short-term advertising elasticities are small and decrease during the product life cycle</li>
+<li>G3: In mature, frequently purchased packaged goods markets, returns to advertising diminish fast. A small frequency, therefore, is sufficient for advertising to establish brand</li>
+<li>G4: The concept of a space of intermediate effects us supported, but a hierarchy is not</li>
+<li>G5: Cognition bias interferes with affect measurement</li>
+</ul>
+<h2 id="Directions-for-further-research"><a href="#Directions-for-further-research" class="headerlink" title="Directions for further research"></a>Directions for further research</h2><h4 id="Integrating-all-three-intermediate-effects"><a href="#Integrating-all-three-intermediate-effects" class="headerlink" title="Integrating all three intermediate effects"></a>Integrating all three intermediate effects</h4><ul>
+<li>EAC space</li>
+<li>Advertising’s positioning is determined by context. <ul>
+<li>Second-hand bike: Information</li>
+<li>Laundry: Affect, emotions</li>
+</ul>
+</li>
+</ul>
+<h4 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h4><ul>
+<li>Components of context<ul>
+<li>Goal diversity: Some advertising seeks to convey factual information through cognitive appeals, some seeks liking and affect, and some merely reinforces habit</li>
+<li>Product category: Advertising varies for high- medium- and low-involvement categories, durables and non-durables, and industrial and consumer products; high-quality brands should advertise more than their low-quality competitors</li>
+<li>Competition: The extent of competitive advertising influences its effectiveness</li>
+<li>Marketing mix: The extent of non-advertising promotional activities</li>
+<li>Stage of the product life cycle</li>
+<li>Target market: The target consumers are themselves diverse; consumers may vary with respect to their involvement</li>
+</ul>
+</li>
+<li>The authors prefer to start from the goal of advertising<ul>
+<li>Advertising may be used to support premium pricing, or in response to competitive activities</li>
+<li>Products and target markets dictate changes in advertising strategies</li>
+</ul>
+</li>
+</ul>
+<h4 id="Long-term-effects"><a href="#Long-term-effects" class="headerlink" title="Long-term effects"></a>Long-term effects</h4><ul>
+<li>The study of long-term effects has been primarily at the market rather than the individual level</li>
+<li>We need more studies on individual level</li>
+<li>How to measure and identify long-term effects</li>
+</ul>
+<h4 id="Combining-intermediate-and-behavioral-effects"><a href="#Combining-intermediate-and-behavioral-effects" class="headerlink" title="Combining intermediate and behavioral effects"></a>Combining intermediate and behavioral effects</h4><ul>
+<li>Combining econometric market response and conceptual models of intermediate advertising effects (attitudes, affective, etc)</li>
+<li>The authors propose that the consumer profile information that typically accompanies single source household purchase data should be augmented by including cognitive, affective, and experience measures with respect to the particular brands and their advertising</li>
+<li>When such databases are complied, research should focus on the study of long- and short- term, main, and interactive effects of advertising, promotions, cognition, affect, and experience on consumer choice</li>
+</ul>
+<h4 id="Cognitive-bias"><a href="#Cognitive-bias" class="headerlink" title="Cognitive bias"></a>Cognitive bias</h4><ul>
+<li>The traditional measurement of attitudes through cognitive analysis has been shown to be disruptive or inadequate</li>
+<li>The problem is not just with the collection of raw data from respondents, but also with the way it must be made explicit and verbalized when it is summarized and transmitted from researchers to managers and thence through a series of increasingly senior client and agency executives</li>
+</ul>
+<blockquote><ol>
+<li>The goal of advertising is becoming richer and richer in the recent years</li>
+<li>Our method combines intermediate and behavioral affects, and uses behavioral data to measure the intermediate affects. Using econometrics to measure affective effects</li>
+<li>Our method solves the cognitive bias by observing their behavior (long before purchasing, internet provides us with data between seeing ads and purchasing) instead of asking their emotions</li>
+</ol>
+</blockquote>
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        <a href="/tags/Advertising-on-Consumers/"># Advertising on Consumers</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/05/Giving-and-Receiving-Advice/">Giving and Receiving Advice</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
