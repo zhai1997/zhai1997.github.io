@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>A decade of online advertising research: What we learned and what we need to know. | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">A decade of online advertising research: What we learned and what we need to know.</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Advertising/">Advertising</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper is a summary of online advertising research.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>Online advertising has come a long way since the first banner ad appeared in 1994 (Singel 2010)</li>
+<li>As online budgets grow, the repertoire of online advertising tools has also expanded significantly beyond the the initial limited options of banner ads, websites, and directory listings</li>
+<li>The initial point of departure from online and offline advertising was the more interactive nature of online advertising (Shrum 2002)</li>
+<li>Two another reviews: Kim and McMillan (2008), Ha (2008)</li>
+</ul>
+<blockquote><ol>
+<li>Interactive is the main difference of online advertising from offline</li>
+<li>Read Ha (2008) later</li>
+</ol>
+</blockquote>
+
+<h2 id="Online-Advertising-Effectiveness"><a href="#Online-Advertising-Effectiveness" class="headerlink" title="Online Advertising Effectiveness"></a>Online Advertising Effectiveness</h2><ul>
+<li>Online advertising produces positive returns but the magnitude varies significantly by product category, customer segment, and ad format</li>
+<li>Unlike the conclusive superiority of online advertising over traditional media recognized in Ha (2008), recent research shows more complexities, possibly due to the more diverse online and offline advertising formats examined</li>
+<li>Lack of visual attention is often cited as the reason why online advertising may sometimes be less effective</li>
+<li>The superiority of offline over online advertising is often found in the lab</li>
+<li>Most of studies on cross media have concluded a positive synergistic effect, while no synergy and negative synergy has also been found in some studies too</li>
+<li>More nuanced investigations suggest that the sequence of exposure to different media matters</li>
+<li>Findings are mixed on cross-media synergy between online and offline channels; cross-media synergy depends on the sequence of exposure to different channels</li>
+</ul>
+<h4 id="Future-directions"><a href="#Future-directions" class="headerlink" title="Future directions"></a>Future directions</h4><ul>
+<li>Long-term effects (Breuer and Brettel, 2012)</li>
+<li>Recent work suggests the possibility that they may excel in reaching every different goals</li>
+<li>Existing evidence points to the problems with commonly used metrics, such as clicks. Research on the effectiveness of online advertising should examine what metrics be used in a given situation and how the choice of metrics affects advertisers’ decisions</li>
+</ul>
+<blockquote><ol>
+<li>We can find a short video on Douyin with a promotion of a product. We want to prove that it is not because the content of advertising is annoying or disturbing, but being an ad is a sin</li>
+<li>The lack of attention is more and more a problem in the modern world where information is everywhere </li>
+<li>The lab experiments have different environments from the real world</li>
+</ol>
+</blockquote>
+
+<h2 id="Online-Advertising-Mechanisms"><a href="#Online-Advertising-Mechanisms" class="headerlink" title="Online Advertising Mechanisms"></a>Online Advertising Mechanisms</h2><ul>
+<li>Research here tends to focus on emotional engagement and mere exposure</li>
+<li>High engagement has been shown to increase online ad effectiveness. This is more likely for ad forms that claim consumers’ focal attention, such as websites and mobile apps, and when consumers have sufficient cognitive and affective resources</li>
+<li>Research finds robust support for mere exposure effects in online advertising, showing more favorable attitudes under less attention and increased implicit memory but not explicit memory. Mere exposure effect is moderated by the ad’s relationship with the consumers’ focal task at hand</li>
+<li>Duff and Faber (2011) explored the boundary conditions of mere exposure effects and found it less likely when the main task is complex and the ad is visually and spatially close to the focal content. They argue that actively ignoring a distracting ad has a distractor devaluating effect</li>
+</ul>
+<blockquote><ol>
+<li>We can test the difference on different <strong>time periods</strong></li>
+<li>When people are working, they hate ads more</li>
+</ol>
+</blockquote>
+
+<h4 id="Future-directions-1"><a href="#Future-directions-1" class="headerlink" title="Future directions"></a>Future directions</h4><ul>
+<li>Now still little understanding about the cross-over effects from multiple ad exposures by the same advertiser. Further research can examine the effects of sequence of exposure</li>
+<li>We need to understand the inner workings of online advertising across different stages from start of information search to the eventual purchase decision (Krick, 2015)</li>
+<li>Online advertising effects for children</li>
+<li>Future research needs to go beyond the current focus on persuasion knowledge to uncover deeper differences in cognitive and affective process</li>
+</ul>
+<blockquote><ol>
+<li>Age can be a moderator for this effect, because young people are generally exposed to more ads are generally exposed to more ads in their childhood</li>
+<li>We should use GD instead of bidding ads</li>
+<li>Include Krick, 2015 in my proposal</li>
+</ol>
+</blockquote> 
+
+<h2 id="Creative-Elements-in-Online-Advertising"><a href="#Creative-Elements-in-Online-Advertising" class="headerlink" title="Creative Elements in Online Advertising"></a>Creative Elements in Online Advertising</h2><ul>
+<li>Attention-getting elements are double-edged swords<ul>
+<li>Larger ads and rich media ads can enhance the brand recognition and recall</li>
+<li>They are also considered more intrusive and annoying</li>
+<li>Attention-getting devices may be suitable when memory is the main goal or when immediate traffic is desired</li>
+</ul>
+</li>
+<li>Among engagement tactics, emotional appeal plays an important role<ul>
+<li>Research shows that effective emotional appeals tend to be more positive, generate high arousal, and feature more complex emotions, such as humor</li>
+<li>Consumers are influenced by not only the dynamics of emotions in an ad</li>
+<li>Interactivity continued to receive some attention, mostly regarding active control and two-way communication</li>
+</ul>
+</li>
+<li>Examined the effectiveness of repeating the same ad creative versus using varied creatives across exposures<ul>
+<li>While repetition can increase brand recall and click intention</li>
+<li>Frequent repetition can also increase perceived intrusiveness. </li>
+<li>Content variation across exposures can help counter the negative effects and may be particularly effective when the host website is not cluttered and when it is not relevant to the content of ad</li>
+</ul>
+</li>
+</ul>
+<h4 id="Future-directions-2"><a href="#Future-directions-2" class="headerlink" title="Future directions"></a>Future directions</h4><ul>
+<li>Attention and engagement remain elusive for advertisers, despite the various executional elements aimed to achieve these goals<ul>
+<li>Consumers are less tolerant of intrusion and less understanding of the need for advertising in the online environment </li>
+<li>This leads to the increased mental avoidance of online ads and a reluctance to engage</li>
+</ul>
+</li>
+<li>To counter this trend, advertisers are increasingly using gamification to make ads more entertaining for the audience (Terlutter and Capella 2013)<ul>
+<li>Many other game components can influence consumer response, such as game reward structure, visual design, and narrative story. More researches are needed on these more complex elements of advergames.</li>
+</ul>
+</li>
+<li>Another common strategy for engaging consumers online is through authentic dialogues with consumers in social media<ul>
+<li>Advertising in social media requires a style of communication that is distinct from “traditional” online advertising</li>
+<li>How should the very different creative styles be coordinated to convey a consistent message across different online channels</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>Very similar to the frequency control</li>
+<li>Mention Terlutter and Capella (2013) in the proposal</li>
+<li>Ying, L., Korneliussen, T., &amp; Grønhaug, K. (2009) should be included</li>
+</ol>
+</blockquote>
+
+<h2 id="The-Role-of-Context-in-Online-Advertising"><a href="#The-Role-of-Context-in-Online-Advertising" class="headerlink" title="The Role of Context in Online Advertising"></a>The Role of Context in Online Advertising</h2><ul>
+<li>A recent review suggests that context affects ad processing mainly through either attention transfer or a priming/halo effect (Stipp 2018)</li>
+<li>Earlier research found congruent ads to be superior to incongruent ads</li>
+<li>But recent research shows more nuance in congruence effects, contingent on ad arousal, position, and goal relevance</li>
+<li>Congruence interacts with creative elements such as ad complexity to determine their effects</li>
+<li>Besides congruence, other contextual characteristics have also been examined, including contextual arousal, ad clutter, and contextual valence</li>
+<li>Mobile ads thematically relevant to consumer’s present location and goal lead to more purchases than those not congruent with the location</li>
+<li>This is even true for ads delivered to consumers near a competitor’s location if a deep discount is offered</li>
+<li>Consumers at the same location tend to respond to the ads similarly, suggesting some underlying homogeneity attributable to location</li>
+</ul>
+<h4 id="Future-directions-3"><a href="#Future-directions-3" class="headerlink" title="Future directions"></a>Future directions</h4><ul>
+<li>As media multitasking becomes more common the context in which an online ad appears can become more complex</li>
+<li>It is necessary for future research to define and examine context in a broader scope that involves what the consumer is doing and what other devices he or she may be using at the time of exposure</li>
+<li>The importance of location as a contextual cue demonstrates that the particularly important role of context in mobile advertising, where consumers can be in a wide variety of places when they see an ad</li>
+<li>We need a deeper understanding of how physical and task contexts influence mobile ad responses</li>
+<li>Future research needs to better understand the influence of other environmental elements, such as <strong>weather, setting and social context</strong> at the time of mobile ad exposure</li>
+</ul>
+<blockquote><ol>
+<li>Very similar to the Sati Rerank model</li>
+<li>The importance of location undermines the usefulness of lab experiments</li>
+<li>The importance of location may suggest that we should avoid using location as the proxy for rich or poor</li>
+</ol>
+</blockquote>
+
+<h2 id="Online-Personalization"><a href="#Online-Personalization" class="headerlink" title="Online Personalization"></a>Online Personalization</h2><ul>
+<li>Personalization can be based on consumers’ past behavior, current behavior, or knowledge about consumer identity and location<ul>
+<li>Personalization enhances advertising effectiveness by increasing personal relevance, reducing ad skepticism and inducing more attentive processing</li>
+<li>Research shows that personalization strategy can have a significant positive impact on both advertiser revenue and consumer welfare</li>
+<li>But its effectiveness tends to decrease as consumers get closer to a purchase decision, suggesting a higher impact when information is the main goal</li>
+<li>The effectiveness of personalization is also contingent on other executional elements of an ad, such as its visibility and content</li>
+</ul>
+</li>
+<li>Personalization also triggers significant privacy concerns<ul>
+<li>This concern may be amplified by the presence of social cues, such as human-like recommendation agent</li>
+<li>Ethical and legal implications</li>
+</ul>
+</li>
+</ul>
+<h4 id="Future-directions-4"><a href="#Future-directions-4" class="headerlink" title="Future directions"></a>Future directions</h4><ul>
+<li>Existing research on online personalization demonstrates the importance of personal relevance to balance the loss of privacy</li>
+<li>Not all information is helpful in creating more relevant ads for consumers</li>
+<li>Future study should find ways to undertake real-time analysis of big data and address more systematically what types of information can make ads more personally relevant</li>
+<li>As personalized advertising forms, such ads re-targeted ads, become more common, the field needs a more systematic understanding fo the macro- and micro-level effects of such practices to better decide the policy to regulate online personalization </li>
+</ul>
+<blockquote><ol>
+<li>Personalized ads are Pareto improvement</li>
+<li>The arguments here are describing something like the ad system of ByteDance</li>
+</ol>
+</blockquote>
+
+<h2 id="Search-Advertising"><a href="#Search-Advertising" class="headerlink" title="Search Advertising"></a>Search Advertising</h2><ul>
+<li>The difference of search advertising from other types of advertising is that consumers are purposefully searching for something to which an ad is directly related</li>
+<li>Research on search advertising uses more economic theories and methods instead of psychology research</li>
+<li>Empirical data more often come from real-world campaigns</li>
+<li>As an advertising format, search advertising involves a unique combination of keyword, ranking and bidding price considerations</li>
+<li>Clicks tend to be higher for less common and more specific keywords and for keywords containing the advertisers’ name</li>
+<li>Bidding a high price to gain a top position may not always be wise. Although a higher position can increase clicks, the gain may not cover the overall cost increase</li>
+<li>Findings are conflicting on whether a higher rank increases or decreases conversion rate</li>
+<li>Highlighted the heavy impact of competitor actions</li>
+</ul>
+<h4 id="Future-directions-5"><a href="#Future-directions-5" class="headerlink" title="Future directions"></a>Future directions</h4><ul>
+<li>Previous studies has mostly dealt with aggregate-level effects</li>
+<li>In reality, individual consumers may respond in very diverse ways, which could be masked by aggregate effects</li>
+<li>Do not tell why things work</li>
+</ul>
+<blockquote><ol>
+<li>Xu, L., Chen, J., &amp; Whinston, A. (2011). Price competition and endogenous valuation in search advertising. Journal of marketing Research, 48(3), 566-586.</li>
+<li>Increasing attention should be paid to individual heterogeneity</li>
+<li>Mechanisms are important</li>
+</ol>
+</blockquote>
+
+<h2 id="General-Discussion"><a href="#General-Discussion" class="headerlink" title="General Discussion"></a>General Discussion</h2><ul>
+<li>There is a great need for more theory development in the fast-changing field of online advertising. While new advertising formats emerge frequently with evolving technology, the discipline needs to recognize teh need for online advertising to develop stronger roots by advancing unifying theories that are not easily swayed by trendy developments</li>
+<li>Online advertising needs to leverage more diverse methodologies and data sources to create both internally valid and externally generalizable insights<ul>
+<li>Limitation of lab experiments</li>
+<li>Richer data in online settings</li>
+<li>Neuroscience</li>
+</ul>
+</li>
+<li>Look more into organizational and strategic issues related to advertisers and agencies in the new technology environment. How does online advertising change the client-agency relationship? What are the roles and skill requirements of advertising professionals?</li>
+</ul>
+<p><em>Liu-Thompkins, Y. (2019). A decade of online advertising research: What we learned and what we need to know. Journal of advertising, 48(1), 1-13.</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/05/Douyu-Data-Preprocess/">Douyu Data Preprocess</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
