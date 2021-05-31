@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Preattentive mere exposure effects | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Preattentive mere exposure effects</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Advertising/">Advertising</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>The compelling evidence that people have positive affective responses toward stimuli they cannot remember having seen suggests that ads receiving limited attention may be effective agents of attitude change</li>
+<li>The conclusion may be premature, given that most demonstrations of the influence of mere exposure on affective responses occur in contexts that encourage intentional processing of target stimuli</li>
+<li>This paper differentiates attentive and pre-attentive processes by documenting the the unique response of each set of mechanisms to manipulations of the consumer’s environment<ul>
+<li>Attentive-resource allocation associated with intentional information acquisition</li>
+<li>Hemispheric activation associated with pre-attentive processing</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>Previous researches limit the resources and still encourage intentional processing to create a pre-attentive setting</li>
+</ol>
+</blockquote>
+
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h4 id="The-mechanism-of-affective-responses"><a href="#The-mechanism-of-affective-responses" class="headerlink" title="The mechanism of affective responses"></a>The mechanism of affective responses</h4><ul>
+<li>Hoffman (1986) has identified three potential sources of affective responses, each sensitive to a unique set of variables<ul>
+<li>A direct affective response to the stimulus (ie. hardwired emotions, conditioned responses, mimicry)</li>
+<li>An affective response to the match between the stimulus and a stored cognitive representation or schema (ie. the feeling of familiarity that results when processing a previously seen stimulus)</li>
+<li>An affective response to the meaning of the stimulus (ie. the affective tone of associations in memory)</li>
+</ul>
+</li>
+<li>Previous exposure subconsciously forms a mental representation of a brand name, which makes the subsequent perception easier and thus providing a feeling of familiarity with the name</li>
+<li>In the absence of recognition that could explain the familiarity, the viewer will interpret the familiarity as a positive feeling toward the brand</li>
+</ul>
+<blockquote><ol>
+<li><strong>Our researches deal with the second step, namely, when the cognitive representation has been formed and the consumer sees the ad again</strong></li>
+<li>Take familiarity as like mistakenly</li>
+</ol>
+</blockquote>
+
+<h4 id="How-to-enhance-affective-responses"><a href="#How-to-enhance-affective-responses" class="headerlink" title="How to enhance affective responses"></a>How to enhance affective responses</h4><ul>
+<li>Two strategies:<ul>
+<li>Increase the opportunity for intentional processing of the stimulus, thus increasing the availability of attentive resources<ul>
+<li>Repetition: Bornstein (1989) points out that repeated to exposure is an effective method of encouraging a positive affective response toward a stimulus, providing the exposures do not encourage recognition of stimulus</li>
+<li>Duration: Duration is an effective agent for promoting affective responses, provided that increased duration does not result in recognition of stimulus</li>
+</ul>
+</li>
+<li>Increase the availability of pre-attentive resources<ul>
+<li>No resource need to analyze information, but resource need to store information<ul>
+<li>Although people engage in a pre-attentive feature analysis of their environment automatically, the ability to establish a memory trace of this analysis may be resource dependent</li>
+<li>It is postulated that the automatic, pre-attentive analysis of resources can encourage the allocation of resources for forming memories of the outputs of this analysis</li>
+</ul>
+</li>
+<li>Hemispheric resource theory assumes that there are at least two unique source pools that can support the formation of a mental representation based on the pre-attentive processing<ul>
+<li>One resource pool is better at holistic, inferential processing, and is associated with the right hemisphere</li>
+<li>The other is better at analytic, sequential, repetitive processing and is associated with the left hemisphere</li>
+<li>The visual field in which a stimulus appears can constrain pre-attentive processing to a hemisphere and, as a consequence, influence the formation of the mental representation of the stimulus (Young 1982)</li>
+</ul>
+</li>
+<li>Quantity of resources of a particular composition can influence an affective response to a pre-attentively processed stimulus<ul>
+<li>Matching-activation: The increased availability of resources in one hemisphere because of an increased the processing load in the opposing hemisphere</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>We can study the distribution of viewing duration to see the likelihood of leaving at different stages. If the leaving likelihood is high at the first few seconds (pre-attentive processing is dominant), while the leaving likelihood is normal later (attentive processing is dominant), we conclude:<ol>
+<li>The leave of consumers is due to their avoidance based on past experience</li>
+<li>If we want to tell whether the leave is because pre-attentive processing or attentive processing, further research is needed</li>
+<li>Put the ad sign on the Left and the right</li>
+<li>The cognitive analysis differs less on the positions. If the position of ad sign matters, then it is likely that the pre-attentive processing plays an important role</li>
+</ol>
+</li>
+<li>The left brain is better at dealing with verbal stimuli, so ad sign on the right receives more attention. The right brain is working with the short video contents, so the left brain is activated through matching-activation</li>
+<li>The main feature of online advertising is interactive. So the viewing time of advertising is more and more endogenous</li>
+</ol>
+</blockquote>
+
+<h2 id="Experiment-1"><a href="#Experiment-1" class="headerlink" title="Experiment 1"></a>Experiment 1</h2><h4 id="Materials"><a href="#Materials" class="headerlink" title="Materials"></a>Materials</h4><ul>
+<li>The instrument was a 10-page student newspaper consisting of articles, ads and experimental instructions</li>
+<li>The target task was a pictorial search task that required subjects to find hidden objects in a line drawing of a Thanks-giving celebration</li>
+<li>The target brand name was the letter triplet “NEO”, and was placed either to the right or to the left of the attended target task</li>
+<li>The secondary stimuli occupied a space on the opposite side of the attended task. It can be:<ul>
+<li>A picture ad for Air France Airlines</li>
+<li>A verbal ad “COKE IS IT”</li>
+</ul>
+</li>
+</ul>
+<h4 id="Procedure"><a href="#Procedure" class="headerlink" title="Procedure"></a>Procedure</h4><ul>
+<li>After seated, subjects were given a cover story to reduce anticipated suspicions about the experimental procedure and dependent measures</li>
+<li>Subjects were told a fake experiment goal. And they were supposed to finish three tasks:<ul>
+<li>Reading of an article that contained a set of key words</li>
+<li>An activity that either enhanced or degraded the the influence of the words</li>
+<li>Measured the effect</li>
+</ul>
+</li>
+<li>All subjects began the pictorial search task at the same time and were given two and one-half minutes to complete the task. This time constraint is insufficient for the completion of the pictorial search task to guarantee all have no time to see other parts of the newspaper</li>
+<li>After being told to stop task 2, subjects closed their newspapers and were given a dependent-measure booklet to evaluate the brand name</li>
+<li>After evaluating, subjects indicated their gender and handedness and were asked to review the stimuli and indicate whether they remembered seeing the stimulus in the newspaper and whether they had seen the stimulus prior to that day</li>
+</ul>
+<h4 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h4><ul>
+<li>The evaluation of the target brand name would be greater when it was placed in the right visual field and the stimulus in the left visual field was pictorial, or when it was placed in the left visual field and the stimulus in the right field was verbal</li>
+<li>Evaluation did not differ by level of recognition</li>
+<li>A significant placement effect on the evaluation of the verbal stimulus but not on the pictorial stimulus. And the lack of a placement effect on pictorial stimulus evaluations may be a consequence of using a a pictorial attended task</li>
+<li>The verbal stimulus placed opposite the target brand name was evaluated more positively when instantiated in the left hemisphere</li>
+</ul>
+<blockquote><ol>
+<li>Actually, it is conflicting. The NEO and COKE are equivalent. So if NEO is liked with COKE sent to the left, COKE is also liked when NEO is sent to the left. But it is not the case!</li>
+</ol>
+</blockquote>
+
+<h4 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h4><ul>
+<li>Provide indirect evidence of the influence of pre-attentive processes in generating the affective responses that result from incidental exposure</li>
+<li>The crossover interaction created by the experimental manipulation makes it difficult to advance a hypothesis that attributes the results to directed attention</li>
+<li>The affective responses seem to be attributable to the hemispheric resources associated with pre-attentive processing of incidental information</li>
+<li>More definitive evidence that hemispheric resource availability can influence affective responses would come from a demonstration that attentive and pre-attentive exposure effects are independent</li>
+</ul>
+<h2 id="Experiment-2"><a href="#Experiment-2" class="headerlink" title="Experiment 2"></a>Experiment 2</h2><ul>
+<li>Different assumptions about how two resource systems work<ul>
+<li>The attentive resource strategy advocates reducing the attentive resources allocated to target information, thus increasing the likelihood that resources will be allocated to the processing of incidental information (zero-sum pool)</li>
+<li>The pre-attentive resource strategy advocates increasing the pre-attentive processing requirements of target information, thus increasing the hemispheric resources available for processing the target brand name (matching activation)</li>
+</ul>
+</li>
+</ul>
+<h4 id="Materials-1"><a href="#Materials-1" class="headerlink" title="Materials"></a>Materials</h4><ul>
+<li>Used complete ads for six brands that consisted of a headline and a pictorial display on the top half of the ad, verbal claims in the lower right-hand corner of the ad, and a target brand name consisting of a brand name and a simple line drawing in the left-hand corner of the ad</li>
+<li>Manipulations<ul>
+<li>Factorial manipulation of the processing load of the verbal claim information</li>
+<li>Availability of attentive resources for the processing of the target brand logo with a stimulus set replication (Time to skim or read ads)</li>
+</ul>
+</li>
+<li>Twelve ads were created for each of the six brands - there were four ads for each of the three information-load conditions</li>
+<li>Each low-information-load ad for a brand had a unique headline, pictorial display and verbal claim - only the brand logo was constant</li>
+<li>Low-information-load ads were transformed into moderate- or high-information-load ads by adding clarifying or redundant texts to the basic verbal claim, so as not to make the brand more appealing</li>
+</ul>
+<h4 id="Procedure-1"><a href="#Procedure-1" class="headerlink" title="Procedure"></a>Procedure</h4><ul>
+<li>In order to measure the attention, subjects’ eye movements were monitored while they viewed the eyes</li>
+<li>Upon arriving at the lab, the subject was seated in front of a monitor. An eye tracking camera was located directly below the catalog display area</li>
+<li>The eye-tracking system was explained to the subject</li>
+<li>The subject was told that he would see a series of ads on the computer monitor and that there would be multiple ads for some products</li>
+<li>Depending on the resource availability condition, subjects were told to either skim or read the ads</li>
+<li>Afterward, subjects were asked to fill out a dependent-measure questionnaire similar to that used in experiment 1</li>
+</ul>
+<h4 id="Predictions"><a href="#Predictions" class="headerlink" title="Predictions"></a>Predictions</h4><ul>
+<li>In limited resource condition, attention to the brand logo would be equivalent across the three processing-load conditions. Only increases in the pre-attentive resources associated with matching activation could result in a more positive evaluation of brand logo</li>
+<li>In the extended attentive-resource conditions, the attention to the brand logo increases as the processing load decreases, thus overwhelming the matching activation effects</li>
+</ul>
+<h4 id="Manipulation-checks"><a href="#Manipulation-checks" class="headerlink" title="Manipulation checks"></a>Manipulation checks</h4><ul>
+<li>The data were analyzed as a counterbalanced design; within-subject factors were processing load nested within brand pairs and brands nested; the between-subjects factor was attentive-resource availability</li>
+<li>Manipulations influence attention as expected</li>
+</ul>
+<h4 id="Results-1"><a href="#Results-1" class="headerlink" title="Results"></a>Results</h4><ul>
+<li>In the limited attentive-resource condition, evaluation of the brand logo became more positive as the processing load of the verbal claims increased</li>
+<li>In the extended attentive-resource condition, evaluation of the brand logo became less positive as the processing load of the verbal claims increased</li>
+<li>No correlation between the amount of attention to the logo or the text and evaluation of the logo in the limited attentive-resource condition</li>
+<li>A positive correlation between evaluation of the brand name and attention to the brand logo but a negative correlation between evaluation of the brand name and attention to the verbal text claims in the extended attentive-resource condition</li>
+</ul>
+<h4 id="Discussion-1"><a href="#Discussion-1" class="headerlink" title="Discussion"></a>Discussion</h4><ul>
+<li>The apparent independence of pre-attentive and attentive contributions to affective responses resulting from exposure to a brand name</li>
+<li>However our knowledge about the source of matching-activation effect is quite limited<ul>
+<li>One possibility is that matching activation is a consequence of the feature analysis of parafoveal information that results in the parsing and categorization of the data as well as an assessment of its importance<ul>
+<li>From a attention-control standpoint, a non-controlled processing system would need to allocate additional resources to the less activated hemisphere to ensure it could contribute equally to the pre-attentive analysis of the environment (The weak need more resources to perform equally well)</li>
+</ul>
+</li>
+<li>Matching activation may also be a consequence of the semantic analysis that results from interhemispheric attempts to perceive the environment. The information-processing system can engage in a semantic analysis of the environment using both controlled and non-controlled resources<ul>
+<li>In controlled, attentive processing, foveal stimuli are instantiated in each hemisphere and the outputs of intra-hemispheric activities are continually shared so as to update the analysis in the opposing hemisphere. In anticipation of this cooperative processing, each hemisphere is allocated resources in accordance with the more activated of the two hemispheres (Friedman and Polson 1981)</li>
+<li>In Non-controlled semantic processing, <strong>parafoveal stimuli are initially feature analyzed</strong>, and, provided that the features can be perceived, an elementary sematic analysis will ensue</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>If feature analysis resources are responsible for the effects, then increasing the quantity of the information available for pre-attentive processing in the non-target hemisphere may help</li>
+<li>If semantic analysis, then increasing the meaningfulness may help</li>
+</ul>
+<blockquote><ol>
+<li>How about we also change the complexity of the video. If the video is more complex and appealing, people will not care find it is an ad. But the quality of video is confounding</li>
+<li>Find the index for ad pollution</li>
+</ol>
+</blockquote>
+
+<h2 id="Experiment-3"><a href="#Experiment-3" class="headerlink" title="Experiment 3"></a>Experiment 3</h2><h4 id="Design-and-Materials"><a href="#Design-and-Materials" class="headerlink" title="Design and Materials"></a>Design and Materials</h4><ul>
+<li>The context of the experiment is quite similar with Experiment 1</li>
+<li>Consisted of a factorial manipulation of the quantity of secondary stimulus information (low, moderate, and high) and the meaningfulness of secondary stimulus information (meaningless, meaningful) plus a control group</li>
+</ul>
+<h4 id="Procedure-2"><a href="#Procedure-2" class="headerlink" title="Procedure"></a>Procedure</h4><p>The procedure was similar to that used in experiment 1. The only differences were</p>
+<ul>
+<li>Subjects performed one picture search task within the newspaper, because of time constraints</li>
+<li>A post-experimental inquiry was used to assess problems with hypothesis guessing, because of the unusual nature of the no-semantic-meaning stimuli</li>
+</ul>
+<h4 id="Expected-Results"><a href="#Expected-Results" class="headerlink" title="Expected Results"></a>Expected Results</h4><ul>
+<li>As the quantity of information instantiated in the non-target hemisphere increased, the evaluation of a brand name instantiated in the opposing hemisphere could increase</li>
+<li>As the meaningfulness of information increased, the evaluation could increase</li>
+<li>An interaction between the quantity and meaningfulness of information. This may suggest that feature analysis resources and semantic analysis resources are <strong>interdependent</strong> or are <strong>channel outputs to a common operation</strong></li>
+</ul>
+<h4 id="Results-2"><a href="#Results-2" class="headerlink" title="Results"></a>Results</h4><ul>
+<li>Levels of recognition did not interact with experimental manipulations</li>
+<li>Recognition did have a differential impact on target brand name evaluation by condition</li>
+<li>Subjects who remembered having seen the target stimulus in the newspaper, or indicated awareness on the post-experimental inquiry were removed from the analysis</li>
+<li>No main effect of meaningfulness or quantity, but an interaction between the two factors</li>
+<li>A meaningful, low-information-quantity stimulus was more beneficial to the evaluation of teh target brand name than a meaningless, low-information-quantity stimulus</li>
+<li>A meaningless, high-information-quantity stimulus was more beneficial to the evaluation of the target brand name than a meaningful high-information-quantity stimulus</li>
+</ul>
+<h4 id="Discussion-2"><a href="#Discussion-2" class="headerlink" title="Discussion"></a>Discussion</h4><ul>
+<li>Both semantic and feature analysis have an effect on the pre-attentive process of other incidental information</li>
+<li>As the quantity of meaningful information in the right visual field increased, evaluation of the target brand name in the opposing visual field decreased. It seems to be inconsistent with experiment 2</li>
+<li>Attentive operations in some way assist in the selection of outputs from pre-attentive operations (Marcel 1983)<ul>
+<li>Marcel has shown that access to semantic information precedes access to feature information, even though a feature analysis is a necessary prerequisite to a semantic analysis of the information</li>
+<li>This implies that access to the record of the feature analysis that is responsible for perceptual fluency may be sensitive to the amount of concurrent semantic analysis that must be performed</li>
+<li>If the accessibility to feature analysis and sematic analysis outputs depends on a common mechanism, and this mechanism is resource limited, then increases in the semantic integration demands of a peripherally placed stimulus could reduce the availability of resources to form an accessible mental representation of the feature information</li>
+<li>There are sufficient resources available for integrating semantic information (experiment 2)</li>
+<li>Attempts at information integration will take precedence over information storage in limited resource situations</li>
+</ul>
+</li>
+</ul>
+<h2 id="Discussion-3"><a href="#Discussion-3" class="headerlink" title="Discussion"></a>Discussion</h2><ul>
+<li>Matching activation was shown to be sensitive to demands on feature analyzers, and possibly on low-level sematic analyzers, in the non-target hemisphere</li>
+<li>The declines in effect sizes are due to the strategy for manipulating pre-attentive-resource availability<ul>
+<li>Experiment 1: Form of a peripherally placed stimulus</li>
+<li>Experiment 2: The amount of a particular form of stimulus in focal objects</li>
+<li>Experiment 3: The amount and meaningfulness of stimulus in non-focal objects</li>
+</ul>
+</li>
+<li>Evidence against long-standing belief that pre-attentive operations have no influence on learning<ul>
+<li>The evidence suggests that the feature analysis of incidental information may be automatic, but the memory traces of these feature analyses is resource dependent and the availability of these resources is independent of the operations associated with attentive processing</li>
+</ul>
+</li>
+<li>Explained the conflict that the simultaneous presentation of pf more information facilitates information processing with the assumptions of a single-pool limited-capacity processing model</li>
+</ul>
+<blockquote><ol>
+<li>I like the word “automatic”. The avoidance to ads is also automatic</li>
+</ol>
+</blockquote>
+
+<p><em>Janiszewski, C. (1993). Preattentive mere exposure effects. Journal of Consumer Research, 20(3), 376-392.</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/05/A-decade-of-online-advertising-research-What-we-learned-and-what-we-need-to-know/">A decade of online advertising research: What we learned and what we need to know.</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
