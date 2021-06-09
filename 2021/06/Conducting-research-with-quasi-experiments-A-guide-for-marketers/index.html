@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Conducting research with quasi-experiments: A guide for marketers | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Conducting research with quasi-experiments: A guide for marketers</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Empirical-Methods/">Empirical Methods</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper is a great user guide for researchers who want to infer the causality from observational data.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>Work with quasi-experiments has a specific focus: Can a single covariate $x$ in the vector of $X$ be demonstrated to cause $y$</li>
+<li>Quasi-experiment tools mimic the random assignment that is often referred to as the “gold standard” for identifying causal relationships</li>
+<li>Quasi-experiment often suffer from fewer external validity concerns compared to lab experiments</li>
+<li>A paper that successfully uses the quasi-experimental econometric approach answers the following three questions:<ul>
+<li>Research question: Do we can whether $x$ causes $y$<ul>
+<li>Researchers who do quasi-experimental research do best if they start not with the data but instead start by asking themselves - suppose I convincingly showed that an increase in $x$ increases $y$ - who would care？</li>
+</ul>
+</li>
+<li>Identification strategy: Does $x$ really cause $y$ to shift<ul>
+<li>Working out a setting and dataset which makes it feasible to identify whether $x$ causes $y$</li>
+<li>Constructing tables and figures that convince a reader </li>
+</ul>
+</li>
+<li>Mechanism: Why does $x$ cause $y$ to shift. Typically done by<ul>
+<li>Demonstrating that the effect identified in the second stage is larger in situations where theory suggests it will be large</li>
+<li>Demonstrating that the effect identified in the second stage goes away in situations where theory suggests it should not apply</li>
+<li>It provides further evidence that the effect identified in the second stage is likely to be causal</li>
+<li>It provides an understanding of the drivers of the effect</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Quasi-experimental work aims to determine causal relationships by identifying situations in which the variation in $x$ can be seen as random for the purposes of assessing its impact on $y$</li>
+</ul>
+<blockquote><ol>
+<li>In order to mimic the random assignment, we need to prove that the treatment and control groups are the same</li>
+<li>But we can only observe some covariates, the identification strategies are dealing with the unobservable covariates</li>
+<li>Why do they all mention Exogeneity. I believe all the three methods have something essential in common</li>
+<li>Exogeneity means that the treatment variables are not correlated with the unobservables</li>
+<li>Essentially, the instrumental variable is the treatment in DID and the fixed cutoff in reg discontinuity</li>
+</ol>
+</blockquote>
+
+<h2 id="Identification"><a href="#Identification" class="headerlink" title="Identification"></a>Identification</h2><h4 id="Why-obsession-with-identification"><a href="#Why-obsession-with-identification" class="headerlink" title="Why obsession with identification"></a>Why obsession with identification</h4><ul>
+<li>The problem of identification: Many different theoretical models and hence many different causal interpretations may be consistent with the same data</li>
+<li>Potential outcomes approach: The unobservability of the counterfactual means that assumptions are required <ul>
+<li>The identification problem means that those experience $x$, and those who do not, are different in unobservable ways</li>
+<li>Ronald Fisher et al. (2007) notes that under random assignment, “the distribution of outcomes by members of a treatment group will be the same as would be observed if the treatment in question were received by all members of the population” </li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>The RCT has two implications:<ol>
+<li>The treatment group is not systematically different from the population</li>
+<li>The treatment group is not systematically different from control group</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+
+<h4 id="Identifying-a-quasi-experiment"><a href="#Identifying-a-quasi-experiment" class="headerlink" title="Identifying a quasi-experiment"></a>Identifying a quasi-experiment</h4><ul>
+<li>In order to find something that approximates RCT, researchers look for sources of exogenous variation</li>
+<li>The variation should occur because of some random shock, or because the entity that decided whether people were exposed to $x$ or ont simply did not care about their outcome (and their other features)</li>
+<li>It is variation in the data that should drive the identification of the causal relationship</li>
+<li>It is often best to look for exogenous shocks in mundane events</li>
+</ul>
+<h2 id="Quasi-Experimental-Data-Analysis"><a href="#Quasi-Experimental-Data-Analysis" class="headerlink" title="Quasi-Experimental Data Analysis"></a>Quasi-Experimental Data Analysis</h2><ul>
+<li>To see whether the quasi-experiment is credible<ul>
+<li>The treatment and control groups are similar in dimensions other than whether they received the treatment</li>
+<li>In cases where the treatment occurs in the middle of a time series, demonstrating that the treatment and control groups were similar prior to the arrival of the treatment can be a powerful argument for the exogeneity</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>The idea of exogenous treatment is quite similar to the idea of random assignment in the biology and other subjects. <strong>They are the same thing</strong></li>
+</ol>
+</blockquote>
+
+<h2 id="DID"><a href="#DID" class="headerlink" title="DID"></a>DID</h2><ul>
+<li>A standard DID analysis compares a treatment group and a quasi-control group before and after the time of treatment</li>
+<li>The treatment is a shock, like government regulation, and platform actions</li>
+<li>DID is typically analyzed with reg analysis in order to allow researchers to control for <strong>factors</strong> that may change over time and across individuals. The factors are added to $X$ to address additional omitted variables concerns, such as an observed covariate that may not affect treatment and control groups in the same way</li>
+<li>Use static panel data method to estimate DID</li>
+<li>If the treatment occurs at different times, $AfterTreatment$ can change with both $i$ and $t$</li>
+<li>A key issue in DID analysis is correlated errors in observations because the outcome is often observed at a finer level than the treatment. For example, the choice of the same individual in many time periods are likely to be correlated<ul>
+<li>Bertrand et al. (2004) emphasized that this will lead to an overstatement of the effective degrees of freedom. They suggest clustering std by individual over time to address this issue</li>
+<li>Researchers need to make assumptions to decide the size of clusters</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>In DID, the real treatment is actually $TreatmentGroup\times AfterTreatment$</li>
+<li>The other two terms are time and individual fixed effects.</li>
+<li>The most general form is a specification with fixed effects and treatment.<ol>
+<li>It is easy to get biased results because of incidental parameters problem.</li>
+<li><strong>The DID hypotheses no different within the control or treatment groups.</strong></li>
+<li>The Panel Data methods eliminate the fixed effects or estimate them.</li>
+<li>DID is more like a very unbalanced panel.</li>
+</ol>
+</li>
+<li>The differences in these three models are the types of exogenous treatments.</li>
+<li>Clustering cares about the auto-correlation among observations or individuals</li>
+</ol>
+</blockquote>
+
+<h4 id="Explain-and-defend-the-“experiment”"><a href="#Explain-and-defend-the-“experiment”" class="headerlink" title="Explain and defend the “experiment”"></a>Explain and defend the “experiment”</h4><ul>
+<li>In the absence of random assignment, it is not possible to prove that the difference between the treatment and control group is exogenous</li>
+<li>The purpose of this step is to clearly lay out the identification strategy, describe the assumption behind that strategy and explain why these assumptions are reasonable<ul>
+<li>Bronnenberg et al. (2012) use consumer migration to new locations as a quasi-experiment to study the causal impact of past experiences on current purchases</li>
+</ul>
+</li>
+<li>It is also important to consider whether the quasi-experiment affects $x$ in an interesting way</li>
+<li>One of the most important aspects of the identification strategy is to clearly lay out the identifying assumptions<ul>
+<li>“Prices of cars in the same segment that are not on promotion in a given week are a valid counterfactual for the prices that would have been obtained on the promoted cars in the absence of a promotion” </li>
+<li>Then a substantial part of empirical effort is dedicated to exploring the validity of these assumptions</li>
+</ul>
+</li>
+<li>The objective of the authors is to pursue projects only when they can convince themselves that the causal interpretation is more plausible that other possible explanations</li>
+</ul>
+<blockquote><ol>
+<li>If we have data, we can also study the migration of consumers. We can see if migration to a richer city will influence his belief on ads</li>
+<li>Will the migration be exogenous?</li>
+</ol>
+</blockquote>
+
+<h4 id="Present-the-raw-data-in-terms-of-a-graph"><a href="#Present-the-raw-data-in-terms-of-a-graph" class="headerlink" title="Present the raw data in terms of a graph"></a>Present the raw data in terms of a graph</h4><p>Show the outcomes of interest for the treatment and control group before and after the treatment</p>
+<h4 id="Show-treatment-and-control-groups-are-similar-pre-treatment-in-terms-of-their-observable-characteristics"><a href="#Show-treatment-and-control-groups-are-similar-pre-treatment-in-terms-of-their-observable-characteristics" class="headerlink" title="Show treatment and control groups are similar pre-treatment in terms of their observable characteristics"></a>Show treatment and control groups are similar pre-treatment in terms of their observable characteristics</h4><p>Helps to defend the identification strategy</p>
+<h4 id="Present-baseline-estimates-Cluster-std-as-appropriate"><a href="#Present-baseline-estimates-Cluster-std-as-appropriate" class="headerlink" title="Present baseline estimates. Cluster std as appropriate"></a>Present baseline estimates. Cluster std as appropriate</h4><ul>
+<li>This typically appears n the form of a regression table with several different specifications</li>
+<li>The first column might not include any controls beyond the fixed effects, and the next set of columns might add controls</li>
+<li>Comparing the coefficient of interest in the models with and without controls is informative about how big the impact of omitted variables has to be relative to the observed controls for an omitted change over time in the treatment group to drive the result</li>
+<li>Altonji et al. (2005) provide a method to compare the role of included and omitted variables, which can help researchers find how important (big and correlated) the omitted variables would have to be for the treatment effect to go away</li>
+</ul>
+<h4 id="Investigate-pre-treatment-patterns"><a href="#Investigate-pre-treatment-patterns" class="headerlink" title="Investigate pre-treatment patterns"></a>Investigate pre-treatment patterns</h4><ul>
+<li>It is useful to show that behaviors were similar in the period prior to the policy change across the treatment and control groups. This reinforces the results from Step 2 and 3</li>
+<li>This is often done by estimating $\beta$ for each period in the data and plotting out the estimates<ul>
+<li>In particular, <strong>replace $\beta~{}TreatmentGroup\times AfterTreatment$ with a series of covariates for each time period before and after the treatment</strong></li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>We should examine whether the control and treatment groups are similar with their demographics and behaviors</li>
+<li>Does reg discontinuity also use several time dummies to capture the change</li>
+</ol>
+</blockquote>
+
+<h4 id="Conduct-multiple-robustness-checks"><a href="#Conduct-multiple-robustness-checks" class="headerlink" title="Conduct multiple robustness checks"></a>Conduct multiple robustness checks</h4><ul>
+<li>The specific robustness checks chosen will depend on the exact context</li>
+<li>The idea is to try to show that the estimate of $\beta$ remains broadly consistent across a vast range of possible models</li>
+<li>Examples: Different choices of controls, different functional forms (Logit and linear), different choices of the time period under study, different dependent variables (There might be several different but related DV, like Reach and Impressions), different choices of the size of the control group</li>
+<li>Researchers should not expect every specification to yield the exact same results</li>
+</ul>
+<h4 id="Discuss-the-assumptions-behind-homogeneous-treatment-effects-and-explain-why-the-treated-population-is-inherently-interesting"><a href="#Discuss-the-assumptions-behind-homogeneous-treatment-effects-and-explain-why-the-treated-population-is-inherently-interesting" class="headerlink" title="Discuss the assumptions behind homogeneous treatment effects and explain why the treated population is inherently interesting"></a>Discuss the assumptions behind homogeneous treatment effects and explain why the treated population is inherently interesting</h4><ul>
+<li>This step bounds the external validity of the analysis.</li>
+<li>It discusses the assumptions required for the analysis to capture ATE, rather than a more local effect which is an artifact of the data sample or the source of quasi-experimental variation</li>
+<li>Whether the treated population is unrepresentative</li>
+<li>It is important to understand the underlying assumptions behind any broad interpretation of quasi-experimental results<ul>
+<li>The treatment effect is likely to be heterogeneous across places</li>
+<li>While, in the presence of the right data, these heterogeneous treatment effects can provide an opportunity to identify the mechanism, heterogeneous treatment effects limit the recommendations and policy implications </li>
+<li>Because data constraints usually push forward assuming more homogeneous treatment effects that it is likely true</li>
+<li>Would it be that if there were inputting errors in the name, their address could be more likely to be misspelled</li>
+<li>What happens if the population whose names were misspelled were mostly of Polish ancestry</li>
+<li>Whether it is interesting to study an instance where the consumer received multiple coupons on the same day</li>
+</ul>
+</li>
+<li>Clearly lay out the assumptions and limitations</li>
+<li>An alternative solution is to use a difference-in-differences approach to identify relationships such as elasticities and then to use a structural model to identify the counterfactual of interest</li>
+</ul>
+<blockquote><ol>
+<li>We usually assume that the treated group is homogeneous</li>
+<li>This is quite similar to Exogeneity</li>
+<li>Structure model can be used to generate several suggestions for policy</li>
+</ol>
+</blockquote>
+
+<h4 id="Apologize-for-all-that-is-still-unproven-and-give-caveats"><a href="#Apologize-for-all-that-is-still-unproven-and-give-caveats" class="headerlink" title="Apologize for all that is still unproven and give caveats"></a>Apologize for all that is still unproven and give caveats</h4><ul>
+<li>The assumptions needed for identification strategies to work need to be explicit throughout the paper</li>
+<li>Obfuscation is much worse than a clear summary of the identifying assumptions</li>
+</ul>
+<h2 id="Regression-Discontinuity"><a href="#Regression-Discontinuity" class="headerlink" title="Regression Discontinuity"></a>Regression Discontinuity</h2><ul>
+<li>RD is another useful quasi-experimental technique in which the ‘experiment’ relies on an exogenous arbitrary threshold</li>
+<li>The basic idea behind RD is that assignment to the treatment is determined, either completely or partly, by the value of the predictor being on the either side of <strong>a fixed threshold</strong></li>
+<li>Many marketing interventions are based on thresholds of real or expected consumer behavior<ul>
+<li>For example, RFM, policy based on firm size, time window around a policy change</li>
+</ul>
+</li>
+<li>Often the implementation and effective date of a policy change is staggered and subject to delays, making a clean discontinuity problematic </li>
+</ul>
+<h4 id="Explain-and-defend-the-“experiment”-1"><a href="#Explain-and-defend-the-“experiment”-1" class="headerlink" title="Explain and defend the “experiment”"></a>Explain and defend the “experiment”</h4><ul>
+<li>Particular attention should be devoted to the source of the threshold and providing evidence that the threshold is essentially arbitrary and not likely to be linked to underlying discontinuity</li>
+<li>The key assumption is that although the predictor (other factors) may be correlated with outcomes, the association is assumed to be smooth</li>
+</ul>
+<blockquote><ol>
+<li>In RD, the exogenous treatment is the fixed threshold</li>
+<li>Two assumptions<ol>
+<li>The treatment is exogenous</li>
+<li>Other factors are smoothly associated with the outcome, but the treatment is not</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+
+<h4 id="Present-the-raw-data"><a href="#Present-the-raw-data" class="headerlink" title="Present the raw data"></a>Present the raw data</h4><ul>
+<li>Provide graphical evidence for the discontinuity</li>
+<li>Berreca el al. (2011) show however, that the children are placed just at the cut-off seem to have significantly worse outcomes than babies on either side of the cut off</li>
+<li>This may be a signal that poor-quality hospitals have relatively high propensities to round birth weights but is also consistent with manipulation of recorded birth weights by doctors, nurses, or parents to obtain favorable treatment for their children</li>
+</ul>
+<h4 id="Show-groups-below-and-above-the-threshold-are-similar-based-on-observables"><a href="#Show-groups-below-and-above-the-threshold-are-similar-based-on-observables" class="headerlink" title="Show groups below and above the threshold are similar based on observables"></a>Show groups below and above the threshold are similar based on observables</h4><h4 id="Present-baseline-estimates-Cluster-standard-errors-as-appropriate"><a href="#Present-baseline-estimates-Cluster-standard-errors-as-appropriate" class="headerlink" title="Present baseline estimates. Cluster standard errors as appropriate"></a>Present baseline estimates. Cluster standard errors as appropriate</h4><h4 id="Conduct-multiple-robustness-checks-1"><a href="#Conduct-multiple-robustness-checks-1" class="headerlink" title="Conduct multiple robustness checks"></a>Conduct multiple robustness checks</h4><ul>
+<li>Showing robustness to functional form, covariates excluded, outcome used and other choices will improve the credibility of the estimates</li>
+</ul>
+<h4 id="Discuss-the-assumptions-behind-homogeneous-treatment-effects-and-explain-why-the-treated-population-is-inherently-interesting-1"><a href="#Discuss-the-assumptions-behind-homogeneous-treatment-effects-and-explain-why-the-treated-population-is-inherently-interesting-1" class="headerlink" title="Discuss the assumptions behind homogeneous treatment effects and explain why the treated population is inherently interesting"></a>Discuss the assumptions behind homogeneous treatment effects and explain why the treated population is inherently interesting</h4><ul>
+<li>A limitation of RD is that the results directly apply only to populations around the threshold</li>
+</ul>
+<h4 id="Apologize-for-all-that-is-still-unproven-and-give-caveats-1"><a href="#Apologize-for-all-that-is-still-unproven-and-give-caveats-1" class="headerlink" title="Apologize for all that is still unproven and give caveats"></a>Apologize for all that is still unproven and give caveats</h4><ul>
+<li>Lay out the identification strategy, assumptions and limitations of the analysis</li>
+</ul>
+<h2 id="Instrumental-variables"><a href="#Instrumental-variables" class="headerlink" title="Instrumental variables"></a>Instrumental variables</h2><ul>
+<li>The basic idea behind using IV is that the covariate of interest contains both useful variation and less useful variation</li>
+<li>A good IV is strongly correlated with the useful variation but uncorrelated with the confounding variation</li>
+<li>IV is a <strong>plausibly exogenous shifter</strong><ul>
+<li>An IV can be seen as a treatment that affects the endogenous covariate directly</li>
+<li>Directly regressing the outcome of interest on the IV will get the causal effect of interest, but it will not be properly scaled</li>
+<li>The purpose of two stages is to scale the treatment effect properly</li>
+<li>Two stages are needed to get the elasticity right, but the experiment happens at the level of instrument </li>
+</ul>
+</li>
+<li>IV can be a less transparent solution to identifying causal effects than the the other two techniques<ul>
+<li>Harder to visualize how the quasi-experimental variation works in IV</li>
+<li>In contrast to the binary nature of the exogenous variation in DID and RD, instruments are often continuous,which makes it difficult to communicate the intuition of exogeneity</li>
+<li>Challenges of using ‘weak’ instruments, which can lead to incorrect inference in which the bias of the weak IV dominates the potential bias of omitted variables</li>
+<li>Researchers present instrumental variables results with different tests and different norms</li>
+</ul>
+</li>
+</ul>
+<h4 id="Explain-and-defend-the-“experiment”-2"><a href="#Explain-and-defend-the-“experiment”-2" class="headerlink" title="Explain and defend the “experiment”"></a>Explain and defend the “experiment”</h4><ul>
+<li>The exclusion restriction is the cornerstone of any instrumental variables analysis, which is that $z$ only affects $y$ through affecting $x$</li>
+<li>However, it is not possible to directly prove the validity of the exclusion restriction</li>
+<li>So, we need to lay out the assumptions behind the exclusion restriction<ul>
+<li>For example, there is no other way plausibly that the wind could affect the creation of social ties except through content creation</li>
+<li>The exclusion restriction is that there is no other reason that vacations or public holidays in the few days surrounding adoption would affect ultimate usage except through delaying the ability to navigate security protocols required to sign up for the online banking service</li>
+<li>Then show evidence against alternative explanations for the influence of instruments on outcomes</li>
+</ul>
+</li>
+</ul>
+<h4 id="Test-for-power-and-overidentification"><a href="#Test-for-power-and-overidentification" class="headerlink" title="Test for power and overidentification"></a>Test for power and overidentification</h4><ul>
+<li>Steps that researchers can take to assess whether the instruments have power<ul>
+<li>Report the first stage</li>
+<li>Report F-statistics on the excluded instruments</li>
+<li>If there are multiple instruments, report the first and second stage results for each instrument separately</li>
+<li>Show the overidentification test to ensure that different instruments use different variation to increase the apparent power of the analysis</li>
+<li>Conduct a Hausman test comparing OLS and IV</li>
+<li>Compare 2SLS and LIML</li>
+</ul>
+</li>
+</ul>
+<h4 id="Do-a-reduced-form-reg-of-the-DV-on-the-instruments"><a href="#Do-a-reduced-form-reg-of-the-DV-on-the-instruments" class="headerlink" title="Do a reduced form reg of the DV on the instruments"></a>Do a reduced form reg of the DV on the instruments</h4><ul>
+<li>Because this step is OLS it is unbiased</li>
+<li>$z$ has direct impact on $y$ </li>
+</ul>
+<h4 id="Conduct-multiple-robustness-checks-2"><a href="#Conduct-multiple-robustness-checks-2" class="headerlink" title="Conduct multiple robustness checks"></a>Conduct multiple robustness checks</h4><h4 id="Discuss-the-assumptions-behind-homogeneous-treatment-effects-and-explain-why-the-treated-population-is-inherently-interesting-2"><a href="#Discuss-the-assumptions-behind-homogeneous-treatment-effects-and-explain-why-the-treated-population-is-inherently-interesting-2" class="headerlink" title="Discuss the assumptions behind homogeneous treatment effects and explain why the treated population is inherently interesting"></a>Discuss the assumptions behind homogeneous treatment effects and explain why the treated population is inherently interesting</h4><h4 id="Apologize-for-all-that-is-still-unproven-and-give-caveats-2"><a href="#Apologize-for-all-that-is-still-unproven-and-give-caveats-2" class="headerlink" title="Apologize for all that is still unproven and give caveats"></a>Apologize for all that is still unproven and give caveats</h4><h4 id="Summary-of-identification-strategies"><a href="#Summary-of-identification-strategies" class="headerlink" title="Summary of identification strategies"></a>Summary of identification strategies</h4><ul>
+<li>Often, it is useful to combine different approaches in the same paper</li>
+</ul>
+<h2 id="Mechanism-Checks"><a href="#Mechanism-Checks" class="headerlink" title="Mechanism Checks"></a>Mechanism Checks</h2><ul>
+<li>The most effective papers typically do not stop when answering “Does $x$ cause $y$ to shift”, they assess why $x$ causes $y$ to shift<ul>
+<li>Understanding underlying mechanisms is a key goal of social science</li>
+<li>Mechanism checks often help make causal identification more convincing</li>
+</ul>
+</li>
+<li>Falsification checks<ul>
+<li>Identifying what other groups would be affected by potential sources of bias that would not display the causal effect of interests</li>
+<li>If the effect goes away when theory suggests it should</li>
+</ul>
+</li>
+<li>Researchers can then use a similar approach to provide suggestive positive evidence about the behavioral mechanism<ul>
+<li>If the effect is larger when theory suggests it should be</li>
+</ul>
+</li>
+</ul>
+<h2 id="What-happens-if-there-is-no-quasi-experiment-Matching-and-Controls"><a href="#What-happens-if-there-is-no-quasi-experiment-Matching-and-Controls" class="headerlink" title="What happens if there is no quasi-experiment - Matching and Controls"></a>What happens if there is no quasi-experiment - Matching and Controls</h2><ul>
+<li>Whether controls sufficient to deal with the omitted variables problem<ul>
+<li>The linear multiple reg model assumes a particular functional form</li>
+<li>It is not possible to know whether the controls capture all of the relevant omitted variables</li>
+</ul>
+</li>
+<li>Matching helps address the first concern. Rather than assuming linear structure, matching allows for a non-parametric relationship</li>
+<li>There are variety of different matching estimators. What they have in common is the ability to identify similar individuals based on observables in a flexible way. Typically, this involves <strong>a propensity score</strong></li>
+<li>In the absence of the quasi-experimental variation, researchers can at least derive a measure of how large the omitted variables bias has to be in order to change the conclusions<ul>
+<li>When the most obvious confounds have little impact, it provides a limited way to assess the plausibility of the causal interpretation</li>
+<li>Enhanced by showing multiple data sets with different potential biases yield similar results</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>Contain the Lite project in my CV</li>
+</ol>
+</blockquote>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li>Limitations of causation-focused research<ul>
+<li>It is impossible to prove the validity of a quasi-experiment</li>
+<li>External validity depends on the match between the treatments driven by the quasi-experimental variation and the overall sample needed to answer the research question (restricted to a small sample of data)</li>
+<li>All the methods require throwing out some variation, thus losing power</li>
+</ul>
+</li>
+<li>Steps:<ul>
+<li>Do we care if $x$ causes $y$: When $x$ will be shifted in reality</li>
+<li>Does $x$ really cause $y$ to shift<ul>
+<li>Is the data structure understood</li>
+<li>Is there <strong>model free</strong> evidence</li>
+<li>Does the paper follow etiquette</li>
+<li>Are there plenty of caveats and apologies that clarify the limitations of the analysis</li>
+</ul>
+</li>
+<li>Mechanism: Why does $x$ cause $y$ to shift</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>We can do teh same test in different countries</li>
+</ol>
+</blockquote>
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        <a href="/tags/Causal-Inference/"># Causal Inference</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/06/Algorithmic-bias-an-empirical-study-of-apparent-gender-based-discrimination-in-the-display-of-stem-career-ads/">Algorithmic bias? an empirical study of apparent gender-based discrimination in the display of stem career ads</a>
+            
+            
+            <a class="next" rel="next" href="/2021/05/Preattentive-mere-exposure-effects/">Preattentive mere exposure effects</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
