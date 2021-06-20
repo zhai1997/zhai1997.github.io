@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Structural workshop paper—descriptive, structural, and experimental empirical methods in marketing research | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Structural workshop paper—descriptive, structural, and experimental empirical methods in marketing research</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Empirical-Methods/">Empirical Methods</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper compares the advantages and disadvantages of the mainstream methods adopted by management researchers. It emphasizes the importance of theory when doing empirical works in order to interpret a regression results with behavioral meanings.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>Descriptive analyses cannot literally test theories</li>
+<li>Structural models do not generally provide the best description of data or the best predictive model</li>
+<li>Experimental studies are not assumption free, and their results may not generalize to real-life marketing applications</li>
+<li>Descriptive model:<ul>
+<li>Document interesting patterns, trends, practices, and puzzles</li>
+<li>Con 1: Can insights from descriptive summaries be applied in other contexts</li>
+<li>Con 2: Some attempt to draw causal inferences or policy conclusions from simple statistics</li>
+</ul>
+</li>
+<li>Structural model:<ul>
+<li>The structure comes from behavioral theories and statistics</li>
+<li>Pro 1: Explicitly linking behavior to data</li>
+<li>Pro 2: Counterfactual analysis</li>
+<li>Cons: Simplifying assumptions, lack of fit and not being well connected to marketing institutions</li>
+</ul>
+</li>
+<li>Experimental model:<ul>
+<li>Must explain: How the experimental design and and statistical models capture the effect of interest</li>
+<li>Absent a clear theoretical model for the experimental effect, it may be unclear what lessons can be extracted from a given experiment or whether those lessons generalize to other settings</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>In general, all the empirical methods in marketing care about the causality and behavioral incentives. In other words, they want to figure out the data generation process</li>
+<li>The experimental methods mainly solve questions of generalization and exogeneity</li>
+</ol>
+</blockquote>
+
+<h2 id="Descriptive-Empirical-Models"><a href="#Descriptive-Empirical-Models" class="headerlink" title="Descriptive Empirical Models"></a>Descriptive Empirical Models</h2><ul>
+<li>Descriptive empirical work is broadly about the collection, documentation, and interpretation of information</li>
+<li>Good descriptive work is effective and efficient and explores data sufficiently<ul>
+<li>The most effective displays are self-contained and laid out with an intelligent yet uninformed reader in mind</li>
+<li>Effective displays are straightforward and honest</li>
+</ul>
+</li>
+<li>Exemplary descriptive studies in marketing minimally do three things well<ul>
+<li>Contain clear statements about the facts they document and how these facts inform marketing questions</li>
+<li>Use relevant and high-quality data that speak directly to the questions of interest</li>
+<li>Provide accurate interpretations of the results</li>
+</ul>
+</li>
+<li>Mistakes:<ul>
+<li>A familiar mistake is assigning a causal interpretation to a correlation</li>
+<li>Descriptive work is not just about informing existing theories; it can also be about directing attention to new issues and facts worthy of theoretical attention</li>
+<li>There is a tendency to have descriptive work reject simple null hypotheses. Rejecting a null hypothesis does not prove a specific alternative hypothesis is correct. Descriptive research cannot literally test theories, only an econometric representation of the theory can serve as the basis for such a test</li>
+<li>The position that descriptive work is preferable because it makes fewer assumptions is untenable. To interpret data, one always needs assumptions and needs to be clear about what assumptions have been made to reach conclusions about what the data do or do not show<ul>
+<li>The moet general object one could describe is the joint distribution of all the data. But it is difficult to estimate $f(X_1, X_2,\cdots , X_N, Y_1, Y_2, \cdots, Y_N)$</li>
+<li>Researchers implicitly or explicitly place structure on the joint density, like the pairs $\{X_i,Y_i\}$ are independent and identically distributed</li>
+<li>It is important to understand that structure could limit the statements a marketing researcher can make about behavior</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Regression needs theory to make it “reduced form”. Mere regression only provides the best linear predictor of weight given height</li>
+<li>Experimentalists’ view is to seek a exogenous treatment. However, even in situations where it is possible to conduct experiments to interpret the resulting effects as causal, one still needs a theory, which minimally says why the treatment sample differs from the control sample in the experiment</li>
+<li>The dilemma of generalization and reliability (control confounding factors)</li>
+</ul>
+<blockquote><ol>
+<li>Descriptive researches document facts</li>
+<li>They can also do prediction</li>
+<li>It is at least necessary to assume that some points in the sample are draw from the same population</li>
+<li>The assumption when dealing with data should be determined considering the research context</li>
+<li>Behavior has incentives ($X$) and outcomes ($Y$)</li>
+</ol>
+</blockquote>
+
+<h2 id="Structural-Models"><a href="#Structural-Models" class="headerlink" title="Structural Models"></a>Structural Models</h2><ul>
+<li>Structural models, on the other hand, are empirical models of individual or firm behavior that give rise to a particular joint density function of the data</li>
+<li>Structural models rely on two main ingredients:<ul>
+<li>A formal model that mathematically relates $X$ to $Y$</li>
+<li>A stochastic specification that maps the theoretical model to a joint density of data, which can be interpreted as heterogeneity in consumer preferences, consumer decision-making errors, or measurement errors</li>
+</ul>
+</li>
+<li>Marketing researchers are interested in structural models for three reasons:<ul>
+<li>Allow researchers to estimate useful theoretical objects (assumed parameters)</li>
+<li>Can answer policy questions (counterfactual analysis)</li>
+<li>Allow researchers to assess what aspects of behavior constrain the data</li>
+<li>Allow researchers to <strong>compare different theories</strong> based on how they fit the data in sample and out of sample<ul>
+<li>It should be noted that testing theories usually depend on assumptions</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Structural models are value-free descriptions of optimizing behavior, whereas many marketers are ultimately concerned with normative questions<ul>
+<li>However, structural models describe behavior subject to institutional and practical realties</li>
+<li>To illustrate, one might observe a firm setting the same price in two different markets</li>
+<li>Removing the constraint of identical prices will make an improvement</li>
+</ul>
+</li>
+<li>The key point is that an advantage of structural models is that they enforce the discipline of being clear about what behavior is being modeled, in what sense it is optimal and in what sense it might be changed</li>
+</ul>
+<blockquote><ol>
+<li>Structural models use theories to get a particular joint density of the data, and then use statistics to get estimates</li>
+<li>Structural models systematically lay out all the assumptions and how data would look like under the assumptions</li>
+<li>Structural models usually use microeconomic models which assume everyone is already optimizing with a given constraint</li>
+</ol>
+</blockquote>
+
+<h4 id="An-extended-example"><a href="#An-extended-example" class="headerlink" title="An extended example"></a>An extended example</h4><ul>
+<li>The stochastic terms of a model, together with the functional form of the demand and supply equations and the market clearing condition, deliver the structural model</li>
+<li>This structural model implies a joint density of market prices and quantities given $x_1$ and $x_2$ - $f(P,Q|x_1,x_2,\beta,\gamma,\Sigma)$</li>
+<li>The functional form of this conditional density and its dependence on $\gamma$ and $\beta$ are what distinguish structural models from descriptive models</li>
+<li>To obtain the estimable form, one can solve for price and quantity as a function of conditioning variables $x_1$ and $x_2$ and the demand and supply errors</li>
+<li>The process of recovering the structural parameters involves relating the structural parameters to the reduced form. Historically, the term reduced form was used to denote the estimable set of equations derived from structural form that expressed $Y$ in terms of $X$ and unobservables</li>
+</ul>
+<blockquote><ol>
+<li>The coefficients of descriptive models do not have behavioral meanings and is purely a characteristic of the joint distribution</li>
+<li>The structural models build the bridge between the feature of joint distribution and parameters in the theory</li>
+</ol>
+</blockquote>
+
+<h4 id="Caveats"><a href="#Caveats" class="headerlink" title="Caveats"></a>Caveats</h4><ul>
+<li>It is often difficult and time consuming to develop and estimate structural models.<ul>
+<li>Models must be flexible enough to fit data</li>
+<li>Models must be simple enough to estimate</li>
+<li>Often, simplicity comes at the cost of realism. It is hard to formulate simple theoretical models that respect the institutional realties of marketing applications and yet are estimable given the data available </li>
+</ul>
+</li>
+<li>Typically, structural modelers must also confront the reality that theory rarely delivers a complete empirical model, so they must add variables, parameters, functional form assumptions, and other elements to make the theory operational</li>
+<li>Recently, structural modelers and econometricians have begun to explore more systematically the role of supplemental assumptions used to complete models<ul>
+<li>The literature on nonparametric identification and partial identification have developed methods for analyzing the sensitivity of estimates or inferences to alternative economic and statistical assumptions</li>
+<li>A number of recent papers have sought to examine whether it is possible to identify non-parametrically the distribution of consumer heterogeneity or other properties of tastes from the joint distribution of product attributes and product choices</li>
+</ul>
+</li>
+<li>Although nonparametric identification arguments have the potential to establish that functional forms can flexibly be recovered from joint distributions of data, it may not always be possible</li>
+<li>The literature on partial identification treats model assumptions as potentially yielding bounds on parameters or functions rather than unique values</li>
+</ul>
+<h2 id="The-Experimentalist-Approach"><a href="#The-Experimentalist-Approach" class="headerlink" title="The Experimentalist Approach"></a>The Experimentalist Approach</h2><ul>
+<li>The general logic of the experimental approach is to find data that have exogenous variation in variables that would otherwise be endogenous or confounded because of behavior, omitted variables, selection effects, etc</li>
+<li>The experimentalist seeks to circumvent endogeneity by developing data where price is manipulated independently of there factors or by finding data where price can reasonably be regarded as being exogenous to these factors</li>
+<li>Whereas <strong>lab experiments</strong> provide the researcher with a controlled environment to demonstrate the internal validity of their causal hypothesis, such experiments may have difficulty demonstrating external validity</li>
+<li><strong>Field experiments</strong> have greater external validity, a potential problem with them is that it may be difficult to hold constant all factors that matter</li>
+<li>Quasi-experimental methods need theories to prove the exogeneity</li>
+</ul>
+<blockquote><ol>
+<li>Structural models aim at describing the DGP and recovering the parameters of DGP, while experimentalists aim at manipulating the DGP to only focus on one factor</li>
+</ol>
+</blockquote>
+
+<h2 id="Contrasting-the-Approaches"><a href="#Contrasting-the-Approaches" class="headerlink" title="Contrasting the Approaches"></a>Contrasting the Approaches</h2><ul>
+<li>To give the coefficient estimates of this equation a deeper structural or causal interpretation, we must first address<ul>
+<li>Why we have regressed $Q$ on $P$ instead of $P$ on $Q$</li>
+<li>Why we use a linear relation</li>
+<li>What error term represents</li>
+</ul>
+</li>
+<li>To answer the first question, structural modelers appeal to theory<ul>
+<li>According to theory, the only way we know whether we are estimating a demand curve is by observing what variables other than price and quantity are included or excluded from the equations of interest</li>
+</ul>
+</li>
+<li>The error terms are also an important part of any structural model<ul>
+<li>By placing structure on $E(\epsilon |P)$, it may, of course, be possible to provide a clearer interpretation of $\beta_1$</li>
+<li>A familiar way of placing structure on $\epsilon$ is to find an instrumental variable</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>IV is actually a hypothesis on the error term. It puts more assumptions to the structure of error term</li>
+</ol>
+</blockquote>
+
+<h4 id="Selection-of-IV"><a href="#Selection-of-IV" class="headerlink" title="Selection of IV"></a>Selection of IV</h4><ul>
+<li>Without knowledge or assumptions about the source of the error term, it is difficult to argue that the exogeneity and relevance conditions are satisfied</li>
+<li>The exogeneity and relevance conditions are necessary but not sufficient conditions for IV to produce consistent estimates</li>
+<li>Using $X$ as IV sometimes leads to a deficient rank matrix when estimating coefficients</li>
+<li>Although quasi-experimental methods do not require explicitly model endogenous variables, they do require researchers to keep the theories about how $X$ is generated in mind</li>
+<li>In some cases, it may be possible to use statistical tests for endogeneity and overidentification to check assumptions about the IV</li>
+<li>In the end, a researcher’s first defense of instruments should come from economic theory</li>
+<li>Knowing these differences is what allows researchers to make progress in understanding potential economic or marketing reasons for the differences in their findings</li>
+</ul>
+<blockquote><ol>
+<li>Ideally, IV should bring new information to the estimation</li>
+<li>But we usually use the lagged $X$ as IV</li>
+<li>We should be careful when we are doing this</li>
+</ol>
+</blockquote>
+
+<h2 id="Concluding-Remarks"><a href="#Concluding-Remarks" class="headerlink" title="Concluding Remarks"></a>Concluding Remarks</h2><ul>
+<li>Even if we are sure about functional form, it is still useful to have a structural model that can motivate the researcher’s choice of instruments</li>
+<li>Many structural marketing models currently heavily rely on generic economic models. Moving these models toward marketing applications where <strong>consumers develop tastes for good and those tastes are in turn influenced by marketing activities</strong> will lead to more credible marketing research</li>
+<li>It is essential for structural modelers to explore whether their results are sensitive to the assumptions</li>
+</ul>
+<p><em>Reiss, P. C. (2011). Structural workshop paper—descriptive, structural, and experimental empirical methods in marketing research. Marketing Science, 30(6), 950-964.</em></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        <a href="/tags/Causal-Inference/"># Causal Inference</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/06/Algorithmic-bias-an-empirical-study-of-apparent-gender-based-discrimination-in-the-display-of-stem-career-ads/">Algorithmic bias? an empirical study of apparent gender-based discrimination in the display of stem career ads</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
