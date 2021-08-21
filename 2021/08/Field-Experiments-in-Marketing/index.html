@@ -12,7 +12,7 @@
 
 
 
-<title>Notes of the webinar on how to select a good research topic and get it published | Sihan&#39;s Blog</title>
+<title>Conducting research with quasi-experiments: A guide for marketers | Sihan&#39;s Blog</title>
 
 
 
@@ -208,7 +208,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Notes of the webinar on how to select a good research topic and get it published</h1>
+            <h1 class="post-title">Conducting research with quasi-experiments: A guide for marketers</h1>
             
                 <div class="post-meta">
                     
@@ -218,7 +218,7 @@
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/Interesting-things-I-found/">Interesting things I found</a>
+                                <a href="/categories/Empirical-Methods/">Empirical Methods</a>
                             
                         </span>
                     
@@ -227,40 +227,60 @@
         </header>
 
         <div class="post-content">
-            <p>A research project can be divided into several steps: Topic -&gt; Model -&gt; Data -&gt; Findings -&gt; Writing and Motivation. A good model should be clean and simplify all other irrelevant parts. The quality, granularity and credibility of data are the most important features of the data. </p>
-<h2 id="The-trend-of-topics-of-top-journals"><a href="#The-trend-of-topics-of-top-journals" class="headerlink" title="The trend of topics of top journals"></a>The trend of topics of top journals</h2><ul>
-<li>Research on management comes from the practice but is a step further from the practice.</li>
-<li>So, it should have implications on the real world and the hot topic follows the evolution of the technologies and trends<ul>
-<li>Ten years ago, researches were studying e-commerce and social media</li>
-<li>Seven or eight years ago, omni-channel retailing</li>
-<li>Later, mobile internet marketing </li>
-<li>Sharing economics, Didi and Uber</li>
-<li>AI, algorithmic pricing, algorithmic recommendation, AI customer service</li>
-</ul>
+            <p>This is a guide to field experiments. </p>
+<h2 id="Why-a-field-experiment"><a href="#Why-a-field-experiment" class="headerlink" title="Why a field experiment?"></a>Why a field experiment?</h2><ol>
+<li>The empirical gold standard in the social sciences is to estimate a causal effect of some action</li>
+<li>A field experiment ensures that ex ante, via random experiment, any differences between the treated and control group should not matter</li>
+</ol>
+<h2 id="Decide-on-unit-of-randomization"><a href="#Decide-on-unit-of-randomization" class="headerlink" title="Decide on unit of randomization"></a>Decide on unit of randomization</h2><ol>
+<li>At the highest level of generality, the statistical power of a randomized experiment is likely to increase with greater granularity of the unit of randomization. The lack of granularity in randomization reduced the chance that ex ante the “unobserved ways” do not matter</li>
+<li>There are also constraints that argue against granularity<ol>
+<li>There are constraints imposed by the cost and logistics of having finely-grained unit of observation</li>
+<li>The researcher needs to minimize the potential for spillovers and crossovers between experimental treatments</li>
+</ol>
 </li>
-<li>On one hand, top journals prefer the latest topics</li>
-<li>On the other hand, the hot topics are competing and it is difficult to distinguish the study from other papers</li>
+</ol>
+<blockquote><ul>
+<li>“Optimizely” allows researchers to independently and easily run field tests to evaluate the effects of different landing pages or website content</li>
 </ul>
-<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ul>
-<li>For empirical researches, sometimes it is important to start from the data and then decide on the topic</li>
-<li>Researchers should well position the paper in the literature through the comparison with other literature</li>
-<li>A good topic should be<ul>
-<li>Important to the real world and theory</li>
-<li>Understudied or unstudied</li>
-</ul>
-</li>
-<li>When selecting a research topic, it is important to combine the existing literature and insights of the industry</li>
-<li>Have a thorough grasp of classical researches and pay attention to the cut-edging researches and latest business practice</li>
-<li>We can learn a lot from the classical researches, like how to refine ideas and how to process data</li>
-<li>Focus on two or three topics at the stage of PhD and master to get a thorough understanding of these topics</li>
-</ul>
-<h2 id="Common-mistakes-in-selecting-a-topic"><a href="#Common-mistakes-in-selecting-a-topic" class="headerlink" title="Common mistakes in selecting a topic"></a>Common mistakes in selecting a topic</h2><ul>
-<li>Only an overall topic but no detailed ideas</li>
-<li>Overemphasized the coverage but overlooked the depth. Depth is much more important than coverage</li>
-<li>Only seek research ideas in the literature. It can help researchers find understudied questions, but it is not that important</li>
-<li>Simply combing two models. The combined model may not be better than two separated models. </li>
-</ul>
+</blockquote>
 
+<h2 id="Ensure-no-spillover-and-crossover-effects"><a href="#Ensure-no-spillover-and-crossover-effects" class="headerlink" title="Ensure no spillover and crossover effects"></a>Ensure no spillover and crossover effects</h2><ol>
+<li>A spillover occurs when a treated individual affects the outcomes for other untreated individuals. One possible solution is to randomized at the level of plausibly isolated social networks such as a community, rather than randomizing at the level of the individual</li>
+<li>A crossover occurs when an individual who was supposed to be assigned to one treatment is accidentally exposed to another treatment</li>
+</ol>
+<h2 id="Decide-on-complete-and-stratified-randomization"><a href="#Decide-on-complete-and-stratified-randomization" class="headerlink" title="Decide on complete and stratified randomization"></a>Decide on complete and stratified randomization</h2><ol>
+<li>In stratified randomization, individuals are first divided into subsamples based on covariate values so that each of the subsamples are more homogeneous relative to that covariate than the full sample. Then each individual in each of the subsamples is randomized</li>
+<li>The stratified technique is useful if a covariate is strongly correlated with an outcome.</li>
+<li>In marketing research, reliable data which allow such stratification may not be present.</li>
+</ol>
+<blockquote><ul>
+<li>Do we need to divide audience into several groups?</li>
+<li>Stratified randomization is another way of control.</li>
+</ul>
+</blockquote>
+
+<h2 id="Ensure-that-appropriate-data-is-collected"><a href="#Ensure-that-appropriate-data-is-collected" class="headerlink" title="Ensure that appropriate data is collected"></a>Ensure that appropriate data is collected</h2><ol>
+<li>This is particularly important in digital environments where different parties have access to different types of data and it is not always obvious how these can be collected and linked</li>
+<li>Researchers should carefully consider data points that are not directly linked to measuring the outcome of the randomization, because they may help the researcher understand the behavioral mechanism or rule out alternative interpretations</li>
+<li>Researchers should be aware of the potential need for a large sample when conducting a field experiment, especially when the magnitude, direction and heterogeneity of the treatment effect are unknown</li>
+</ol>
+<blockquote><ul>
+<li>What other data sources can we access?</li>
+</ul>
+</blockquote>
+
+<h2 id="Interpreting-results-from-a-field-experiment"><a href="#Interpreting-results-from-a-field-experiment" class="headerlink" title="Interpreting results from a field experiment"></a>Interpreting results from a field experiment</h2><ol>
+<li>The key issue is understanding exactly what is different between the groups who were treated</li>
+<li>In general, researchers should try and collect data for as long a period as possible to understand wether any treatment they measure is stable, dissipates or increases in its effect over time</li>
+<li>The existence or importance of Hawthorne effects, where the mere fact of being observed as part of a field experiment can alter outcomes, is the subject of much academic debate. The researcher should provide assuring evidence for the reader that the causal effect they measure between the treatment and control is associated with the effect they claim</li>
+<li>Firms may only be willing to experiment with, in their view, less successful media or sales territories, and to incur costs of experimentation for their best customers</li>
+</ol>
+<blockquote><ul>
+<li>How long should we conduct our experiments?</li>
+<li>What other effects can our treatment leads to?</li>
+</ul>
+</blockquote>
         </div>
 
         
@@ -270,7 +290,9 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/Research-Methodology/"># Research Methodology</a>
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        <a href="/tags/Causal-Inference/"># Causal Inference</a>
                     
                         
                 </span>
@@ -283,10 +305,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/08/Field-Experiments-in-Marketing/">Conducting research with quasi-experiments: A guide for marketers</a>
             
-            
-            <a class="next" rel="next" href="/2021/06/Structural-workshop-paper%E2%80%94descriptive-structural-and-experimental-empirical-methods-in-marketing-research/">Structural workshop paper—descriptive, structural, and experimental empirical methods in marketing research</a>
+            <a class="next" rel="next" href="/2021/06/Notes-of-the-webinar-on-how-to-select-a-good-research-topic-and-get-it-published/">Notes of the webinar on how to select a good research topic and get it published</a>
             
         </section>
 
