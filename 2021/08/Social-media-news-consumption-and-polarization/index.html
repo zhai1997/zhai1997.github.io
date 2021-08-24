@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Social media, news consumption, and polarization | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Social media, news consumption, and polarization</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Social-Media/">Social Media</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper proves that social media algorithms may limit exposure to counter-attitudinal news and thus increase polarization through a field experiment.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>People extensively consume news via social media</li>
+<li>The logic of the impact of algorithms:<ul>
+<li>Algorithms influence the exposure to news on social media</li>
+<li>Exposure influences the online news consumption</li>
+<li>Exposure to counter-attitudinal news decreases affective polarization</li>
+<li>Facebook’s algorithm may limit exposure to counter-attitudinal news</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>Polarization is defined as negative attitudes toward the opposing political party, instead of self-enhancement. The author did not find evidence on self-enhancement in this study</li>
+<li>Control group is necessary in the study</li>
+<li>We can measure subscriptions to outlets by asking participants to log in with their Facebook accounts</li>
+<li>We can collect the browsing history of participants by a Chrome extension</li>
+<li>Besides the distance between individuals’ ideology and the slant of their news consumption, their demographics may also result in the digital divide of interest. And it is difficult to distinguish between the factors</li>
+</ol>
+</blockquote>
+
+<h2 id="Design-and-Data"><a href="#Design-and-Data" class="headerlink" title="Design and Data"></a>Design and Data</h2><h4 id="Experimental-design"><a href="#Experimental-design" class="headerlink" title="Experimental design"></a>Experimental design</h4><ul>
+<li>Recruit American adults to the experiment using Facebook ads</li>
+<li>After logging in, and before treatment assignment, four potential liberal outlets and four potential conservative outlets were defined for each participant. Then, participants were randomly assigned to a liberal or conservative treatment, or assigned to the control group</li>
+<li>Ask them to install an extension</li>
+<li>Ask them to share the data about sharing and subscribing on Facebook</li>
+<li>Conduct endline survey</li>
+</ul>
+<blockquote><ol>
+<li>We should also pay attention to experimenter effects</li>
+<li>The timing of intervention should be well considered. The former intervention may affect the compliance of the latter intervention</li>
+</ol>
+</blockquote>
+<h4 id="Subsamples"><a href="#Subsamples" class="headerlink" title="Subsamples"></a>Subsamples</h4><ul>
+<li>When analyzing the effects on opinions, focus on the endline survey subsample</li>
+<li>When analyzing media outcome, focus on extension subsample and access post subsample</li>
+</ul>
+<blockquote><ol>
+<li>The author measures the slant with an index ranging from -1 to 1</li>
+<li>WRDS data can be accessed via <a target="_blank" rel="noopener" href="https://wrds-www.wharton.upenn.edu/pages/about/data-vendors/comscore/">https://wrds-www.wharton.upenn.edu/pages/about/data-vendors/comscore/</a></li>
+</ol>
+</blockquote>
+
+<h4 id="Outcomes"><a href="#Outcomes" class="headerlink" title="Outcomes"></a>Outcomes</h4><ul>
+<li>Media<ul>
+<li>Measure the direct effect of the experiment according to the number of times participants engaged with the potential outlets</li>
+<li>Measure the mean slant of all leading news outlets with which participants engaged</li>
+<li>Congruent scale: mean slant of news consumed, multiplied by -1 for liberal participants</li>
+<li>Share of counter-attitudinal news: the share of news from counter-attitudinal outlets among all news from pro- and counter-attitudinal outlets</li>
+</ul>
+</li>
+<li>Opinions and attitudes</li>
+</ul>
+<blockquote><ol>
+<li>The author uses the control group to standardize data</li>
+<li>We can refer to the design of question in this paper</li>
+</ol>
+</blockquote>
+
+<h4 id="Empirical-strategy"><a href="#Empirical-strategy" class="headerlink" title="Empirical strategy"></a>Empirical strategy</h4><ul>
+<li><p>Liberal and conservative treatments: the author estimates the following ITT regression:<br>$$<br>Y_i=\beta_1T_i^L+\beta_2T_i^C+\alpha X_i+\epsilon_i<br>$$<br>where $T_i^L,T_i^C\in \{0,1\}$ is whether participant $i$ is assigned to the liberal or conservative treatment, respectively. By testing whether $\beta_1&gt;\beta_2$, the difference between two treatments can be measured. $X$ is a list of controls, including age, age squared, party affiliation, answers in the baseline survey, etc</p>
+</li>
+<li><p>Pro-attitudinal and counter-attitudinal treatments: the author estimates the following ITT regression:<br>$$<br>Y_i=\beta_1T_i^A+\beta_2T_i^P+\alpha X_i+\epsilon_i<br>$$</p>
+</li>
+</ul>
+<h4 id="Compliance"><a href="#Compliance" class="headerlink" title="Compliance"></a>Compliance</h4><ul>
+<li>To measure the effect of complying with the treatment, defined as subscribing to at least one offered outlet, the author also analyzes TOT estimates by regressing the DV on compliance with each treatment and instrumenting compliance with the random treatment assignment</li>
+</ul>
+<blockquote><ol>
+<li>This experiment randomizes the eligibility instead of the treatment. So ITT actually measures the influence of eligibility</li>
+<li>People with lower polarization do not want to make a comment</li>
+<li>Complication depends on the definition of treatment</li>
+</ol>
+</blockquote>
+
+<h2 id="Descriptive-Analysis-Segregation-in-Online-News-Consumption"><a href="#Descriptive-Analysis-Segregation-in-Online-News-Consumption" class="headerlink" title="Descriptive Analysis: Segregation in Online News Consumption"></a>Descriptive Analysis: Segregation in Online News Consumption</h2><ul>
+<li>Isolation measures whether conservatives and liberals visit different websites. It is defined as the differences between exposure to conservatives in websites visited by conservatives and exposure to conservatives in websites visited by liberals</li>
+<li>Segregation is defined as the scaled standard deviation of the slant of news sites visited by participants</li>
+</ul>
+<h4 id="Segregation-in-online-news"><a href="#Segregation-in-online-news" class="headerlink" title="Segregation in online news"></a>Segregation in online news</h4><ul>
+<li>Social media is more segregated and extreme than news consumed through other channels</li>
+<li>The effect does not stem from the composition of individuals using social media to consume news</li>
+<li>A clear positive correlation between consumers’ ideology and the slant of their news consumption, and the slope is steeper for Facebook </li>
+<li>No substantial change in segregation between 2007 and 2017 found in the data<ul>
+<li>Probably because social media still accounts for a limited share of visits to news sites</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>Ignorance vs rumor</li>
+<li>Delivery of contents can be influenced by subscription</li>
+<li>This study also uses state-level data, justifying our method</li>
+<li>We can not calculate the metrics mentioned here for digital divide</li>
+<li>This research also does not find an increased segregation</li>
+</ol>
+</blockquote>
+<h4 id="Segregation-within-Facebook"><a href="#Segregation-within-Facebook" class="headerlink" title="Segregation within Facebook"></a>Segregation within Facebook</h4><ul>
+<li>Two mechanisms that could increase segregation<ul>
+<li>Homophily: An echo chamber effect where one’s friends tend to recommend like-minded news sources</li>
+<li>Abundance of accessible, free options allowing consumers to personalize their news feed</li>
+<li>Algorithms.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Findings-Demand-for-News-on-Social-Media"><a href="#Findings-Demand-for-News-on-Social-Media" class="headerlink" title="Findings: Demand for News on Social Media"></a>Findings: Demand for News on Social Media</h2><h4 id="Individuals-are-willing-to-engage-with-counter-attitudinal-news"><a href="#Individuals-are-willing-to-engage-with-counter-attitudinal-news" class="headerlink" title="Individuals are willing to engage with counter-attitudinal news"></a>Individuals are willing to engage with counter-attitudinal news</h4><ul>
+<li>Effects are estimated by regressing engagement with the four potential pro- or counter-attitudinal outlets in the two weeks following the intervention on treatment dummies</li>
+<li>Treatment increased the number of subscriptions, exposure to posts, news sites visited and sharing behavior</li>
+<li>In order to test whether participants notice the increase to exposure to new posts, they are asked in the endline survey how often they sau news from various outlets in their Facebook feed in the past week</li>
+<li>In addition to visits to news sites trough Facebook, there seems to be an effect on other visits</li>
+<li>The relative effect on sharing counter-attitudinal posts is stronger than that on pro-attitudinal posts</li>
+</ul>
+<h4 id="The-social-media-feed-strongly-affects-online-news-consumption"><a href="#The-social-media-feed-strongly-affects-online-news-consumption" class="headerlink" title="The social media feed strongly affects online news consumption"></a>The social media feed strongly affects online news consumption</h4><ul>
+<li>Individuals do not fully re-optimize their news consumption to keep the slant of the news sites they visited constant</li>
+<li>The estimates of (the effects of exposure on news consumption) are calculated instrumenting the slant of posts observed in the Facebook feed with the treatment assignment<ul>
+<li>The regressions rely on the exclusion restriction that the treatments only affected the slant of sites visited through the slant of the Facebook feed. While the intervention is only expected to have an effect through the Facebook feed, the treatments could affect the feed in many ways</li>
+</ul>
+</li>
+<li>The effects of the experiment declined but remained significant for at least 12 weeks</li>
+</ul>
+<blockquote><ol>
+<li>We should also consider the long-term effects</li>
+</ol>
+</blockquote>
+
+<h4 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h4><ul>
+<li>Passive news consumption can also explain why Chen and Yang (2019) find that providing access to uncensored internet does not lead to consumption of censored foreign news</li>
+<li>This research raises concerns regarding the power of social media companies in shaping news consumption habits</li>
+</ul>
+<h2 id="Findings-Opinions-and-Attitudes"><a href="#Findings-Opinions-and-Attitudes" class="headerlink" title="Findings: Opinions and Attitudes"></a>Findings: Opinions and Attitudes</h2><h4 id="Social-media-news-exposure-does-not-strongly-affect-political-opinions"><a href="#Social-media-news-exposure-does-not-strongly-affect-political-opinions" class="headerlink" title="Social media news exposure does not strongly affect political opinions"></a>Social media news exposure does not strongly affect political opinions</h4><ul>
+<li>Why did the treatments not affect political opinions even though they dramatically affected the Facebook feed of participants<ul>
+<li>Perhaps some participants were persuaded by the offered outlets, while for others, there was a backlash effect and opinions moved in the opposite direction of their treatment assignment. However, evidence for backslash is not found in the data</li>
+<li>Social media is still not a dominant news source compared to television</li>
+<li>Intervention need to last long enough to affect attitudes</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>Forced exposure media experiments should be avoided, because the results may be concentrated among individuals who would not consumer the content outside the experiment setting and may be driven by backlash effect</li>
+</ol>
+</blockquote>
+
+<h4 id="Exposure-to-Counter-Attitudinal-News-Decreases-Affective-Polarization"><a href="#Exposure-to-Counter-Attitudinal-News-Decreases-Affective-Polarization" class="headerlink" title="Exposure to Counter-Attitudinal News Decreases Affective Polarization"></a>Exposure to Counter-Attitudinal News Decreases Affective Polarization</h4><ul>
+<li>When estimating the effect on each component of the index separately, the effect is largest on whether participants find it difficult to see things from each party’s point of view</li>
+<li>Comparing each treatment separately to the control group shows that most of the difference between the pro- and counter-attitudinal treatment stems from the counter-attitudinal treatment</li>
+<li>Three ways to interpret the magnitudes of the effect<ul>
+<li>Compare the effect of the intervention to benchmarks in the control group and outside the experiment</li>
+<li>Use the extension data to estimate the effect of a change in exposure to pro- and counter-attitudinal news on affective polarization (IV)</li>
+<li>Conduct two back-of-the-envelope calculations to measure how affective polarization would have changed if Facebook had a more balanced feed</li>
+</ul>
+</li>
+</ul>
+<h4 id="Interpretation"><a href="#Interpretation" class="headerlink" title="Interpretation"></a>Interpretation</h4><ul>
+<li>Attitudes may have changed because participants learned the opposing party is not as extreme as they thought</li>
+<li>Exposure to pro- and counter-attitudinal news affects attitudes due to increased negative coverage</li>
+<li>Participants exposed to counter-attitudinal news learned some of the opposing party’s arguments and thus understood better why that party supports certain positions, leading to more positive attitudes but not changing the political opinions as long as they do not find those arguments important</li>
+</ul>
+<h2 id="Findings-Exposure-to-Pro-Attitudinal-News-on-Social-Media"><a href="#Findings-Exposure-to-Pro-Attitudinal-News-on-Social-Media" class="headerlink" title="Findings: Exposure to Pro-Attitudinal News on Social Media"></a>Findings: Exposure to Pro-Attitudinal News on Social Media</h2><ul>
+<li>Decomposes the gap in exposure to posts shared by the pro- and counter-attitudinal outlets offered in experiment into three main forces<ul>
+<li>Participants are less likely to subscribe to counter-attitudinal news outlets</li>
+<li>Facebook’s algorithm supplies fewer posts from counter-attitudinal outlets, conditional on participants subscribing to them</li>
+<li>Participants use Facebook less often when offered counter-attitudinal outlets</li>
+</ul>
+</li>
+<li>The strongest force associated with participants’ increased exposure to pro-attitudinal news is the algorithm</li>
+<li>No evidence for within-outlet personalization</li>
+<li>The posts control group participants are exposed to in their feed are not more pro-attitudinal than the outlets they subscribe to<ul>
+<li>Users only subscribe to pro-attitudinal outlets, so the algorithms have few counter-attitudinal outlets to filter</li>
+<li>Adjusting the algorithm to offer more balanced news, conditional on subscription, would not make a big difference if individuals only subscribe to pro-attitudinal outlets</li>
+</ul>
+</li>
+</ul>
+<blockquote><ol>
+<li>The estimating process is interesting</li>
+<li>Ad is more strong than content distribution in that it depends less on subscriptions of users</li>
+<li>The authors find evidence that algorithms slightly increases over time</li>
+<li>We can directly measure the impact of algorithms</li>
+</ol>
+</blockquote>
+
+<h2 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h2><ul>
+<li>Only observe online news consumption, and no data from users of Facebook smartphone apps</li>
+<li>Cannot totally rule out experimenter effects</li>
+<li>Endline survey suffers from high attrition</li>
+<li>No study on moderate outlets</li>
+<li>The result may not hold for other periods</li>
+<li>The results may be different in the long term</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        <a href="/tags/Echo-Chamber/"># Echo Chamber</a>
+                    
+                        <a href="/tags/Algorithms/"># Algorithms</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/08/Field-Experiments-in-Marketing/">Field Experiments in Marketing</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
