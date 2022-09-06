@@ -12,7 +12,7 @@
 
 
 
-<title>Algorithmic bias? an empirical study of apparent gender-based discrimination in the display of stem career ads | Sihan&#39;s Blog</title>
+<title>Fake Sales and Ranking Algorithms in Online Retail Marketplace with Sponsored Advertising | Sihan&#39;s Blog</title>
 
 
 
@@ -208,7 +208,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Algorithmic bias? an empirical study of apparent gender-based discrimination in the display of stem career ads</h1>
+            <h1 class="post-title">Fake Sales and Ranking Algorithms in Online Retail Marketplace with Sponsored Advertising</h1>
             
                 <div class="post-meta">
                     
@@ -218,7 +218,7 @@
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/Advertising/">Advertising</a>
+                                <a href="/categories/Fake-reviews/">Fake reviews</a>
                             
                         </span>
                     
@@ -227,34 +227,66 @@
         </header>
 
         <div class="post-content">
-            <p>This paper conducts a field test, and finds that a gender neutral ad was systematically sent more to the male. After ruling out several possibilities, they conclude that it probably due to the spillover of other ads.</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>In settings where ads are allocated by algorithm, research has documented instances where historically discriminated-against groups are more likely to be associated with undesirable ads</li>
-<li>But they do not attempt to understand why ad algorithms can produce apparently discriminatory outcomes</li>
-<li>Empirical focus on information about STEM careers is motivated by the fact that policy makers in many countries are concerned about a shortage of graduates in the STEM sector, particularly women</li>
-<li>Providing information is important because of evidence showing that the shortage is not necessarily a result of hiring practices (Conditional on applying, women are more likely than men to be hire)</li>
-<li>Distortions in perceptions about careers in STEM across genders may potentially explain why women do not apply</li>
+            <p>This paper models a marketplace involving both fake sales and sponsored advertising, through which the authors investigate the economic impact of the fake sales on the platform and solve for the optimal algorithms decisions of the platform.</p>
+<ul>
+<li>The revenues of the platform come from both commissions and advertising revenue when sellers compete in sponsored advertising auctions.</li>
+<li>Brushing may affect the ranking of products on the platform and hurt genuine sales by other sellers.</li>
+<li>Brushing may also incentivize genuine sellers to bid for advertising auctions.</li>
+</ul>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>In the model, there are a platform, two sellers and consumers.</p>
+<h4 id="Platform"><a href="#Platform" class="headerlink" title="Platform"></a>Platform</h4><ul>
+<li>The platform charges a commission. </li>
+<li>It decides <strong>whether to rank sellers according to their quality or popularity and whether to tolerate fake sales</strong>.</li>
+<li>The platform shows both sellers in the organic listings, and ranks the sellers according to quality or popularity. The platform also places a sponsored advertising slot on top of the two organic listings.</li>
+</ul>
+<h4 id="Sellers"><a href="#Sellers" class="headerlink" title="Sellers"></a>Sellers</h4><ul>
+<li>Sellers decide the price and sell products to consumers through the platform.</li>
+<li>Sellers the bidding and bid for the advertising space.</li>
+<li>Sellers may boost their popularity rankings by buying fake sales.</li>
+<li>Assume only seller 1 can buy fake reviews.</li>
+<li>Assume $m_1&lt;m_2$.</li>
+<li>Assume the cost of purchasing fake reviews is 0.</li>
+</ul>
+<h4 id="Consumers"><a href="#Consumers" class="headerlink" title="Consumers"></a>Consumers</h4><ul>
+<li>There is a mass of consumers whose sizes are normalized to 1.</li>
+<li>Suppose their utility from purchasing the product $i$ is $u_i=\lambda_i\theta q_i-p_i$. $\lambda_i$ represents whether the consumer finds a match with product $i$ and follows a Bernoulli distribution with parameter $m_i$. $m_i$ is product popularity. $q_i$ denotes the product quality from seller $i$, and $\theta$ represents a consumer’s sensitivity to quality following $U[0,1]$. $p_i$ is the price decided by seller $i$.</li>
+<li>Consumers also have outside option, whose utility is normalized to 0.</li>
+<li>Assume consumers only pay attention to the top 2 slots. This assumption captures the limited attention of consumers and limited slot spaces online. Therefore, the sellers can bid for advertising not only to make themselves more salient, but also to push other sellers out of the competition.</li>
+<li>Assume consumers examine one seller at most. </li>
+<li>Consumers strategically click on seller $i$ with a higher expected utility considering the platform’s ranking, or take the outside option of exiting the market.</li>
+<li>After clicking, consumers purchase if and only if the net utility from purchasing is higher than the outside option of 0.</li>
+</ul>
+<h4 id="Information-structure"><a href="#Information-structure" class="headerlink" title="Information structure"></a>Information structure</h4><ul>
+<li>Assume a seller’s quality $q_i$ and price $p_i$ can be perfectly revealed and is public information.</li>
+<li>Assume the realization of a consumer’s quality sensitivity $\theta$ is the consumer’s private information, whereas sellers and the platform only know about its distribution $\sim U[0,1]$.</li>
+<li>Platform knows both sellers’ product popularity $m_i$ and $m_j$. Seller $i$ knows $m_i$ but not $m_j$.</li>
+<li>Consumers don’t know either $m_i$ or $m_j$.</li>
+<li>Consumers believe in the best seller badge issued by the platform.</li>
+</ul>
+<h4 id="Timing-of-the-game"><a href="#Timing-of-the-game" class="headerlink" title="Timing of the game"></a>Timing of the game</h4><ul>
+<li>The platform decides whether to tolerate fake sales and chooses how to rank organic results.</li>
+<li>Seller 1 decides whether to purchase fake sales.</li>
+<li>Each seller picks a bid for the ad auction $b_i$ and chooses their price $p_i$.</li>
+<li>The platform allocates the ad slot to the winner of the auction and assigns the top organic slot accordingly.</li>
+<li>Consumers observe both seller’s quality $q_i$ and $p_i$. Consumers decide whether to click and examine, and make the purchase decision based on the realization of the match value $\lambda_i$.</li>
 </ul>
 <blockquote><ol>
-<li>There are some subtle differences between the expensive traffic and the cheap<ol>
-<li>The ctr and pvr are high for the expensive (due to both purchasing power and less avoidance)</li>
-<li>More ads are targeted at them</li>
-<li>If no targeting ads:<ol>
-<li>Due to their low pvr, the bid should be high enough to send (ecpm threshold)</li>
-</ol>
-</li>
-<li>If targeting ads exist:<ol>
-<li>More ads would target at the experience, so the bid should be high enough to win and the quality of the ads should also be high enough</li>
-</ol>
-</li>
-<li>The success of the experiment relies on the small enough difference between the attitudes of the expensive and the cheap</li>
-<li>If the authors increase the bid, will they find the female. Yes! But there will be more male</li>
-</ol>
-</li>
-<li>The bid should be same for a single ad or campaign</li>
-<li>It could be that at cold start periods, the female click less</li>
+<li>Put less flexible steps earlier in the timing of the game.</li>
+<li>The best-seller badge here is tricky. The authors say that in equilibrium, giving badges on sales is the same as giving badges on $m_i$. But is it always rational for the consumers to believe in the best-seller badge to infer the matching probability?</li>
+<li>Allow sellers to price based on the equilibrium bidding outcome. Sellers can adjust prices based on whether they win the ad auction or not.</li>
+<li>It is also tricky to distinguish between $m_i$ and $q_i$. $m_i$ is before using and $q_i$ is after using? It is strange that the quality is known to consumers before the purchase.</li>
 </ol>
 </blockquote>
+
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><ul>
+<li>A platform may strategically tolerate or even encourage popularity-boosting fake sales by a seller to maximize its two streams of revenues, sales commissions and advertising revenue. <ul>
+<li>When the seller with fake sales has a very low quality, buying fake sales can help boost his product popularity and force the competing seller to bid more aggressively in the advertising auction, which benefits the platform with more advertising revenue.</li>
+<li>When the quality of the seller with fake sales is very high, purchasing fake sales increases differentiation between the two competing sellers and softens the price competition between the sellers, which directly the platform’s commission revenue and may also indirectly increase the platform’s advertising revenue.</li>
+</ul>
+</li>
+<li>Either a high-quality or low-quality seller may be more likely to resort to fake sales, and a seller’s incentive to purchase fake sales interacts with the platform’s organic ranking algorithms.</li>
+<li>Whether fake sales harm consumers and competing sellers is not straightforward.</li>
+</ul>
 
         </div>
 
@@ -267,7 +299,7 @@
                     
                         <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
                     
-                        <a href="/tags/Algorithmic-Bias/"># Algorithmic Bias</a>
+                        <a href="/tags/Manipulation-of-Reviews/"># Manipulation of Reviews</a>
                     
                         
                 </span>
@@ -280,10 +312,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/06/Structural-workshop-paper%E2%80%94descriptive-structural-and-experimental-empirical-methods-in-marketing-research/">Structural workshop paper—descriptive, structural, and experimental empirical methods in marketing research</a>
             
-            
-            <a class="next" rel="next" href="/2021/06/Conducting-research-with-quasi-experiments-A-guide-for-marketers/">Conducting research with quasi-experiments: A guide for marketers</a>
+            <a class="next" rel="next" href="/2021/08/Investigating-the-relationship-between-medical-crowdfunding-and-personal-bankruptcy-in-the-United-States/">Investigating the relationship between medical crowdfunding and personal bankruptcy in the United States</a>
             
         </section>
 
