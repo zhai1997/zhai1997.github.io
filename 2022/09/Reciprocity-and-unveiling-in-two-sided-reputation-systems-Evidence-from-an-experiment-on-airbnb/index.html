@@ -12,7 +12,7 @@
 
 
 
-<title>When and Why Do Buyers Rate in Online Markets? | Sihan&#39;s Blog</title>
+<title>Reciprocity and unveiling in two-sided reputation systems: Evidence from an experiment on Airbnb | Sihan&#39;s Blog</title>
 
 
 
@@ -208,7 +208,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">When and Why Do Buyers Rate in Online Markets?</h1>
+            <h1 class="post-title">Reciprocity and unveiling in two-sided reputation systems: Evidence from an experiment on Airbnb</h1>
             
                 <div class="post-meta">
                     
@@ -227,59 +227,81 @@
         </header>
 
         <div class="post-content">
-            <p>This paper studies the generation of online reviews using Bayesian methods. The core assumption is that the buyer is more inclined to leave a review when the absolute difference between his Bayesian posterior and prior is larger. The model based on this assumption successfully predicts the reality and generates meaningful simulation results.</p>
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h4 id="Basic-Setup"><a href="#Basic-Setup" class="headerlink" title="Basic Setup"></a>Basic Setup</h4><ul>
-<li>Only consider one typical buyer.</li>
-<li>The transaction experience is a signal $s\in\{ g,b\}$, where $s=g$ if the transaction is good and $s=b$ if it is bad.</li>
-<li>Sellers can be of high or low quality $q\in \{q_h, q_l\}$. The seller type is not known to the buyer.</li>
-</ul>
-<h4 id="Before-the-transaction"><a href="#Before-the-transaction" class="headerlink" title="Before the transaction"></a>Before the transaction</h4><ul>
-<li>The buyer has initial belief $\lambda \in (0,1)$ that sellers entering the platform are of good quality.</li>
-<li>She updates this belief using the specific sellers public reputation record, which is summarized by an index $y$.</li>
-<li>To update her initial belief, the buyer specifies probability $\sigma_h (y)=\mathrm{Pr}(y|q=q_h)$ and $\sigma_l (y)=\mathrm{Pr}(y|q=q_l)$. Then the buyer forms a Bayesian belief<br>$$ \mu (\lambda,y)=\frac{\lambda\sigma_h (y)}{\lambda\sigma_h (y)+(1-\lambda)\sigma_l (y)}$$</li>
-<li>Assumption 1: $\sigma_h(y)/\sigma_l(y)$ is strictly increasing in $y$. This assumption guarantees that a better rating record increases the belief while a worse one decreases it.</li>
-</ul>
-<h4 id="After-the-transaction"><a href="#After-the-transaction" class="headerlink" title="After the transaction"></a>After the transaction</h4><ul>
-<li>Assume the transaction happens for sure.</li>
-<li>After the buyer receives the signal $s$ about the seller’s quality. Let $\rho^h\equiv\mathrm{Pr}(s=g|q=q_h)$ and $\rho^l\equiv\mathrm{Pr}(s=g|q=q_l)$.</li>
-<li>Assumption 2: $\rho^h&gt;\rho^l$ and $\rho^h&gt;1/2$. This assumption means that the signals from transactions are informative.</li>
-<li>The buyer uses the signal to to form a posterior belief $\mu^s$ about seller quality.<br>$$\mu^g\equiv\mathrm{Pr}(q=q_h|s=g)=\frac{\mu\rho^h}{\mu\rho^h+(1-\mu)\rho^l}$$<br>$$\mu^b\equiv\mathrm{Pr}(q=q_h|s=b)=\frac{\mu(1-\rho^h)}{\mu(1-\rho^h)+(1-\mu)(1-\rho^l)}$$</li>
-<li>Let $d\equiv |\mu^s-\mu|$. The buyer leaves a rating if<br>$$u(d,c)\equiv b(d)-c\geq 0$$</li>
-<li>This is the core assumption in the model. $d$ is the amount of knowledge that consumers learn from the transaction. The motivation to post the information is increasing with the increase in the value of $d$. Here, $b$ can also capture the baseline inclination to leave a rating.</li>
-</ul>
-<h4 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h4><ul>
-<li>Dependence of the change in beliefs on the rating record. <ul>
-<li>If the transaction experience was positive, then there exists a unique $\hat{y}$ such that the difference between posterior and prior beliefs increases in $y$ if $y&lt;\hat{y}$, and decreases in $y$ if $y&gt;\hat{y}$. Furthermore, $\mu(\hat{y})\equiv\hat{\mu}&lt;1/2$.</li>
-<li>If the transaction experience was negative, then there exists a unique $\check{y}$ such that the difference between prior and posterior beliefs increases in $y$ if $y&lt;\check{y}$, and decreases in $y$ if $y&gt;\check{y}$. Furthermore, $\mu(\check{y})\equiv\check{\mu}&gt;1/2$.</li>
-<li>Just take the first derivative, and it is easy to prove.</li>
-<li>It shows that when the when $\mu$ is sufficiently high, the buyer learns little from any kind of messages.</li>
+            <p>Through a large-scale field experiment, the study reveals the causal effect of one particular design choice - the timing with which feedback by one user about another is displayed on the platform. Reputation systems are widely used by nearly every digital marketplace to reduce information asymmetry and moral hazard. However, since the creation of accurate reviews is voluntary and costly, reviews are under-provided, leading to missing information and a variety of biases. These make the design of effective reputation system important for digital platforms.</p>
+<h2 id="Literature-Review"><a href="#Literature-Review" class="headerlink" title="Literature Review"></a>Literature Review</h2><ul>
+<li>Literature about why people submit feedback and whether this voluntary process produces bias.<ul>
+<li>Avery et al. (1999) show that evaluations will be under-provided in equilibrium without an appropriate payment scheme.</li>
+<li>Miller et al. (2005) show how to design a scoring system with accurate reporting of feedback in equilibrium.</li>
+<li>Dellarocas and Wood (2007) argue, using data from eBay, that people with worse experiences are less likely to submit feedback.</li>
+<li>Later research finds that people with more extreme experiences are more likely to review.</li>
 </ul>
 </li>
-<li>Rating dynamics for a high quality seller.<ul>
-<li>Corollary 1: Let $\mu&gt;\check{\mu}$ and consider a sequence of increases in $y$. Then the likelihood that a buyer derives a benefit from rating the transaction decreases and shrinks to $b(0)$ as $\mu\to 1$.<blockquote><p>I have question with this corollary. I think the rating of the high quality firms should be high from the very beginning and shouldn’t have such a systematically increasing trend.</p>
-</blockquote></li>
+<li>Other factors that contribute to biased reviews<ul>
+<li>Li and Hitt (2008) argue that early buyers may have different preferences than late buyers, which could cause early previews to be non-representative.</li>
+<li>Filippas et al. (2018) argue that because reviewers may feel bad hurting a counterparty via a negative review, average review scores may inflate over time on platforms.</li>
 </ul>
 </li>
-<li>Interim ratings and their effect.<ul>
-<li>Study the effect a negative feedback has on the likelihood that ensuing buyers share positive and negative experiences.</li>
-<li>This setting can help guarantee that sellers don’t have enough time to strategically respond to the previous ratings.</li>
-<li>The negative rating shock induces an increased probability to rate when $y&gt;\check{y}$.</li>
-<li>Let $f_1(y)\equiv\mu^g(y)-\mu(y)$, $f_2(y)\equiv\mu(y)-\mu^b(y)$, and $z(y)\equiv f_1(y)-f_2(y)$. Then,<br>$$\frac{\mathrm{d}}{\mathrm{d} y}z(\mu(y))&gt;0$$</li>
-<li>Corollary 2: Let $y_t$ get large. Suppose that interim ratings lead $y_t$ decrease from $y_t$ to $y_{t+1}$. Let the buyer incorporate the interim decrease in the rating score in her decision. Then,<ul>
-<li>the likelihood that she rates the transaction increases, relative to not incorporating that shock in her rating decision.</li>
-<li>the likelihood that a given rating is negative increases more relative to the likelihood that it is positive</li>
+</ul>
+<h2 id="Theoretical-Framework"><a href="#Theoretical-Framework" class="headerlink" title="Theoretical Framework"></a>Theoretical Framework</h2><p>The authors add a new component “the desire to unveil reviews” to the theory of reciprocal reviewing. This component provides an incentive for agents to review more often and more quickly in the simultaneous review reputation system.</p>
+<h4 id="Traditional-Theory"><a href="#Traditional-Theory" class="headerlink" title="Traditional Theory"></a>Traditional Theory</h4><ul>
+<li>Prior literature covers following items in the utility function of reviewers:<ul>
+<li>An intrinsic cost (or benefit) from leaving a review. This will vary across individuals so that some people dislike reviewing whereas others like it.</li>
+<li>A disutility from misrepresenting the quality of a transaction in a review. This implies that absent other forces individuals review honestly.</li>
+<li>For a second review, a positive utility from submitting a review with a reciprocal rating. For example, the second reviewer may feel obliged to leave a positive review once they read the positive review fof the first reviewer.</li>
+<li>A benefit from having more and better reviews. Because the first review affects the rate and type of second reviews, the reviewer may feel obliged to leave a positive review once they read the positive review of the first reviewer.</li>
+</ul>
+</li>
+<li>Analysis of the incentives of reviewers:<ul>
+<li>The second reviewer:<ul>
+<li>The second reviewer knows that her review will not change anything about the first review. As a result, term 4 drops out.</li>
+<li>In the SR (simultaneous reveal) system, the second reviewer does not know the content of the first review. So, term 3 drops out. However, in the RIT system, term 3 remains. </li>
+<li>Overall, because term 3 increases the utility of reviewing, the utility of reviewing is lower in the SR system and the review rate is predicted to fall.</li>
+</ul>
+</li>
+<li>The first reviewer:<ul>
+<li>The first reviewer in the SR system knows that the content of the first review will not affect the content of the second review. As a result, the first reviewer has less incentive to review and to do so positively in the SR system than in RIT system. </li>
+<li>Overall, if the only factor driving reviewing behavior were reciprocity, then first reviewer’s review rate would be predicted to fall as well.</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="Empirical-Evidence"><a href="#Empirical-Evidence" class="headerlink" title="Empirical Evidence"></a>Empirical Evidence</h2><p>Empirical Challenges:</p>
-<ul>
-<li>Seller quality is unobservable and may change over time: Construct a balanced panel of sellers and control for seller fixed effects.</li>
-<li>There may be selective matching, which means that for a given seller early buyers are different from later buyers: Use rich information in the data to construct measures of buyer behavior, which will be further used a controls.</li>
-<li>Transaction quality as perceived by the buyer may change over time, for instance because the seller learns, or because he changes the prices: Use alternative measures in both auction and posted price formats to show that consumer surplus does not change much over time.</li>
-<li>There could be transient shocks to transactions quality, and the shocks cause negative ratings in sequence: Use an empirical strategy based on negative ratings that are left because the buyer accidentally left the wrong feedback.</li>
-<li>Sellers may react to receiving bad ratings: Exploit transactions that took place before the negative feedback arrives, but the rating of this transaction happened after the arrival.</li>
+<h4 id="New-Theory"><a href="#New-Theory" class="headerlink" title="New Theory"></a>New Theory</h4><ul>
+<li>Desire to unveil reviews: The presence of a “hidden” first review that can be revealed increases the utility of reviewing. <ul>
+<li>Because it is natural for people to be <strong>curious</strong> about others’ comments.</li>
+<li>Because if people expect the review is positive, they may also want it displayed publicly as soon as possible, which may bring more bookings in the future. (<strong>strategic</strong>)</li>
+</ul>
+</li>
+<li>The key consequence of the desire to unveil reviews is that there will be more reviews and faster reviews in the SR system.</li>
+<li>It may also have an effect on the speed of first reviews, because users may want to write a quick first review to trigger a quick second review. But this effect is smaller than that on the second reviews.</li>
+</ul>
+<h2 id="Empirical-Work"><a href="#Empirical-Work" class="headerlink" title="Empirical Work"></a>Empirical Work</h2><ul>
+<li>They use a two-sided platform, on which the guest and the host each have the opportunity to review one another.<ul>
+<li>In the control group, reviews are revealed both to the counterparty and to the public as soon as they are submitted.</li>
+<li>In the treatment group (simultaneous reveal), reviews are hidden until both parties have reviewed or until the time to review has expired.</li>
+</ul>
+</li>
+<li>Effects on timing and rates:<ul>
+<li>The SR treatment reduced the time to review by 17% for guests and 9.9% for hosts. It also increased the review rates by 1.7% for guests and 9.8% for hosts.</li>
+<li>Whereas the treatment decreased the time from check-out to first review by 9.7%, it decreased the amount of time between the first and second review by much more (35%).</li>
+<li>The change in review timing is seen for guests and hosts across all levels of experience.</li>
+</ul>
+</li>
+<li>Effects on the types of reviews<ul>
+<li>The treatment decreased the correlation between guest and host ratings by 48%.</li>
+<li>The ratings in the treatment groups were more negative, but the effects were small.</li>
+</ul>
+</li>
+<li>Selection effects<ul>
+<li>Using methodology of principal stratification, they show that the treatment changed the review behaviors of in individuals who would have reviewed regardless of the treatment.</li>
+<li>This finding supports that the effects on ratings reflect more accurate reviews in the treatment group.</li>
+</ul>
+</li>
+<li>Effects on adverse selection<ul>
+<li>No effects are found from the data.</li>
+<li>The lack of detectable effect is because of the small overall effect of the treatment on realized distribution of ratings.</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -306,10 +328,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/09/Reciprocity-and-unveiling-in-two-sided-reputation-systems-Evidence-from-an-experiment-on-airbnb/">Reciprocity and unveiling in two-sided reputation systems: Evidence from an experiment on Airbnb</a>
             
-            
-            <a class="next" rel="next" href="/2022/08/Fake-Sales-and-Ranking-Algorithms-in-Online-Retail-Marketplace-with-Sponsored-Advertising/">Fake Sales and Ranking Algorithms in Online Retail Marketplace with Sponsored Advertising</a>
+            <a class="next" rel="next" href="/2022/08/When-and-Why-Do-Buyers-Rate-in-Online-Markets/">When and Why Do Buyers Rate in Online Markets?</a>
             
         </section>
 
