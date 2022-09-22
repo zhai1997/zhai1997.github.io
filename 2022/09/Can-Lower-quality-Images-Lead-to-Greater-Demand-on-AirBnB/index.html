@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sihan Zhai">
+
+
+
+
+
+<title>Can Lower-quality Images Lead to Greater Demand on AirBnB? | Sihan&#39;s Blog</title>
+
+
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sihan&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sihan&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Can Lower-quality Images Lead to Greater Demand on AirBnB?</h1>
+            
+                <div class="post-meta">
+                    
+
+                    <!--  -->
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Fake-reviews/">Fake reviews</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>This paper creatively reveals an important but hidden effect of the improvement in the quality of photos (as advertisements), by disentangling the long-run and short-run effects. In the short run, the attractive photos stimulate the current demand. However, the high expectation driven by the high-quality photos may decrease the satisfaction level and reduce the amount of reviews. In the long-run, the demand may be lower due to fewer reviews online. This is an innovative application of the reference dependence in behavioral economics. Moreover, this paper successfully combines deep learning, data analysis and theoretical models via a well-designed structural model.</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<li>Property images are under the control of hosts and can effectively increase the demand for an AirBnB property.</li>
+<li>Puzzle 1: There exist a large number of amateur (low-quality) images on AirBnB. One possible explanation for the low adoption of high-quality images is that high-quality images are costly for the hosts.</li>
+<li>Puzzle 2: In 2011, AirBnB offered highest quality professional images to all the host by sending their professional images to all the hosts by sending their professional photographers to the property and shoot, process and post the photos for the hosts. However, only 30% of the hosts used the AirBnB professional photography program after its launch.</li>
+<li>This paper provides an explanation. The host’s decision on the quality of images to post depends not only on the advertising impact of the photos on present demand and the cost of photos, but also on the impact of the photos on the satisfaction level of the guest post-consumption, which would then in turn impact the future demand.</li>
+</ul>
+<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><ul>
+<li>They use the time it takes for hosts to reply to guests as the proxy for the service quality.</li>
+<li>The used deep learning classifier to measure image quality.</li>
+<li>A constant market size is used.</li>
+</ul>
+<h2 id="Reduced-form-Evidence"><a href="#Reduced-form-Evidence" class="headerlink" title="Reduced-form Evidence"></a>Reduced-form Evidence</h2><ul>
+<li>Both image quality and number of review have positive impact on AirBnB property’s present booking.<br>$$ReserveDays_{jt}=Intercept+\beta_1 ImageQuality_{jt}+\beta_2 NumReview_{jt-1}\\ +\beta_3 Controls_{jt}+Property_j+Period_t $$</li>
+<li>High quality images come with a risk of creating a “negative/dissatisfaction gap” for consumers and could adversely affect the future demand.<br>$$WriteProb_{jt}=\alpha_j+\alpha_{high}HighImage_{jt}+\alpha_{med}MedImage_{jt}+\alpha_{effort}Effort_{jt} \\ +\alpha_{price}NightlyRate_{jt}+\alpha_4 Control_{jt}+Period_t $$</li>
+</ul>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><ul>
+<li>Build a dynamic game model, in which individual hosts, other lodging alternative providers including their peers, make monthly decisions about the quality of posted property images and the amount of effort for providing guest service.</li>
+<li>Assume hosts are rational and forward looking, with their objectives to maximize the total discounted utility flow summed over all periods forward.</li>
+<li>Timing:<ul>
+<li>At the beginning of each period $t$, an individual host $j$ observes her current state of the quality of the property image, the total number of reviews accumulated until now, and the states of her peers.</li>
+<li>She makes a decision on whether or not to keep the listing active for this period.<ul>
+<li>If she chooses to snooze, then the model in this period ends and will begin again for her at the beginning of period $t+1$.</li>
+<li>If she chooses to operate, then she pays a cost for the operation regardless of received property bookings in this period.</li>
+</ul>
+</li>
+<li>Then, she makes decisions on:<ul>
+<li>Choosing the aggregate image quality from the three quality levels</li>
+<li>Choosing an effort between low- versus high-levels to invest in providing service</li>
+</ul>
+</li>
+<li>Then, the consumers will observe the properties and their characteristics, including the image quality and number of reviews, based on which they will form an expectation on each property and choose one lodging alternative. Later, they will receive a realized lodging experience. They decide whether to leave a review.</li>
+<li>Next, each individual host receives a total amount of the revenue generated from renting out their property. For each reserved day, she pays a cost of hosting the guests associated to the amount of invested service effort.</li>
+<li>Lastly, each individual property’s number of reviews is updated, corresponding to the number of bookings received and their guests’ post-consumption behavior.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Property-Market-Share"><a href="#Property-Market-Share" class="headerlink" title="Property Market Share"></a>Property Market Share</h3><ul>
+<li>Challenges:<ul>
+<li>The lodging market consists of a large number of differentiated products.</li>
+<li>Consumers are heterogeneous in their preferences on the lodging features</li>
+<li>Our data on demand is at an aggregate market-level. Researchers only observe property bookings as aggregated responses from individual consumers’ choices of lodgings, without knowing the trajectories of who booked particular properties.</li>
+</ul>
+</li>
+<li>Used an aggregate-demand model.</li>
+<li>Suppose there are $J$ AirBnB properties on Manhattan lodging market. The utility that consumer $i$ chooses alternative $j$ in period $t$ can be written as<br>$$u_{ijt}=\begin{cases} X_{jt}\theta^i+\eta_{jt}+\epsilon_{ijt}, \quad\text{if i chooses one} \\<br>\epsilon_{ijt},\quad\text{if an outside option is chosen} \end{cases} $$<br>where $X_{jt}$ is a 1 by $K$ product-attribute vector and $\theta_i$ captures consumer $i$’s preferences over the $K$ attributes. $\eta_{jt}$ is a common aggregate demand shock across consumers. The idiosyncratic shock $\epsilon_{ijt}$ follows an iid distribution $F_{\epsilon}(\epsilon)$</li>
+<li>To incorporate heterogeneity in consumers’ preferences, model individual-specific preference $\theta_i$ as an independent draw from the preference distribution $F_\theta(\theta,\omega)$, characterized by parameter $\omega$.</li>
+<li>Each consumer chooses the alternative that gives him/her teh highest utility. The aggregated response gives us the market share for alternative $j$.<br>$$ms_{jt}=\int_{\{\theta^i,\epsilon_{it}|u_{ijt}\ge u_{ilt},\forall l\not= j\}} \operatorname{d}F_{\theta}(\theta,\omega)\operatorname{d}F_\epsilon(\epsilon)$$</li>
+<li>Model consumer preferences follow a normal distribution with $\omega=(\bar{\theta},\Sigma)$. $\epsilon_{ijt}$ is assumed to be drawn from type-1 Extreme Value distribution.<br>$$ms_{jt}=\int ms_{ijt}\phi(\theta^i|\bar{\theta},\Sigma)\operatorname{d}\theta^i=\int\frac{\operatorname{exp}(X_{jt}\theta^i+\eta_{jt})}{1+\sum_{l=1}^{J}\operatorname{exp}(X_{lt}\theta^i+\eta_{lt})}\phi(\theta^i|\bar{\theta},\Sigma)\operatorname{d}\theta^i $$</li>
+</ul>
+<h3 id="Hosts’-Revenues"><a href="#Hosts’-Revenues" class="headerlink" title="Hosts’ Revenues"></a>Hosts’ Revenues</h3><p>$$<br>\begin{aligned}<br>Revenue_{jt}&amp;=ReservationDays_{jt}\cdot NightRate_{jt}\\<br>&amp;=(ms_{jt}\cdot MarketSize)\cdot NightlyRate_{jt}\\<br>&amp;=\left(\int\frac{\operatorname{exp}(\mu_{jt}+X_{jt}\nu^i)}{1+\sum_{l=1}^J\operatorname{exp}\mu_{lt}+X_{lt}\nu^i}\phi(\nu^i|0,\Sigma)\operatorname{d}\nu\right)\cdot MarketSize\cdot NightlyRate_{jt}<br>\end{aligned}<br>$$</p>
+<h3 id="Endogeneity"><a href="#Endogeneity" class="headerlink" title="Endogeneity"></a>Endogeneity</h3><ul>
+<li>Property price: It may be correlated with random shocks in the demand which are unobserved to the researchers. Three IVs are used:<ul>
+<li>BLP instruments: use own product’s characteristics and the sum of competitor products’ characteristics</li>
+<li>Collect local rental information from Zillow to serve as another instrument</li>
+<li>Include local utility fee in the set of instruments</li>
+</ul>
+</li>
+<li>Image quality: Hosts’ incentive to use high-quality images to attract more bookings when the overall demand level varies. A host’s decision on image quality is affected by the quality of her property.<ul>
+<li>BLP instruments: the sum of quality of competitors’ image quality</li>
+<li>Property location: some locations or neighborhoods may have higher supply of local photographers</li>
+<li>Listing type: it may be easier to manage a professional photography shooting for a property that is listed as entire home</li>
+<li>The number of years of experience as an AirBnB host: A host with more experience may be more likely to hire a professional photographers on her own</li>
+</ul>
+</li>
+<li>Property review count: The number of reviews may be correlated with unobserved property characteristics. So, two IVs are used:<ul>
+<li>BLP instruments: the sum of number of review of other properties</li>
+<li>The number of hotel rooms in each zip code</li>
+</ul>
+</li>
+</ul>
+<h3 id="Individual-Host’s-Cost"><a href="#Individual-Host’s-Cost" class="headerlink" title="Individual Host’s Cost"></a>Individual Host’s Cost</h3><ul>
+<li>Investing effort in guests service: Normalize the cost to invest low efforts to be 0. The host incurs this cost for every booked day.<br>$$ServiceCost_{jt}=\begin{cases}<br>0,\quad HighEffort_{jt}=0\\<br>\lambda_j^{effort},\quad HighEffort_{jt}=1<br>\end{cases}$$</li>
+<li>Operating list: Normalize the cost of the outside option to be 0. This cost is incurred as a fixed cost at the beginning of each period, regardless of the realized booking in that period.<br>$$OperationCost_{jt}=\begin{cases}<br>0,\quad Active_{jt}=0\\<br>\lambda_j^{operate},\quad Active_{jt}=1<br>\end{cases}<br>$$</li>
+<li>Photography cost: Normalize the cost of taking low-quality photos to be 0. This cost is incurred when hosts change the photos.<br>$$ImageCost_{jt}=\begin{cases}<br>\lambda^{MedImg},\quad MedImage_{jt}=1 \text{ and } MedImage_{jt-1}=0\\<br>\lambda^{HighImg},\quad HighImage_{jt}=1 \text{ and } HighImage_{jt-1}=0<br>\end{cases}$$</li>
+</ul>
+<h3 id="Individual-Host’s-Per-period-Payoff"><a href="#Individual-Host’s-Per-period-Payoff" class="headerlink" title="Individual Host’s Per-period Payoff"></a>Individual Host’s Per-period Payoff</h3><p>Prior to taking an action, the host can only form an expectation on the payoff received in current period as the revenue is realized only at the end of the period.<br>$$\begin{aligned}<br>\widetilde{\Pi_{jkt}}=&amp;ReserveDays_{jt}(a_{jt},X_{jt},X_{-jt},a_{-jt})\cdot (NightlyRate_{jt}+\lambda_j^{effort}I\{a_{jt}(HighEffort)=1\})\\<br>&amp;+\lambda^{MedImg}I\{a_{jt}(MedImage)=1\}\cdot I\{a_{jt-1}(MedImage)=0\}\\<br>&amp;+\lambda^{HighImg}I\{a_{jt}(HighImage)=1\}\cdot I\{a_{jt-1}(HighImage)=0\}\\<br>&amp;+\lambda_j^{operate}<br>\end{aligned}<br>$$</p>
+<h3 id="State-Variables"><a href="#State-Variables" class="headerlink" title="State Variables"></a>State Variables</h3><ul>
+<li>The set of state variables for individual $j$ at time $t$ is $s_{jt}=(MedImage_{jt-1},HighImage_{jt-1},NumReviews_{jt-1})$</li>
+<li>For each individual $j$, the evolution of her own state at time $t$, $s_{jt}$, depends on s_{jt-1} and a_{jt}</li>
+<li>For images:<br>$$s_{jt+1}(Image_{jt+1})=\begin{cases}<br>a_{jt}(Image_{jt}),\quad a_{jt}(Active_{jt}=1)\\<br>s_{jt}(Image_{jt}),\quad a_{jt}(Active_{jt}=0)<br>\end{cases}$$</li>
+<li>For number of reviews: The host can only form an expectation on the number of generated new review. Assume that hosts have learnt the relationship between consumers’ likelihood of writing reviews and the realized gap and the quality of provided guest services<ul>
+<li>First, empirically identify the relationships from the data.<br>$$WriteProb_{jt}=\alpha_j+\alpha_{high}HighImage_{jt}+\alpha_{med}MedImage_{jt}+\alpha_{effort}Effort_{jt} \\ +\alpha_{price}NightlyRate_{jt}+\alpha_4 Control_{jt}+Period_t $$</li>
+<li>Then, form the expectation<br>$$\begin{aligned}<br>E(NumReviews_{jt+1})&amp;=NumReviews_{jt}+NumReservations_{jt}\cdot WriteProb_{jt}\\<br>&amp;=NumReviews_{jt+1}+\left(\frac{ReservationDays_{jt}}{MinStays_{jt}}\right)\cdot WriteProb_{jt}<br>\end{aligned}$$</li>
+</ul>
+</li>
+</ul>
+<h3 id="Individual’s-Optimization-Problem"><a href="#Individual’s-Optimization-Problem" class="headerlink" title="Individual’s Optimization Problem"></a>Individual’s Optimization Problem</h3><p>On an infinite-time horizon, each individual $j$ chooses an infinite sequence of actions $a_{jt}=\{Image_{jt},Effort_{jt},Active_{jt}\}_{t=1}^\infty$ to maximize the sum of expected life-time payoff:</p>
+<p>$$\max_{<br>    \{<br>        Image_{jt},Effort_{jt},Active_{jt}<br>    \}_{t=1}^{\infty}<br>    }\operatorname{E}_{\{s’_{jt},s’_{-jt}\}}<br>    \left(\sum^\infty_{t=0} \beta^t\widetilde{\Pi_{jt}}<br>    \right)$$</p>
+<h3 id="Equilibrium-Concept"><a href="#Equilibrium-Concept" class="headerlink" title="Equilibrium Concept"></a>Equilibrium Concept</h3><p>The payoff functions of individual hosts also depend on the states (actions) of other hosts. So it is a game theoretical model. The equilibrium concept used in this study is Markov Perfect Equilibrium.</p>
+<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><ul>
+<li>Demand:<ul>
+<li>There is a strong pattern of seasonality.</li>
+<li>Number of reviews helps generate more bookings.</li>
+<li>Location plays a role when travelers choose lodging alternatives.</li>
+<li>Good images, compared to low-quality images, can generate more bookings in current month.</li>
+</ul>
+</li>
+<li>Consumers who give more weights to image quality tend to be those who value the number of reviews more, which highlights a trade-off for hosts.</li>
+</ul>
+<h2 id="Policy-Simulation"><a href="#Policy-Simulation" class="headerlink" title="Policy Simulation"></a>Policy Simulation</h2><ul>
+<li>There are three policies:<ul>
+<li>Current policy: free high-quality images</li>
+<li>Proposed policy 1: free medium-quality images</li>
+<li>Proposed policy 2: freely choose either free high-quality images or free medium-quality images</li>
+</ul>
+</li>
+<li>Results:<ul>
+<li>Current policy beats proposed policy 1 in the short run, but loses to proposed policy 1 in the long run.</li>
+<li>They are all better than the no policy situation.</li>
+<li>Proposed policy 2 is better than proposed policy 1.</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Reviews-of-Papers/"># Reviews of Papers</a>
+                    
+                        <a href="/tags/Manipulation-of-Reviews/"># Manipulation of Reviews</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2022/09/Reciprocity-and-unveiling-in-two-sided-reputation-systems-Evidence-from-an-experiment-on-airbnb/">Reciprocity and unveiling in two-sided reputation systems: Evidence from an experiment on Airbnb</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>Sihan Zhai | Powered by Hexo & Chic</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
